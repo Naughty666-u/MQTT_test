@@ -18,7 +18,7 @@
 #define PASSWORD        "b37z198v4479"
 
 // MQTT 服务器 (参照文档第5行)
-#define MQTT_IP         "192.168.0.107"  // [cite: 5]
+#define MQTT_IP         "175.27.162.174"  // [cite: 5]
 #define MQTT_Port       "1883"            // [cite: 5]
 
 // 设备身份定义 (参照文档第24-26行)
@@ -69,5 +69,5 @@ void Connect_MQTT( char * mqtt_ip , char * mqtt_port , uint8_t timeout );
 void Subscribes_Topics( char * topics );
 void Send_Data( char * topics , char * data );
 void Process_RingBuffer_Data(void);
-
+int ESP8266_ATE0(void);
 #endif

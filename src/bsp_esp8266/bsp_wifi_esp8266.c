@@ -23,6 +23,7 @@ void ESP8266_MQTT_Test(void)
     ESP8266_UART2_Init();
     ESP8266_Hard_Reset();
     ESP8266_STA(); 
+    ESP8266_ATE0();
     ESP8266_STA_JoinAP(ID, PASSWORD, 20);
 
     // 4. 配置 MQTT 属性 (注意：如果你的函数支持，应在这里传入遗嘱参数)
@@ -41,11 +42,16 @@ void ESP8266_MQTT_Test(void)
     ESP8266_DEBUG_MSG("订阅命令主题: %s\r\n", MQTT_SUB_TOPIC);
     Subscribes_Topics(MQTT_SUB_TOPIC); 
 
-    // 7. 第一次上线状态上报 (参照文档 7.2 节) [cite: 161]
-    ESP8266_DEBUG_MSG("上报初始在线状态...\r\n");
-    // 构造一个符合文档要求的简易 JSON [cite: 165-174]
-    char *init_payload = "{\"ts\":1772000100,\"online\":true,\"total_power_w\":0.0,\"voltage_v\":220.0,\"current_a\":0.0,\"sockets\":[]}";
-    Send_Data_Raw(MQTT_PUB_STATUS, init_payload);
+//    // 7. 第一次上线状态上报 (参照文档 7.2 节) [cite: 161]
+//    ESP8266_DEBUG_MSG("上报初始在线状态...\r\n");
+//    // 构造一个符合文档要求的简易 JSON [cite: 165-174]
+//    char *init_payload = "{\"ts\":1772000100,\"online\":true,\"total_power_w\":0.0,\"voltage_v\":220.0,\"current_a\":0.0,\"sockets\":[]}";
+//    Send_Data_Raw(MQTT_PUB_STATUS, init_payload);
+		ESP8266_DEBUG_MSG("初始化完成，进入监听模式...\r\n");
+		memset(At_Rx_Buff, 0, sizeof(At_Rx_Buff)); // 清除阻塞缓冲区
+		// 重点：排空环形缓冲区，防止初始化期间的残留字符干扰 JSON 解析
+		uint8_t dummy;
+		while (g_rx_buf.get(&g_rx_buf, &dummy) == 0);
 }
 
 
@@ -316,7 +322,30 @@ void Subscribes_Topics( char * topics )
            }
        }
 }
+/**
+ * @brief 关闭 ESP8266 命令回显 (ATE0)
+ * @return 0: 成功, -1: 超时
+ */
+int ESP8266_ATE0(void)
+{
+    ESP8266_DEBUG_MSG("[SYSTEM] 正在关闭 ATE 回显...\r\n");
+    Clear_Buff();
+    ESP8266_AT_Send("ATE0\r\n");
 
+    uint32_t timeout = 100; // 500ms
+    while (timeout--)
+    {
+        if (strstr(At_Rx_Buff, "OK"))
+        {
+            ESP8266_DEBUG_MSG("[SYSTEM] 回显已成功关闭！\r\n");
+            Clear_Buff();
+            return 0;
+        }
+        R_BSP_SoftwareDelay(5, BSP_DELAY_UNITS_MILLISECONDS);
+    }
+    ESP8266_DEBUG_MSG("[ERROR] ATE0 无响应\r\n");
+    return -1;
+}
 /*发布MQTT消息函数*/
 void Send_Data( char * topics , char * data )
 {
@@ -353,7 +382,8 @@ void Send_Data_Raw( char * topics , char * data )
 
     // 1. 发送请求
     sprintf(cmd_buf, "AT+MQTTPUBRAW=0,\"%s\",%d,1,0\r\n", topics, data_len);
-    Clear_Buff();
+    // 不要直接全部清除，可以只清除特定的标志位或等待窗口
+    // Clear_Buff(); // 建议慎用，除非你确定缓冲区没别的东西
     ESP8266_AT_Send(cmd_buf); 
 
     // 2. 等待 > (不需要再判 Uart2_Send_Flag，因为 AT_Send 发完就完了)
@@ -362,7 +392,7 @@ void Send_Data_Raw( char * topics , char * data )
         if (strchr(At_Rx_Buff, '>')) break; // 只要看到 > 就跳出
         R_BSP_SoftwareDelay(5, BSP_DELAY_UNITS_MILLISECONDS);
     }
-
+    if(timeout == 0) return; // 没等到 > 直接退出，不要强行发载荷
     // 3. 直接发送数据载荷
     // 这里不再使用 ESP8266_AT_Send，因为数据载荷不需要加 \r\n，且不需要等回应
     Uart2_Send_Flag = false;
@@ -381,7 +411,12 @@ void Send_Data_Raw( char * topics , char * data )
         }
         R_BSP_SoftwareDelay(5, BSP_DELAY_UNITS_MILLISECONDS);
     }
-    Clear_Buff();
+   // 关键添加：把刚刚发送产生的 OK、+MQTTPUB:OK 从环形缓冲区里“吃掉”
+   // 防止它们留给 handle_uart_json_stream
+   uint8_t dummy;
+   while (g_rx_buf.get(&g_rx_buf, &dummy) == 0); 
+
+   memset(At_Rx_Buff, 0, sizeof(At_Rx_Buff));
 }
 
 /*Wifi串口回调函数*/
@@ -393,11 +428,11 @@ void esp8266_uart2_callback(uart_callback_args_t * p_args)
 
               uint8_t data = (uint8_t)p_args->data;
 
-            /* 1. 【兼容旧代码】存入线性缓冲区，供 Connect_MQTT 等阻塞函数使用 */
-            /* 只有在初始化阶段或者缓冲区未满时才存，防止溢出 */
-           
+           // 1. 安全存入线性缓冲区 (供阻塞指令使用)
+            if (Uart2_Num < 255) {
                 At_Rx_Buff[Uart2_Num++] = (char)data;
-                
+                At_Rx_Buff[Uart2_Num] = '\0'; // 随时封端，防止 strstr 跑飞
+            }
             
 
             /* 2. 【新逻辑】存入环形缓冲区，供主循环异步解析 */

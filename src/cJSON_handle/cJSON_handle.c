@@ -5,12 +5,13 @@
 #include "stdlib.h"
 #include "bsp_wifi_esp8266.h"
 #include "bsp_led.h"
+#include "Systick.h"
 extern circle_buf_t g_rx_buf;
 #define MAX_JSON_SIZE 512
 static char json_process_buf[MAX_JSON_SIZE]; // 线性缓冲区，用于解析
 extern _Bool  Uart2_Send_Flag;
-
-
+ extern uint8_t g_force_upload_flag;
+ int brace_count = 0; // 新增：大括号计数器
 
 
 PowerStrip_t g_strip = {220.0f, 0.0f, 0.0f, {false, false, false, false}};
@@ -52,20 +53,23 @@ void upload_strip_status(void)
 
 void process_cloud_cmd(const char *json_str) 
 {
-    char *json_ptr = strchr(json_str, '{');
-    if (!json_ptr) return;
+   // 1. 寻找 JSON 的起始大括号
+    char *json_start = strchr(json_str, '{');
+    if (!json_start) return;
 
-    // 寻找最后一个 '}'，确保解析的是一段完整的对象
-    char *json_end = strrchr(json_ptr, '}');
-    if (json_end) {
-        *(json_end + 1) = '\0'; 
-    }
+    // 2. 寻找最后一个结束大括号
+    char *json_end = strrchr(json_start, '}');
+    if (!json_end) return;
 
-    printf("Fixed JSON: [%s]\n", json_ptr); // 再次确认
+    // 3. 临时截断字符串，确保 cJSON 只看到 {} 里的内容
+    char backup = *(json_end + 1);
+    *(json_end + 1) = '\0';
 
-    cJSON *root = cJSON_Parse(json_ptr);
+    cJSON *root = cJSON_Parse(json_start);
     if (!root) {
-        printf("Parse Fail again! Error at: %s\n", cJSON_GetErrorPtr());
+        // 如果解析失败，把那一串东西打印出来看看是不是被截断了
+        printf("[JSON Error] 内容太杂导致解析失败!\n");
+        *(json_end + 1) = backup; // 恢复原样
         return;
     }
 
@@ -100,50 +104,62 @@ void process_cloud_cmd(const char *json_str)
         }
         cJSON_Delete(ack);
         
-        // 4. 控制完后，建议立即触发一次状态上报，让网页端秒刷新
-        upload_strip_status();
+        // 关键修改：不要在这里直接 upload_strip_status() !!
+        // 设置一个标志位，让 main 循环去处理发送
+        g_force_upload_flag = 1;
     }
     cJSON_Delete(root);
+    *(json_end + 1) = backup; // 恢复原样
 }
 
 
 void handle_uart_json_stream(void)
 {
     static uint16_t pos = 0;
-    static int brace_count = 0; // 新增：大括号计数器
+    static int brace_count = 0; 
+    static uint32_t last_byte_time = 0;
     uint8_t temp_byte;
 
     while (g_rx_buf.get(&g_rx_buf, &temp_byte) == 0)
     {
+        last_byte_time = HAL_GetTick(); 
+
         if (pos < MAX_JSON_SIZE - 1) {
             json_process_buf[pos++] = (char)temp_byte;
+            json_process_buf[pos] = '\0';
         }
 
-        // 1. 监控大括号，判断 JSON 是否完整
-        if (temp_byte == '{') brace_count++;
-        if (temp_byte == '}') brace_count--;
+        // --- 核心调试打印：看到底收到了什么字符 ---
+        // 如果这里没打印字符，说明中断没把数据放进 ring buffer
+        // printf("%c", temp_byte); 
 
-        // 2. 只有当我们在缓冲区里发现了 +MQTTSUBRECV 
-        //    并且大括号成对闭合（brace_count == 0）且 pos > 0 时，才处理
-        if (brace_count == 0 && pos > 0 && strstr(json_process_buf, "+MQTTSUBRECV")) 
-        {
-            json_process_buf[pos] = '\0'; 
+        if (temp_byte == '{') {
+            brace_count++;
+        }
+        else if (temp_byte == '}') {
+            if (brace_count > 0) brace_count--;
             
-            // 调试打印：看看这次是不是完整的
-            printf("Full Packet: %s\n", json_process_buf);
-            
-            process_cloud_cmd(json_process_buf);
-            
-            // 处理完清空
-            pos = 0; 
-            brace_count = 0;
-            memset(json_process_buf, 0, MAX_JSON_SIZE); 
+            // 当括号闭合时，强制打印缓冲区内容进行检查
+            if (brace_count == 0 && pos > 0) {
+                printf("\r\n[Parser] 捕获到完整括号对，当前缓冲区: %s\r\n", json_process_buf);
+                
+                if (strstr(json_process_buf, "+MQTTSUBRECV")) {
+                    process_cloud_cmd(json_process_buf);
+                } else {
+                    printf("[Parser] 未发现 +MQTTSUBRECV 标志，丢弃\r\n");
+                }
+                
+                // 彻底重置
+                pos = 0;
+                memset(json_process_buf, 0, MAX_JSON_SIZE);
+            }
         }
         
-        // 安全机制：如果 buffer 满了还没闭合，强制重置，防止卡死
-        if (pos >= MAX_JSON_SIZE - 1) {
+        // 超时重置逻辑（适当放宽到 1s）
+        if (pos > 0 && (HAL_GetTick() - last_byte_time > 1000)) {
             pos = 0;
             brace_count = 0;
+            memset(json_process_buf, 0, MAX_JSON_SIZE);
         }
     }
 }

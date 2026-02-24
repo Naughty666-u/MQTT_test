@@ -150,6 +150,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>g_strip</ItemText>
         </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>brace_count</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
