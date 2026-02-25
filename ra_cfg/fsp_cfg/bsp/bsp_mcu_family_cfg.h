@@ -86,7 +86,7 @@ extern "C" {
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 25) /* SCI6 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 26) /* SCI5 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 27) /* SCI4 */ | \
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 28) /* SCI3 */ | \
+            (((1 > 0) ? 0U : 1U) << 28) /* SCI3 */ | \
             (((1 > 0) ? 0U : 1U) << 29) /* SCI2 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 30) /* SCI1 */ | \
             (((1 > 0) ? 0U : 1U) << 31) /* SCI0 */ | \
@@ -134,12 +134,12 @@ extern "C" {
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 28) /* GPT3 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 29) /* GPT2 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 30) /* GPT1 */ | \
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 31) /* GPT0 */ | \
+            (((1 > 0) ? 0U : 1U) << 31) /* GPT0 */ | \
             0x3f3ff8) /* Unused */
 #endif
 #ifndef BSP_TZ_CFG_MSSAR
 #define BSP_TZ_CFG_MSSAR (\
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 0) /* ELC */ | \
+            (((1 > 0) ? 0U : 1U) << 0) /* ELC */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 1) /* DTC_DMAC */ | \
             0xfffffffc) /* Unused */
 #endif
@@ -195,8 +195,8 @@ extern "C" {
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 3U) /* External IRQ3 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 4U) /* External IRQ4 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 5U) /* External IRQ5 */ | \
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 6U) /* External IRQ6 */ | \
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 7U) /* External IRQ7 */ | \
+            (((1 > 0) ? 0U : 1U) << 6U) /* External IRQ6 */ | \
+            (((1 > 0) ? 0U : 1U) << 7U) /* External IRQ7 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 8U) /* External IRQ8 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 9U) /* External IRQ9 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 10U) /* External IRQ10 */ | \

@@ -14,29 +14,43 @@ extern _Bool  Uart2_Send_Flag;
  int brace_count = 0; // 新增：大括号计数器
 
 
-PowerStrip_t g_strip = {220.0f, 0.0f, 0.0f, {false, false, false, false}};
-
+// 初始化数据
+PowerStrip_t g_strip = {
+    .voltage = 220.0f,
+    .sockets = {
+        {false, 0.0f, "PC"},
+        {false, 0.0f, "None"},
+        {false, 0.0f, "Lamp"},
+        {false, 0.0f, "None"}
+    }
+};
 
 
 void upload_strip_status(void) 
 {
     cJSON *root = cJSON_CreateObject();
     if (!root) return;
+	
 
     // 1. 填充基础电参 [cite: 63-67]
     cJSON_AddNumberToObject(root, "ts", 1772000100); // 实际应为动态时间戳
     cJSON_AddBoolToObject(root, "online", true);
     cJSON_AddNumberToObject(root, "total_power_w", g_strip.total_power);
     cJSON_AddNumberToObject(root, "voltage_v", g_strip.voltage);
-    cJSON_AddNumberToObject(root, "current_a", g_strip.current);
+    cJSON_AddNumberToObject(root, "current_a", g_strip.total_current);
 
     // 2. 创建插口数组 [cite: 68-70, 92]
     cJSON *sockets = cJSON_CreateArray();
-    for(int i=0; i<2; i++) { // 以文档中2个插口为例
+    for(int i=0; i<4; i++) {
         cJSON *item = cJSON_CreateObject();
         cJSON_AddNumberToObject(item, "id", i+1);
-        cJSON_AddBoolToObject(item, "on", g_strip.socket_on[i]);
-        cJSON_AddNumberToObject(item, "power_w", g_strip.socket_on[i] ? (g_strip.total_power/2.0) : 0.0);
+        cJSON_AddBoolToObject(item, "on", g_strip.sockets[i].on);
+        
+        // 如果开关关了，强行报 0.0，防止计量芯片温漂产生的小数值干扰后端
+        cJSON_AddNumberToObject(item, "power_w", g_strip.sockets[i].on ? g_strip.sockets[i].power : 0.0);
+        
+        cJSON_AddStringToObject(item, "device", g_strip.sockets[i].device_name);
+        
         cJSON_AddItemToArray(sockets, item);
     }
     cJSON_AddItemToObject(root, "sockets", sockets);
@@ -78,18 +92,26 @@ void process_cloud_cmd(const char *json_str)
     cJSON *type = cJSON_GetObjectItem(root, "type");       // ON/OFF [cite: 54]
     cJSON *socketId = cJSON_GetObjectItem(root, "socketId"); // 插孔号 [cite: 55]
 
-    if (cmdId && type) {
-        // 2. 执行硬件控制逻辑
-        int id = socketId ? socketId->valueint : 1; 
-        if (strcmp(type->valuestring, "ON") == 0) {
-            g_strip.socket_on[id-1] = true;
-			printf("\r\nLED_ON\r\n");
-            // TODO: RA6M5 控制 GPIO 输出高电平
-        } else {
-            g_strip.socket_on[id-1] = false;
-			printf("\r\nLED_OFF\r\n");
-            // TODO: RA6M5 控制 GPIO 输出低电平
-        }
+    
+	 if (cmdId && type && socketId) 
+		{
+        // 将 ID 转为 0-3 的数组索引
+        int id_val = socketId->valueint;
+        int index = id_val - 1; 
+
+        // 3. 安全边界检查：防止下发 0 或 5 以上的 ID 导致数组越界
+        if (index >= 0 && index < 4) 
+		{
+            bool is_on = (strcmp(type->valuestring, "ON") == 0);
+
+            // 更新硬件状态结构体
+            // 假设你使用的是 g_strip.socket_on[4] 或者 g_strip.sockets[index].on
+            g_strip.sockets[index].on = is_on;
+
+            // 4. 打印对应的 LED 亮灭状态（满足你的需求）
+            printf("\r\n[Hardware Control] 插座 %d 状态更新!\r\n", id_val);
+            printf(">>> 物理插座 ID: %d, LED 状态: %s\r\n", id_val, is_on ? "【亮 (ON)】" : "【灭 (OFF)】");
+		}
 
         // 3. 立即发送命令回执 (ACK) [cite: 113-118]
         cJSON *ack = cJSON_CreateObject();
@@ -113,6 +135,7 @@ void process_cloud_cmd(const char *json_str)
 }
 
 
+
 void handle_uart_json_stream(void)
 {
     static uint16_t pos = 0;
@@ -122,9 +145,11 @@ void handle_uart_json_stream(void)
 
     while (g_rx_buf.get(&g_rx_buf, &temp_byte) == 0)
     {
+		
         last_byte_time = HAL_GetTick(); 
 
-        if (pos < MAX_JSON_SIZE - 1) {
+        if (pos < MAX_JSON_SIZE - 1)
+		{
             json_process_buf[pos++] = (char)temp_byte;
             json_process_buf[pos] = '\0';
         }
@@ -133,19 +158,24 @@ void handle_uart_json_stream(void)
         // 如果这里没打印字符，说明中断没把数据放进 ring buffer
         // printf("%c", temp_byte); 
 
-        if (temp_byte == '{') {
+        if (temp_byte == '{') 
+		{
             brace_count++;
         }
-        else if (temp_byte == '}') {
+        else if (temp_byte == '}') 
+		{
             if (brace_count > 0) brace_count--;
             
             // 当括号闭合时，强制打印缓冲区内容进行检查
-            if (brace_count == 0 && pos > 0) {
+            if (brace_count == 0 && pos > 0) 
+			{
                 printf("\r\n[Parser] 捕获到完整括号对，当前缓冲区: %s\r\n", json_process_buf);
                 
-                if (strstr(json_process_buf, "+MQTTSUBRECV")) {
+                if (strstr(json_process_buf, "+MQTTSUBRECV"))
+				{
                     process_cloud_cmd(json_process_buf);
-                } else {
+                } else 
+				{
                     printf("[Parser] 未发现 +MQTTSUBRECV 标志，丢弃\r\n");
                 }
                 
@@ -156,10 +186,13 @@ void handle_uart_json_stream(void)
         }
         
         // 超时重置逻辑（适当放宽到 1s）
-        if (pos > 0 && (HAL_GetTick() - last_byte_time > 1000)) {
+        if (pos > 0 && (HAL_GetTick() - last_byte_time > 1000)) 
+		{
             pos = 0;
             brace_count = 0;
             memset(json_process_buf, 0, MAX_JSON_SIZE);
         }
     }
+
 }
+

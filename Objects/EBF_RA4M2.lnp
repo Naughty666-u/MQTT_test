@@ -7,6 +7,9 @@
 ".\objects\cjson_handle.o"
 ".\objects\systick.o"
 ".\objects\bsp_led.o"
+".\objects\uart_hlw.o"
+".\objects\key.o"
+".\objects\relay.o"
 ".\objects\startup.o"
 ".\objects\system.o"
 ".\objects\bsp_clocks.o"
@@ -31,6 +34,10 @@
 ".\objects\main.o"
 ".\objects\pin_data.o"
 ".\objects\vector_data.o"
+".\objects\r_elc.o"
+".\objects\r_gpt.o"
+".\objects\r_icu.o"
+".\objects\elc_data.o"
 --library_type=microlib --diag_suppress 6319,6314 --scatter ".\script\fsp.scat"
 --entry=Reset_Handler --no_startup --via=".\script\ac6\fsp_keep.via" --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

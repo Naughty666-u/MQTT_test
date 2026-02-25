@@ -112,8 +112,8 @@ FSP Configuration
     R7FA4M2AD3CFP.pincfg -> g_bsp_pin_cfg
       AVCC0 88 ANALOG0_AVCC0 - - - - - - - - IO "Read only" - 
       AVSS0 89 ANALOG0_AVSS0 - - - - - - - - IO "Read only" - 
-      P000 100 - - - - Disabled - - "ADC0: AN000; ICU0: IRQ06" - None - - 
-      P001 99 - - - - Disabled - - "ADC0: AN001; ICU0: IRQ07" - None - - 
+      P000 100 ICU0_IRQ06 - - IRQ06 "IRQ mode" - None "ADC0: AN000; ICU0: IRQ06" - IO - - 
+      P001 99 ICU0_IRQ07 - - IRQ07 "IRQ mode" - None "ADC0: AN001; ICU0: IRQ07" - IO - - 
       P002 98 - - - - Disabled - - "ADC0: AN002; ICU0: IRQ08" - None - - 
       P003 97 - - - - Disabled - - "ADC0: AN003" - None - - 
       P004 96 - - - - Disabled - - "ADC0: AN004; ICU0: IRQ09" - None - - 
@@ -126,7 +126,7 @@ FSP Configuration
       P015 84 - - - - Disabled - - "ADC0: AN013; DAC1: DA1; ICU0: IRQ13" - None - - 
       P100 75 SCI0_RXD0 - Low None "Peripheral mode" CMOS None "AGT0: AGTIO0; GPT_POEG0: GTETRGA; GPT5: GTIOC5B; ICU0: IRQ02; QSPI0: QSPCLK; SCI0: RXD0; SCI0: SCL0; SCI1: SCK1" - IO - - 
       P101 74 SCI0_TXD0 - Low None "Peripheral mode" CMOS None "AGT0: AGTEE0; GPT_POEG1: GTETRGB; GPT5: GTIOC5A; ICU0: IRQ01; QSPI0: QIO1; SCI0: SDA0; SCI0: TXD0; SCI1: CTSRTS1" - IO - - 
-      P102 73 - - - - Disabled - - "ADC0: ADTRG0; AGT0: AGTO0; CAN0: CRX0; GPT_OPS0: GTOWLO; GPT2: GTIOC2B; QSPI0: QIO0; SCI0: SCK0" - None - - 
+      P102 73 GPIO - Low - "Output mode (Initial High)" CMOS - "ADC0: ADTRG0; AGT0: AGTO0; CAN0: CRX0; GPT_OPS0: GTOWLO; GPT2: GTIOC2B; QSPI0: QIO0; SCI0: SCK0" - IO - - 
       P103 72 - - - - Disabled - - "AGT2: AGTIO2; CAN0: CTX0; GPT_OPS0: GTOWUP; GPT2: GTIOC2A; QSPI0: QIO3; SCI0: CTSRTS0" - None - - 
       P104 71 - - - - Disabled - - "AGT2: AGTEE2; GPT_POEG1: GTETRGB; GPT1: GTIOC1B; ICU0: IRQ01; QSPI0: QIO2" - None - - 
       P105 70 - - - - Disabled - - "AGT2: AGTO2; GPT_POEG0: GTETRGA; GPT1: GTIOC1A; ICU0: IRQ00" - None - - 
@@ -168,8 +168,8 @@ FSP Configuration
       P405 6 - - - - Disabled - - "GPT1: GTIOC1A; SSI0: SSITXD0" - None - - 
       P406 7 - - - - Disabled - - "AGT5: AGTO5; GPT1: GTIOC1B; SPI0: SSLA3; SSI0: SSIRXD0" - None - - 
       P407 25 - - - - Disabled - - "ADC0: ADTRG0; AGT0: AGTIO0; CTSU0: TS03; GPT6: GTIOC6A; IIC0: SDA0; RTC0: RTCOUT; SCI4: CTSRTS4; SPI0: SSLA3; USB_FS0: USB_VBUS" - None - - 
-      P408 24 - - - - Disabled - - "AGT2: AGTOB2; CTSU0: TS04; GPT_OPS0: GTOWLO; GPT6: GTIOC6B; ICU0: IRQ07; IIC0: SCL0; SCI3: RXD3; SCI3: SCL3; SCI4: CTS4; USB_FS0: USB_ID" - None - - 
-      P409 23 - - - - Disabled - - "AGT2: AGTOA2; CTSU0: TS05; GPT_OPS0: GTOWUP; ICU0: IRQ06; SCI3: SDA3; SCI3: TXD3; USB_FS0: USB_EXICEN" - None - - 
+      P408 24 SCI3_RXD3 - Low None "Peripheral mode" CMOS None "AGT2: AGTOB2; CTSU0: TS04; GPT_OPS0: GTOWLO; GPT6: GTIOC6B; ICU0: IRQ07; IIC0: SCL0; SCI3: RXD3; SCI3: SCL3; SCI4: CTS4; USB_FS0: USB_ID" - IO - - 
+      P409 23 SCI3_TXD3 - Low None "Peripheral mode" CMOS None "AGT2: AGTOA2; CTSU0: TS05; GPT_OPS0: GTOWUP; ICU0: IRQ06; SCI3: SDA3; SCI3: TXD3; USB_FS0: USB_EXICEN" - IO - - 
       P410 22 - - - - Disabled - - "AGT1: AGTOB1; CTSU0: TS06; GPT_OPS0: GTOVLO; ICU0: IRQ05; SCI0: RXD0; SCI0: SCL0; SCI3: SCK3; SDHI0: SD0DAT1" - None - - 
       P411 21 - - - - Disabled - - "AGT1: AGTOA1; CTSU0: TS07; GPT_OPS0: GTOVUP; ICU0: IRQ04; SCI0: SDA0; SCI0: TXD0; SCI3: CTSRTS3; SDHI0: SD0DAT0" - None - - 
       P412 20 - - - - Disabled - - "AGT1: AGTEE1; CTSU0: TS08; GPT_OPS0: GTOULO; SCI0: SCK0; SCI3: CTS3; SDHI0: SD0CMD" - None - - 
@@ -186,8 +186,8 @@ FSP Configuration
       P601 66 - - - - Disabled - - "AGT3: AGTEE3; GPT6: GTIOC6A; SCI9: RXD9; SCI9: SCL9" - None - - 
       P602 65 - - - - Disabled - - "AGT3: AGTO3; GPT7: GTIOC7B; SCI9: SDA9; SCI9: TXD9" - None - - 
       P603 64 - - - - Disabled - - "AGT4: AGTIO4; GPT7: GTIOC7A; SCI9: CTSRTS9" - None - - 
-      P608 59 GPIO - Low - "Output mode (Initial High)" CMOS - "GPT4: GTIOC4B" - IO - - 
-      P609 60 - - - - Disabled - - "AGT5: AGTO5; GPT5: GTIOC5A" - None - - 
+      P608 59 GPIO - Low - "Output mode (Initial Low)" CMOS - "GPT4: GTIOC4B" - IO - - 
+      P609 60 GPIO - Low - "Output mode (Initial Low)" CMOS - "AGT5: AGTO5; GPT5: GTIOC5A" - IO - - 
       P610 61 - - - - Disabled - - "AGT4: AGTO4; GPT5: GTIOC5B" - None - - 
       P708 16 - - - - Disabled - - "CAC0: CACREF; CTSU0: TS12; ICU0: IRQ11; SCI1: RXD1; SCI1: SCL1; SSI_COMMON0: AUDIO_CLK" - None - - 
       RES 38 SYSTEM0_RES - - - - - - - - IO "Read only" - 
@@ -230,6 +230,17 @@ FSP Configuration
     Flow Control Support: Disable
     RS-485 Support: Disable
     IrDA Support: Disabled
+    
+  Module "Timer, General PWM (r_gpt)"
+    Parameter Checking: Default (BSP)
+    Pin Output Support: Disabled
+    Write Protect Enable: Disabled
+    
+  Module "Event Link Controller (r_elc)"
+    Parameter Checking: Default (BSP)
+    
+  Module "External IRQ (r_icu)"
+    Parameter Checking: Default (BSP)
     
   HAL
     Instance "g_ioport I/O Port (r_ioport)"
@@ -297,4 +308,122 @@ FSP Configuration
       Interrupts: Transmit Data Empty Interrupt Priority: Priority 10
       Interrupts: Transmit End Interrupt Priority: Priority 10
       Interrupts: Error Interrupt Priority: Priority 10
+      
+    Instance "g_timer0 Timer, General PWM (r_gpt)"
+      General: Name: g_timer0
+      General: Channel: 0
+      General: Mode: One-Shot
+      General: Period: 20
+      General: Compare Match: Compare Match A: Status: Disabled
+      General: Compare Match: Compare Match A: Compare match value: 0x10000
+      General: Compare Match: Compare Match B: Status: Disabled
+      General: Compare Match: Compare Match B: Compare match value: 0x10000
+      General: Compare Match: Compare Match C: Status: Disabled
+      General: Compare Match: Compare Match C: Compare match value: 0x10000
+      General: Compare Match: Compare Match D: Status: Disabled
+      General: Compare Match: Compare Match D: Compare match value: 0x10000
+      General: Compare Match: Compare Match E: Status: Disabled
+      General: Compare Match: Compare Match E: Compare match value: 0x10000
+      General: Compare Match: Compare Match F: Status: Disabled
+      General: Compare Match: Compare Match F: Compare match value: 0x10000
+      General: Period Unit: Milliseconds
+      Output: Custom Waveform: GTIOA: Initial Output Level: Pin Level Low
+      Output: Custom Waveform: GTIOA: Cycle End Output Level: Pin Level Retain
+      Output: Custom Waveform: GTIOA: Compare Match Output Level: Pin Level Retain
+      Output: Custom Waveform: GTIOA: Retain Output Level at Count Stop: Disabled
+      Output: Custom Waveform: GTIOB: Initial Output Level: Pin Level Low
+      Output: Custom Waveform: GTIOB: Cycle End Output Level: Pin Level Retain
+      Output: Custom Waveform: GTIOB: Compare Match Output Level: Pin Level Retain
+      Output: Custom Waveform: GTIOB: Retain Output Level at Count Stop: Disabled
+      Output: Custom Waveform: Custom Waveform Enable: Disabled
+      Output: Duty Cycle Percent (only applicable in PWM mode): 50
+      Output: GTIOCA Output Enabled: False
+      Output: GTIOCA Stop Level: Pin Level Low
+      Output: GTIOCB Output Enabled: False
+      Output: GTIOCB Stop Level: Pin Level Low
+      Input: Count Up Source: 
+      Input: Count Down Source: 
+      Input: Start Source: SCI3 RXI (Receive data full)
+      Input: Stop Source: 
+      Input: Clear Source: SCI3 RXI (Receive data full)
+      Input: Capture A Source: 
+      Input: Capture B Source: 
+      Input: Noise Filter A Sampling Clock Select: No Filter
+      Input: Noise Filter B Sampling Clock Select: No Filter
+      Pin Polarity: GTIOCnA Polarity: Normal
+      Pin Polarity: GTIOCnB Polarity: Normal
+      Interrupts: Callback: gpt_uart_callback
+      Interrupts: Overflow/Crest Interrupt Priority: Priority 10
+      Interrupts: Capture/Compare match A Interrupt Priority: Disabled
+      Interrupts: Capture/Compare match B Interrupt Priority: Disabled
+      Interrupts: Compare Match C Interrupt Priority: Disabled
+      Interrupts: Compare Match D Interrupt Priority: Disabled
+      Interrupts: Compare Match E Interrupt Priority: Disabled
+      Interrupts: Compare Match F Interrupt Priority: Disabled
+      Interrupts: Underflow/Trough Interrupt Priority: Disabled
+      Extra Features: Extra Features: Disabled
+      Extra Features: Output Disable: POEG Link: POEG Channel 0
+      Extra Features: Output Disable: Output Disable POEG Trigger: 
+      Extra Features: ADC Trigger: Start Event Trigger (Channels with GTINTAD only): 
+      Extra Features: ADC Trigger: ADC A Compare Match (Raw Counts): 0
+      Extra Features: ADC Trigger: ADC B Compare Match (Raw Counts): 0
+      Extra Features: Dead Time (Value range varies with Channel): Dead Time Count Up (Raw Counts): 0
+      Extra Features: Dead Time (Value range varies with Channel): Dead Time Count Down (Raw Counts) (Channels with GTDVD only): 0
+      Extra Features: Interrupt Skipping (Channels with GTITC only): Interrupt to Count: None
+      Extra Features: Interrupt Skipping (Channels with GTITC only): Interrupt Skip Count: 0
+      Extra Features: Interrupt Skipping (Channels with GTITC only): Skip ADC Events: None
+      Extra Features: Output Disable: GTIOCA Disable Setting: Disable Prohibited
+      Extra Features: Output Disable: GTIOCB Disable Setting: Disable Prohibited
+      
+    Instance "g_uart3 UART (r_sci_uart)"
+      General: Name: g_uart3
+      General: Channel: 3
+      General: Data Bits: 8bits
+      General: Parity: None
+      General: Stop Bits: 1bit
+      Baud: Baud Rate: 115200
+      Baud: Baud Rate Modulation: Disabled
+      Baud: Max Error (%): 5
+      Flow Control: CTS/RTS Selection: Hardware RTS
+      Flow Control: Software RTS Port: Disabled
+      Flow Control: Software RTS Pin: Disabled
+      Extra: Clock Source: Internal Clock
+      Extra: Start bit detection: Falling Edge
+      Extra: Noise Filter: Disable
+      Extra: Receive FIFO Trigger Level: Max
+      Extra: IrDA: Enable: Disabled
+      Extra: IrDA: RXD Polarity Switching: Normal
+      Extra: IrDA: TXD Polarity Switching: Normal
+      Extra: RS-485: DE Pin: Disable
+      Extra: RS-485: DE Pin Polarity: Active High
+      Extra: RS-485: DE Port Number: Disabled
+      Extra: RS-485: DE Pin Number: Disabled
+      Interrupts: Callback: uart3_callback
+      Interrupts: Receive Interrupt Priority: Priority 12
+      Interrupts: Transmit Data Empty Interrupt Priority: Priority 12
+      Interrupts: Transmit End Interrupt Priority: Priority 12
+      Interrupts: Error Interrupt Priority: Priority 12
+      
+    Instance "g_elc Event Link Controller (r_elc)"
+      Name: g_elc
+      
+    Instance "g_external_irq6 External IRQ (r_icu)"
+      Name: g_external_irq6
+      Channel: 6
+      Trigger: Rising
+      Digital Filtering: Disabled
+      Filter Source: PCLK filter
+      Digital Filtering Sample Clock (Only valid when Digital Filtering is Enabled): PCLK / 64
+      Callback: key_externel_irq_callback
+      Pin Interrupt Priority: Priority 12
+      
+    Instance "g_external_irq7 External IRQ (r_icu)"
+      Name: g_external_irq7
+      Channel: 7
+      Trigger: Rising
+      Digital Filtering: Disabled
+      Filter Source: PCLK filter
+      Digital Filtering Sample Clock (Only valid when Digital Filtering is Enabled): PCLK / 64
+      Callback: key_externel_irq_callback
+      Pin Interrupt Priority: Priority 12
       

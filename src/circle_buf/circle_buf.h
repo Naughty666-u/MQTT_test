@@ -10,8 +10,9 @@ typedef struct circle_buf
     int32_t (*put)(struct circle_buf *pcb, uint8_t v);   // 写buffer
     int32_t (*get)(struct circle_buf *pcb, uint8_t *pv); // 读buffer
 } circle_buf_t;
-
+void BL0942_circlebuf_init(void);
 void circlebuf_init(void);   //初始化环形缓冲区结构体变量
+void BL0942_circlebuf_clear(void);
 static int32_t circlebuf_put(struct circle_buf *pcb, uint8_t v);  //写缓冲区
 static int32_t circlebuf_get(struct circle_buf *pcb, uint8_t *pv);//读缓冲区
 

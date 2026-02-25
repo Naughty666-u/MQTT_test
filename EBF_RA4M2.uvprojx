@@ -340,7 +340,7 @@
               <MiscControls>-Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\src\debug_uart;.\src\bsp_esp8266;.\src\circle_buf;.\ra_gen;.\ra\fsp\src;.\ra\fsp\inc\api;.\ra\fsp\inc;.\ra_cfg\fsp_cfg\bsp;.\ra\arm\CMSIS_6\CMSIS\Core\Include;.\ra\fsp\inc\instances;.\ra_cfg\fsp_cfg;.\src\cJSON;.\src\cJSON_handle;..\Device_MQTT_conect;.\src\Systick;.\src\led</IncludePath>
+              <IncludePath>.\src\debug_uart;.\src\bsp_esp8266;.\src\circle_buf;.\ra_gen;.\ra\fsp\src;.\ra\fsp\inc\api;.\ra\fsp\inc;.\ra_cfg\fsp_cfg\bsp;.\ra\arm\CMSIS_6\CMSIS\Core\Include;.\ra\fsp\inc\instances;.\ra_cfg\fsp_cfg;.\src\cJSON;.\src\cJSON_handle;.\src\Systick;.\src\led;..\BL0942_MQTT_test;.\src\uart_hlw;.\src\Key;.\src\Relay</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -461,6 +461,36 @@
               <FileName>bsp_led.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\led\bsp_led.h</FilePath>
+            </File>
+            <File>
+              <FileName>uart_hlw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\uart_hlw\uart_hlw.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_hlw.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\uart_hlw\uart_hlw.h</FilePath>
+            </File>
+            <File>
+              <FileName>Key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Key\Key.c</FilePath>
+            </File>
+            <File>
+              <FileName>Key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Key\Key.h</FilePath>
+            </File>
+            <File>
+              <FileName>Relay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Relay\Relay.c</FilePath>
+            </File>
+            <File>
+              <FileName>Relay.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Relay\Relay.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -22,17 +22,25 @@ void ESP8266_MQTT_Test(void)
     ESP8266_DEBUG_MSG("\r\n[SYSTEM] 开始初始化智能排插...\r\n");
     ESP8266_UART2_Init();
     ESP8266_Hard_Reset();
+	R_BSP_SoftwareDelay(1, BSP_DELAY_UNITS_SECONDS); // 复位后多等 1s
     ESP8266_STA(); 
+	R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); // 给 ATE0 处理时间
     ESP8266_ATE0();
+	R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); // 给 ATE0 处理时间
+	
+	// 4. 【新增】降低发射功率 (针对供电不稳的 ESP-01S 非常有效)
+    // 降低到 50 (最大 82)，减小瞬间电流峰值，防止电压跌落导致重启
+    ESP8266_AT_Send("AT+RFPOWER=50\r\n");
+    R_BSP_SoftwareDelay(200, BSP_DELAY_UNITS_MILLISECONDS);
+
+	
     ESP8266_STA_JoinAP(ID, PASSWORD, 20);
 
     // 4. 配置 MQTT 属性 (注意：如果你的函数支持，应在这里传入遗嘱参数)
     // 根据文档 [cite: 147, 148]，遗嘱 Payload 应为 {"reason": "power_off"}
-    ESP8266_DEBUG_MSG("配置 MQTT 用户属性与遗嘱...\r\n");
+    ESP8266_DEBUG_MSG("配置 MQTT 用户属性\r\n");
     MQTT_SetUserProperty(CLIENT_ID, USER_NAME, USER_PASSWORD);
     
-    // 如果你的 MQTT 库支持设置遗嘱，记得在这里调用，比如：
-    // MQTT_SetWill(MQTT_WILL_TOPIC, 1, false, "{\"reason\": \"power_off\"}"); 
 
     // 5. 连接 MQTT 服务器
     ESP8266_DEBUG_MSG("连接 MQTT 服务器...\r\n");
@@ -253,11 +261,12 @@ void MQTT_SetUserProperty( char * client_id , char * user_name, char * user_pass
 /*连接MQTT服务器函数*/
 void Connect_MQTT( char * mqtt_ip , char * mqtt_port , uint8_t timeout )
 {
+	
     char  Connect_MQTT_AT[256];
 
     uint8_t i;
 
-    sprintf( Connect_MQTT_AT , "AT+MQTTCONN=0,\"%s\",%s,0\r\n" , mqtt_ip , mqtt_port);
+    sprintf( Connect_MQTT_AT , "AT+MQTTCONN=0,\"%s\",%s,1\r\n" , mqtt_ip , mqtt_port);
 
     ESP8266_AT_Send( Connect_MQTT_AT );
 

@@ -24,6 +24,10 @@
         <file category="source" name="src/hal_entry.c"/>
         <file category="source" name="src/led/bsp_led.c"/>
         <file category="header" name="src/led/bsp_led.h" path=""/>
+        <file category="source" name="src/Systick/Systick.c"/>
+        <file category="header" name="src/Systick/Systick.h" path=""/>
+        <file category="source" name="src/uart_hlw/uart_hlw.c"/>
+        <file category="header" name="src/uart_hlw/uart_hlw.h" path=""/>
       </project_files>
     </generator>
   </generators>
@@ -78,11 +82,17 @@
         <file category="other" name="ra/arm/CMSIS_6/LICENSE"/>
         <file category="header" name="ra/fsp/inc/api/bsp_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/fsp_common_api.h" path=""/>
+        <file category="header" name="ra/fsp/inc/api/r_elc_api.h" path=""/>
+        <file category="header" name="ra/fsp/inc/api/r_external_irq_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_ioport_api.h" path=""/>
+        <file category="header" name="ra/fsp/inc/api/r_timer_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_transfer_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_uart_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/fsp_features.h" path=""/>
         <file category="header" name="ra/fsp/inc/fsp_version.h" path=""/>
+        <file category="header" name="ra/fsp/inc/instances/r_elc.h" path=""/>
+        <file category="header" name="ra/fsp/inc/instances/r_gpt.h" path=""/>
+        <file category="header" name="ra/fsp/inc/instances/r_icu.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_ioport.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_sci_uart.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/R7FA4M2AD.h" path=""/>
@@ -128,6 +138,9 @@
         <file category="source" name="ra/fsp/src/bsp/mcu/ra4m2/bsp_linker.c"/>
         <file category="header" name="ra/fsp/src/bsp/mcu/ra4m2/bsp_mcu_info.h" path=""/>
         <file category="header" name="ra/fsp/src/bsp/mcu/ra4m2/bsp_peripheral.h" path=""/>
+        <file category="source" name="ra/fsp/src/r_elc/r_elc.c"/>
+        <file category="source" name="ra/fsp/src/r_gpt/r_gpt.c"/>
+        <file category="source" name="ra/fsp/src/r_icu/r_icu.c"/>
         <file category="source" name="ra/fsp/src/r_ioport/r_ioport.c"/>
         <file category="source" name="ra/fsp/src/r_sci_uart/r_sci_uart.c"/>
       </files>
@@ -143,6 +156,9 @@
         <file category="header" name="ra_cfg/fsp_cfg/bsp/bsp_mcu_family_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/bsp/bsp_mcu_ofs_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h" path=""/>
+        <file category="header" name="ra_cfg/fsp_cfg/r_elc_cfg.h" path=""/>
+        <file category="header" name="ra_cfg/fsp_cfg/r_gpt_cfg.h" path=""/>
+        <file category="header" name="ra_cfg/fsp_cfg/r_icu_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_ioport_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_sci_uart_cfg.h" path=""/>
       </files>
@@ -153,6 +169,7 @@
         <file category="header" name="ra_gen/bsp_clock_cfg.h" path=""/>
         <file category="source" name="ra_gen/common_data.c"/>
         <file category="header" name="ra_gen/common_data.h" path=""/>
+        <file category="source" name="ra_gen/elc_data.c"/>
         <file category="source" name="ra_gen/hal_data.c"/>
         <file category="header" name="ra_gen/hal_data.h" path=""/>
         <file category="source" name="ra_gen/main.c"/>

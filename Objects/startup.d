@@ -1,5 +1,5 @@
 ./objects/startup.o: \
-  D:\RA6M5_project\SD\Device_MQTT_conect\ra\fsp\src\bsp\cmsis\Device\RENESAS\Source\startup.c \
+  D:\RA6M5_project\SD\BL0942_MQTT_test\ra\fsp\src\bsp\cmsis\Device\RENESAS\Source\startup.c \
   ra\fsp\inc\api\bsp_api.h ra\fsp\inc\api\fsp_common_api.h \
   ra\fsp\inc\fsp_version.h ra_cfg\fsp_cfg\bsp\bsp_cfg.h \
   ra_gen\bsp_clock_cfg.h ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \
@@ -26,7 +26,7 @@
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mmf.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ipc.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ospi_b.h \
-  ..\Device_MQTT_conect\bsp_linker_info.h \
+  ..\BL0942_MQTT_test\bsp_linker_info.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_register_protection.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_irq.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_io.h \
