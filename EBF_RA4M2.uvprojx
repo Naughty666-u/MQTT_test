@@ -340,7 +340,7 @@
               <MiscControls>-Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\src\debug_uart;.\src\bsp_esp8266;.\src\circle_buf;.\ra_gen;.\ra\fsp\src;.\ra\fsp\inc\api;.\ra\fsp\inc;.\ra_cfg\fsp_cfg\bsp;.\ra\arm\CMSIS_6\CMSIS\Core\Include;.\ra\fsp\inc\instances;.\ra_cfg\fsp_cfg;.\src\cJSON;.\src\cJSON_handle;.\src\Systick;.\src\led;..\BL0942_MQTT_test;.\src\uart_hlw;.\src\Key;.\src\Relay</IncludePath>
+              <IncludePath>.\src\debug_uart;.\src\bsp_esp8266;.\src\circle_buf;.\ra_gen;.\ra\fsp\src;.\ra\fsp\inc\api;.\ra\fsp\inc;.\ra_cfg\fsp_cfg\bsp;.\ra\arm\CMSIS_6\CMSIS\Core\Include;.\ra\fsp\inc\instances;.\ra_cfg\fsp_cfg;.\src\cJSON;.\src\cJSON_handle;.\src\Systick;.\src\led;.\src\uart_hlw;.\src\Key;.\src\Relay;.\src\sdhi_sdcard;.\src\sdcard_data_handle;.\src\sdhi_sdcard;.\src\FatFs\ff15;..\Appliance identification</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -491,6 +491,61 @@
               <FileName>Relay.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\Relay\Relay.h</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdhi_sdcard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\sdhi_sdcard\bsp_sdhi_sdcard.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdhi_sdcard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\sdhi_sdcard\bsp_sdhi_sdcard.h</FilePath>
+            </File>
+            <File>
+              <FileName>sdcard_data_handle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\sdcard_data_handle\sdcard_data_handle.c</FilePath>
+            </File>
+            <File>
+              <FileName>sdcard_data_handle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\sdcard_data_handle\sdcard_data_handle.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FatFs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\FatFs\ff15\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FatFs\ff15\diskio.h</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\FatFs\ff15\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FatFs\ff15\ff.h</FilePath>
+            </File>
+            <File>
+              <FileName>ffconf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\FatFs\ff15\ffconf.h</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\FatFs\ff15\ffunicode.c</FilePath>
             </File>
           </Files>
         </Group>

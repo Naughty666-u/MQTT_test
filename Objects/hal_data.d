@@ -1,6 +1,6 @@
 ./objects/hal_data.o: \
-  D:\RA6M5_project\SD\BL0942_MQTT_test\ra_gen\hal_data.c \
-  D:\RA6M5_project\SD\BL0942_MQTT_test\ra_gen\hal_data.h \
+  D:\RA6M5_project\SD\Appliance\ identification\ra_gen\hal_data.c \
+  D:\RA6M5_project\SD\Appliance\ identification\ra_gen\hal_data.h \
   ra\fsp\inc\api\bsp_api.h ra\fsp\inc\api\fsp_common_api.h \
   ra\fsp\inc\fsp_version.h ra_cfg\fsp_cfg\bsp\bsp_cfg.h \
   ra_gen\bsp_clock_cfg.h ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \
@@ -27,7 +27,7 @@
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mmf.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ipc.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ospi_b.h \
-  ..\BL0942_MQTT_test\bsp_linker_info.h \
+  ..\Appliance\ identification\bsp_linker_info.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_register_protection.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_irq.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_io.h \
@@ -39,12 +39,14 @@
   ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h \
-  D:\RA6M5_project\SD\BL0942_MQTT_test\ra_gen\common_data.h \
+  D:\RA6M5_project\SD\Appliance\ identification\ra_gen\common_data.h \
   ra\fsp\inc\instances\r_icu.h ra\fsp\inc\api\r_external_irq_api.h \
   ra\fsp\inc\instances\r_elc.h ra_cfg\fsp_cfg\r_elc_cfg.h \
   ra\fsp\inc\api\r_elc_api.h ra\fsp\inc\instances\r_ioport.h \
   ra\fsp\inc\api\r_ioport_api.h ra_cfg\fsp_cfg\r_ioport_cfg.h \
-  ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h ra\fsp\inc\instances\r_sci_uart.h \
-  ra\fsp\inc\api\r_uart_api.h ra\fsp\inc\api\r_transfer_api.h \
+  ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h ra\fsp\inc\instances\r_dmac.h \
+  ra\fsp\inc\api\r_transfer_api.h ra\fsp\inc\instances\r_sdhi.h \
+  ra_cfg\fsp_cfg\r_sdhi_cfg.h ra\fsp\inc\api\r_sdmmc_api.h \
+  ra\fsp\inc\instances\r_sci_uart.h ra\fsp\inc\api\r_uart_api.h \
   ra_cfg\fsp_cfg\r_sci_uart_cfg.h ra\fsp\inc\instances\r_gpt.h \
   ra\fsp\inc\api\r_timer_api.h

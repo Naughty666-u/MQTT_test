@@ -142,8 +142,8 @@ FSP Configuration
       P115 58 - - - - Disabled - - "GPT4: GTIOC4A; SSI0: SSITXD0" - None - - 
       P200 40 - - - - Disabled - - "ICU0: NMI" - None - - 
       P201 39 - - - - Disabled - - "SYSTEM0: MD" - None - - 
-      P205 32 - - - - Disabled - - "AGT1: AGTO1; CGC0: CLKOUT; CTSU0: TS01; GPT_OPS0: GTIV; GPT4: GTIOC4A; ICU0: IRQ01; IIC1: SCL1; SCI4: SDA4; SCI4: TXD4; SCI9: CTSRTS9; SDHI0: SD0DAT3; SPI0: SSLA0; SSI0: SSILRCK0; USB_FS0: USB_OVRCURA" - None - - 
-      P206 31 - - - - Disabled - - "CTSU0: TS02; GPT_OPS0: GTIU; ICU0: IRQ00; IIC1: SDA1; SCI4: RXD4; SCI4: SCL4; SCI9: CTS9; SDHI0: SD0DAT2; SPI0: SSLA1; SSI0: SSIDATA0; USB_FS0: USB_VBUSEN" - None - - 
+      P205 32 SDHI0_SD0DAT3 - Low None "Peripheral mode" CMOS None "AGT1: AGTO1; CGC0: CLKOUT; CTSU0: TS01; GPT_OPS0: GTIV; GPT4: GTIOC4A; ICU0: IRQ01; IIC1: SCL1; SCI4: SDA4; SCI4: TXD4; SCI9: CTSRTS9; SDHI0: SD0DAT3; SPI0: SSLA0; SSI0: SSILRCK0; USB_FS0: USB_OVRCURA" - IO - - 
+      P206 31 SDHI0_SD0DAT2 - Low None "Peripheral mode" CMOS None "CTSU0: TS02; GPT_OPS0: GTIU; ICU0: IRQ00; IIC1: SDA1; SCI4: RXD4; SCI4: SCL4; SCI9: CTS9; SDHI0: SD0DAT2; SPI0: SSLA1; SSI0: SSIDATA0; USB_FS0: USB_VBUSEN" - IO - - 
       P207 30 - - - - Disabled - - "CTSU0: TSCAP; QSPI0: QSSL; SCI4: SDA4; SCI4: TXD4; SPI0: SSLA2" - None - - 
       P208 37 - - - - Disabled - - "DEBUG_TRACE0: TDATA3; GPT_OPS0: GTOVLO; QSPI0: QIO3; SDHI0: SD0DAT0" - None - - 
       P209 36 - - - - Disabled - - "AGT5: AGTEE5; DEBUG_TRACE0: TDATA2; GPT_OPS0: GTOVUP; QSPI0: QIO2; SDHI0: SD0WP" - None - - 
@@ -170,12 +170,12 @@ FSP Configuration
       P407 25 - - - - Disabled - - "ADC0: ADTRG0; AGT0: AGTIO0; CTSU0: TS03; GPT6: GTIOC6A; IIC0: SDA0; RTC0: RTCOUT; SCI4: CTSRTS4; SPI0: SSLA3; USB_FS0: USB_VBUS" - None - - 
       P408 24 SCI3_RXD3 - Low None "Peripheral mode" CMOS None "AGT2: AGTOB2; CTSU0: TS04; GPT_OPS0: GTOWLO; GPT6: GTIOC6B; ICU0: IRQ07; IIC0: SCL0; SCI3: RXD3; SCI3: SCL3; SCI4: CTS4; USB_FS0: USB_ID" - IO - - 
       P409 23 SCI3_TXD3 - Low None "Peripheral mode" CMOS None "AGT2: AGTOA2; CTSU0: TS05; GPT_OPS0: GTOWUP; ICU0: IRQ06; SCI3: SDA3; SCI3: TXD3; USB_FS0: USB_EXICEN" - IO - - 
-      P410 22 - - - - Disabled - - "AGT1: AGTOB1; CTSU0: TS06; GPT_OPS0: GTOVLO; ICU0: IRQ05; SCI0: RXD0; SCI0: SCL0; SCI3: SCK3; SDHI0: SD0DAT1" - None - - 
-      P411 21 - - - - Disabled - - "AGT1: AGTOA1; CTSU0: TS07; GPT_OPS0: GTOVUP; ICU0: IRQ04; SCI0: SDA0; SCI0: TXD0; SCI3: CTSRTS3; SDHI0: SD0DAT0" - None - - 
-      P412 20 - - - - Disabled - - "AGT1: AGTEE1; CTSU0: TS08; GPT_OPS0: GTOULO; SCI0: SCK0; SCI3: CTS3; SDHI0: SD0CMD" - None - - 
-      P413 19 - - - - Disabled - - "AGT3: AGTEE3; CTSU0: TS09; GPT_OPS0: GTOUUP; SCI0: CTSRTS0; SDHI0: SD0CLK" - None - - 
+      P410 22 SDHI0_SD0DAT1 - Low None "Peripheral mode" CMOS None "AGT1: AGTOB1; CTSU0: TS06; GPT_OPS0: GTOVLO; ICU0: IRQ05; SCI0: RXD0; SCI0: SCL0; SCI3: SCK3; SDHI0: SD0DAT1" - IO - - 
+      P411 21 SDHI0_SD0DAT0 - Low None "Peripheral mode" CMOS None "AGT1: AGTOA1; CTSU0: TS07; GPT_OPS0: GTOVUP; ICU0: IRQ04; SCI0: SDA0; SCI0: TXD0; SCI3: CTSRTS3; SDHI0: SD0DAT0" - IO - - 
+      P412 20 SDHI0_SD0CMD - Low - "Peripheral mode" CMOS None "AGT1: AGTEE1; CTSU0: TS08; GPT_OPS0: GTOULO; SCI0: SCK0; SCI3: CTS3; SDHI0: SD0CMD" - IO - - 
+      P413 19 SDHI0_SD0CLK - Low - "Peripheral mode" CMOS None "AGT3: AGTEE3; CTSU0: TS09; GPT_OPS0: GTOUUP; SCI0: CTSRTS0; SDHI0: SD0CLK" - IO - - 
       P414 18 - - - - Disabled - - "AGT5: AGTIO5; CTSU0: TS10; GPT0: GTIOC0B; ICU0: IRQ09; SCI0: CTS0; SDHI0: SD0WP" - None - - 
-      P415 17 - - - - Disabled - - "AGT4: AGTIO4; CTSU0: TS11; GPT0: GTIOC0A; ICU0: IRQ08; SDHI0: SD0CD; USB_FS0: USB_VBUSEN" - None - - 
+      P415 17 SDHI0_SD0CD - Low None "Peripheral mode" CMOS None "AGT4: AGTIO4; CTSU0: TS11; GPT0: GTIOC0A; ICU0: IRQ08; SDHI0: SD0CD; USB_FS0: USB_VBUSEN" - IO - - 
       P500 76 - - - - Disabled - - "ADC0: AN016; AGT0: AGTOA0; CAC0: CACREF; GPT_OPS0: GTIU; QSPI0: QSPCLK; USB_FS0: USB_VBUSEN" - None - - 
       P501 77 - - - - Disabled - - "AGT0: AGTOB0; GPT_OPS0: GTIV; ICU0: IRQ11; QSPI0: QSSL; USB_FS0: USB_OVRCURA" - None - - 
       P502 78 - - - - Disabled - - "AGT2: AGTOA2; GPT_OPS0: GTIW; ICU0: IRQ12; QSPI0: QIO0; USB_FS0: USB_OVRCURB" - None - - 
@@ -240,6 +240,15 @@ FSP Configuration
     Parameter Checking: Default (BSP)
     
   Module "External IRQ (r_icu)"
+    Parameter Checking: Default (BSP)
+    
+  Module "SD/MMC (r_sdhi)"
+    Parameter Checking: Default (BSP)
+    Unaligned Access Support: Enabled
+    SD Support: Enabled
+    eMMC Support: Disabled
+    
+  Module "Transfer (r_dmac)"
     Parameter Checking: Default (BSP)
     
   HAL
@@ -381,7 +390,7 @@ FSP Configuration
       General: Data Bits: 8bits
       General: Parity: None
       General: Stop Bits: 1bit
-      Baud: Baud Rate: 115200
+      Baud: Baud Rate: 9600
       Baud: Baud Rate Modulation: Disabled
       Baud: Max Error (%): 5
       Flow Control: CTS/RTS Selection: Hardware RTS
@@ -427,3 +436,31 @@ FSP Configuration
       Callback: key_externel_irq_callback
       Pin Interrupt Priority: Priority 12
       
+    Instance "g_sdmmc0 SD/MMC (r_sdhi)"
+      Name: g_sdmmc0
+      Channel: 0
+      Bus Width: 4 Bits
+      Card Detection: CD Pin
+      Write Protection: Not Used
+      Callback: g_sdmmc0_callback
+      Access Interrupt Priority: Priority 12
+      Card Interrupt Priority: Priority 12
+      DTC Interrupt Priority: Disabled
+      
+      Instance "g_transfer_sdhi Transfer (r_dmac) SDHIMMC0 DMA REQ (DMA transfer request)"
+        Name: g_transfer_sdhi
+        Channel: 0
+        Mode: Normal
+        Transfer Size: 4 Bytes
+        Destination Address Mode: Fixed
+        Source Address Mode: Incremented
+        Repeat Area (Unused in Normal Mode): Source
+        Number of Transfers: 128
+        Number of Blocks (Valid only in Repeat,Block or Repeat-Block Mode): 0
+        Activation Source: SDHIMMC0 DMA REQ (DMA transfer request)
+        Callback: g_sdmmc0_dmac_callback
+        Transfer End Interrupt Priority: Priority 10
+        Interrupt Frequency: Interrupt after all transfers have completed
+        Offset value (Valid only when address mode is Offset addition): 1
+        Source Buffer Size: 1
+        

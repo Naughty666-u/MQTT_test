@@ -7,6 +7,10 @@
 #include <time.h>   // 用于 srand()
 #define MAX_C 20
 
+
+//BL0942波特率为9600
+
+
 static volatile int g_uart3_tx_complete = 0;
 extern circle_buf_t g_BL0942_rx_buf;
 uint8_t com_data[2]={0x58,0xAA};//读取BL0942模块数据的一个指令
@@ -46,6 +50,11 @@ void BL0942_UART3_Init(void)
     err = g_uart3.p_api->open(g_uart3.p_ctrl, g_uart3.p_cfg);
 	if (FSP_SUCCESS != err)
         printf("uart_hlw open failed\r\n");
+	else
+    {
+		printf("uart_hlw open success\r\n");
+	
+	}
 }
 
 

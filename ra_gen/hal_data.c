@@ -1,11 +1,110 @@
 /* generated HAL source file - do not edit */
 #include "hal_data.h"
 
+
+dmac_instance_ctrl_t g_transfer_sdhi_ctrl;
+transfer_info_t g_transfer_sdhi_info =
+{
+    .transfer_settings_word_b.dest_addr_mode = TRANSFER_ADDR_MODE_FIXED,
+    .transfer_settings_word_b.repeat_area    = TRANSFER_REPEAT_AREA_SOURCE,
+    .transfer_settings_word_b.irq            = TRANSFER_IRQ_END,
+    .transfer_settings_word_b.chain_mode     = TRANSFER_CHAIN_MODE_DISABLED,
+    .transfer_settings_word_b.src_addr_mode  = TRANSFER_ADDR_MODE_INCREMENTED,
+    .transfer_settings_word_b.size           = TRANSFER_SIZE_4_BYTE,
+    .transfer_settings_word_b.mode           = TRANSFER_MODE_NORMAL,
+    .p_dest                                  = (void *) NULL,
+    .p_src                                   = (void const *) NULL,
+    .num_blocks                              = 0,
+    .length                                  = 128,
+};
+const dmac_extended_cfg_t g_transfer_sdhi_extend =
+{
+    .offset              = 1,
+    .src_buffer_size     = 1,
+#if defined(VECTOR_NUMBER_DMAC0_INT)
+    .irq                 = VECTOR_NUMBER_DMAC0_INT,
+#else
+    .irq                 = FSP_INVALID_VECTOR,
+#endif
+    .ipl                 = (10),
+    .channel             = 0,
+    .p_callback          = g_sdmmc0_dmac_callback,
+    .p_context           = &g_sdmmc0_ctrl,
+    .activation_source   = ELC_EVENT_SDHIMMC0_DMA_REQ,
+};
+const transfer_cfg_t g_transfer_sdhi_cfg =
+{
+    .p_info              = &g_transfer_sdhi_info,
+    .p_extend            = &g_transfer_sdhi_extend,
+};
+/* Instance structure to use this module. */
+const transfer_instance_t g_transfer_sdhi =
+{
+    .p_ctrl        = &g_transfer_sdhi_ctrl,
+    .p_cfg         = &g_transfer_sdhi_cfg,
+    .p_api         = &g_transfer_on_dmac
+};
+#define RA_NOT_DEFINED (UINT32_MAX)
+#if (RA_NOT_DEFINED) != (1)
+
+/* If the transfer module is DMAC, define a DMAC transfer callback. */
+#include "r_dmac.h"
+extern void r_sdhi_transfer_callback(sdhi_instance_ctrl_t * p_ctrl);
+
+void g_sdmmc0_dmac_callback (dmac_callback_args_t * p_args)
+{
+    r_sdhi_transfer_callback((sdhi_instance_ctrl_t *) p_args->p_context);
+}
+#endif
+#undef RA_NOT_DEFINED
+
+sdhi_instance_ctrl_t g_sdmmc0_ctrl;
+sdmmc_cfg_t g_sdmmc0_cfg =
+{
+    .bus_width              = SDMMC_BUS_WIDTH_4_BITS,
+    .channel                = 0,
+    .p_callback             = g_sdmmc0_callback,
+    .p_context              = NULL,
+    .block_size             = 512,
+    .card_detect            = SDMMC_CARD_DETECT_CD,
+    .write_protect          = SDMMC_WRITE_PROTECT_NONE,
+
+    .p_extend               = NULL,
+    .p_lower_lvl_transfer   = &g_transfer_sdhi,
+
+    .access_ipl             = (12),
+    .sdio_ipl               = BSP_IRQ_DISABLED,
+    .card_ipl               = (12),
+    .dma_req_ipl            = (BSP_IRQ_DISABLED),
+#if defined(VECTOR_NUMBER_SDHIMMC0_ACCS)
+    .access_irq             = VECTOR_NUMBER_SDHIMMC0_ACCS,
+#else
+    .access_irq             = FSP_INVALID_VECTOR,
+#endif
+#if defined(VECTOR_NUMBER_SDHIMMC0_CARD)
+    .card_irq               = VECTOR_NUMBER_SDHIMMC0_CARD,
+#else
+    .card_irq               = FSP_INVALID_VECTOR,
+#endif
+    .sdio_irq               = FSP_INVALID_VECTOR,
+#if defined(VECTOR_NUMBER_SDHIMMC0_DMA_REQ)
+    .dma_req_irq            = VECTOR_NUMBER_SDHIMMC0_DMA_REQ,
+#else
+    .dma_req_irq            = FSP_INVALID_VECTOR,
+#endif
+};
+/* Instance structure to use this module. */
+const sdmmc_instance_t g_sdmmc0 =
+{
+    .p_ctrl        = &g_sdmmc0_ctrl,
+    .p_cfg         = &g_sdmmc0_cfg,
+    .p_api         = &g_sdmmc_on_sdhi
+};
 sci_uart_instance_ctrl_t     g_uart3_ctrl;
 
             baud_setting_t               g_uart3_baud_setting =
             {
-                /* Baud rate calculated with 0.469% error. */ .semr_baudrate_bits_b.abcse = 0, .semr_baudrate_bits_b.abcs = 0, .semr_baudrate_bits_b.bgdm = 1, .cks = 0, .brr = 53, .mddr = (uint8_t) 256, .semr_baudrate_bits_b.brme = false
+                /* Baud rate calculated with 0.469% error. */ .semr_baudrate_bits_b.abcse = 0, .semr_baudrate_bits_b.abcs = 0, .semr_baudrate_bits_b.bgdm = 1, .cks = 1, .brr = 161, .mddr = (uint8_t) 256, .semr_baudrate_bits_b.brme = false
             };
 
             /** UART extended configuration for UARTonSCI HAL driver */

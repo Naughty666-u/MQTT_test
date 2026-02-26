@@ -72,9 +72,16 @@
       <configSetting altId="p113.gpio_mode.gpio_mode_peripheral" configurationId="p113.gpio_mode"/>
       <configSetting altId="p114.output.high" configurationId="p114"/>
       <configSetting altId="p114.gpio_mode.gpio_mode_out.high" configurationId="p114.gpio_mode"/>
+      <configSetting altId="p205.gpio_mode.gpio_mode_peripheral" configurationId="p205.gpio_mode"/>
+      <configSetting altId="p206.gpio_mode.gpio_mode_peripheral" configurationId="p206.gpio_mode"/>
       <configSetting altId="p300.gpio_mode.gpio_mode_peripheral" configurationId="p300.gpio_mode"/>
       <configSetting altId="p408.gpio_mode.gpio_mode_peripheral" configurationId="p408.gpio_mode"/>
       <configSetting altId="p409.gpio_mode.gpio_mode_peripheral" configurationId="p409.gpio_mode"/>
+      <configSetting altId="p410.gpio_mode.gpio_mode_peripheral" configurationId="p410.gpio_mode"/>
+      <configSetting altId="p411.gpio_mode.gpio_mode_peripheral" configurationId="p411.gpio_mode"/>
+      <configSetting altId="p412.gpio_mode.gpio_mode_peripheral" configurationId="p412.gpio_mode"/>
+      <configSetting altId="p413.gpio_mode.gpio_mode_peripheral" configurationId="p413.gpio_mode"/>
+      <configSetting altId="p415.gpio_mode.gpio_mode_peripheral" configurationId="p415.gpio_mode"/>
       <configSetting altId="p608.output.low" configurationId="p608"/>
       <configSetting altId="p608.gpio_mode.gpio_mode_out.low" configurationId="p608.gpio_mode"/>
       <configSetting altId="p609.output.low" configurationId="p609"/>
@@ -85,6 +92,13 @@
       <configSetting altId="sci2.txd.p112" configurationId="sci2.txd" isUsedByDriver="true" peripheral="SCI2"/>
       <configSetting altId="sci3.rxd.p408" configurationId="sci3.rxd" isUsedByDriver="true" peripheral="SCI3"/>
       <configSetting altId="sci3.txd.p409" configurationId="sci3.txd" isUsedByDriver="true" peripheral="SCI3"/>
+      <configSetting altId="sdhi0.cd.p415" configurationId="sdhi0.cd" isUsedByDriver="true" peripheral="SDHI0"/>
+      <configSetting altId="sdhi0.clk.p413" configurationId="sdhi0.clk" isUsedByDriver="true" peripheral="SDHI0"/>
+      <configSetting altId="sdhi0.cmd.p412" configurationId="sdhi0.cmd" isUsedByDriver="true" peripheral="SDHI0"/>
+      <configSetting altId="sdhi0.dat0.p411" configurationId="sdhi0.dat0" isUsedByDriver="true" peripheral="SDHI0"/>
+      <configSetting altId="sdhi0.dat1.p410" configurationId="sdhi0.dat1" isUsedByDriver="true" peripheral="SDHI0"/>
+      <configSetting altId="sdhi0.dat2.p206" configurationId="sdhi0.dat2" isUsedByDriver="true" peripheral="SDHI0"/>
+      <configSetting altId="sdhi0.dat3.p205" configurationId="sdhi0.dat3" isUsedByDriver="true" peripheral="SDHI0"/>
     </pincfg>
   </raPinConfiguration>
 </raConfiguration>

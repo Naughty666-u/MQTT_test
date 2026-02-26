@@ -1,5 +1,5 @@
 ./objects/bsp_register_protection.o: \
-  D:\RA6M5_project\SD\BL0942_MQTT_test\ra\fsp\src\bsp\mcu\all\bsp_register_protection.c \
+  D:\RA6M5_project\SD\Appliance\ identification\ra\fsp\src\bsp\mcu\all\bsp_register_protection.c \
   ra\fsp\inc\api\bsp_api.h ra\fsp\inc\api\fsp_common_api.h \
   ra\fsp\inc\fsp_version.h ra_cfg\fsp_cfg\bsp\bsp_cfg.h \
   ra_gen\bsp_clock_cfg.h ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \
@@ -26,7 +26,7 @@
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mmf.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ipc.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ospi_b.h \
-  ..\BL0942_MQTT_test\bsp_linker_info.h \
+  ..\Appliance\ identification\bsp_linker_info.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_register_protection.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_irq.h \
   ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_io.h \

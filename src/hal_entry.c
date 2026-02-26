@@ -14,6 +14,21 @@ FSP_CPP_FOOTER
 #include "Relay.h"
 #include "uart_hlw.h"
 #include <time.h>   // 用于 srand()
+#include "sdcard_data_handle.h"
+
+
+MKFS_PARM f_opt = {
+    .fmt = FM_FAT32,       //格式选项
+    .n_fat = 0,     //FATs大小
+    .align = 0,     //数据区域对齐（扇区）
+    .n_root = 0,    //根目录条目数
+    .au_size = 0,   //群集大小（字节）
+};
+FATFS fs;                         /* FatFs文件系统对象 */
+FIL fnew;                         /* 文件对象 */
+UINT fnum;                        /* 文件成功读写数量 */
+FRESULT res_sd;                   /* 文件操作结果 */
+
 
 uint32_t last_report = 0;
 extern PowerStrip_t g_strip;
@@ -50,27 +65,52 @@ void hal_entry(void)
         g_strip.sockets[i].on = true;
     }
 	
-	ESP8266_MQTT_Test();
+	/* 1. 初始化与挂载逻辑 (沿用你之前的代码) */
+    res_sd = f_mount(&fs, "1:", 1);
+    if(res_sd != FR_OK) { /* 错误处理... */ }
+
+    /* 2. 构造几条测试用的“指纹”数据 */
+    Appliance_Data_t test_dev1 = {1, "PC_Host", 150.5, 0.92, 200, 0.85};
+    Appliance_Data_t test_dev2 = {2, "LED_Lamp", 9.2,  0.51, 20,  1.00};
+    Appliance_Data_t test_dev3 = {3, "Fan",      45.0, 0.78, 500, 0.75};
+    Appliance_Data_t test_dev4 = {4, "nitama的", 220, 660, 201, 0.85};
+    printf("\r\n****** 开始指纹库存取实验 ******\r\n");
+
+    // 存入数据
+    if(Save_Appliance_Data(&test_dev1) == FR_OK) printf("已保存: %s\r\n", test_dev1.name);
+    if(Save_Appliance_Data(&test_dev2) == FR_OK) printf("已保存: %s\r\n", test_dev2.name);
+    if(Save_Appliance_Data(&test_dev3) == FR_OK) printf("已保存: %s\r\n", test_dev3.name);
+	if(Save_Appliance_Data(&test_dev4) == FR_OK) printf("已保存: %s\r\n", test_dev4.name);
+
+    /* 3. 从SD卡中读出并格式化打印 */
+    if(Load_And_Print_All() != FR_OK)
+    {
+        printf("指纹库读取失败！\r\n");
+    }
+
+    printf("\r\n实验结束。\r\n");
+	
+//	ESP8266_MQTT_Test();
 
     while(1)
 	{
 		 Simulation_Random_Load_Test();
 		
-		// 1. 随时解析串口进来的 JSON 指令
-		handle_uart_json_stream();
+//		// 1. 随时解析串口进来的 JSON 指令
+//		handle_uart_json_stream();
 
-		// 3s 定时或被标志位触发
-        if((HAL_GetTick() - last_report >= 3000) || g_force_upload_flag) 
-        {
-            g_force_upload_flag = 0; // 清除标志
-            
-            // 更新电参并上报
-            g_strip.voltage = 220.0f + (rand()%10)/10.0f;
-            upload_strip_status();
-            
-            last_report = HAL_GetTick();
-        }
-		
+//		// 3s 定时或被标志位触发
+//        if((HAL_GetTick() - last_report >= 3000) || g_force_upload_flag) 
+//        {
+//            g_force_upload_flag = 0; // 清除标志
+//            
+//            // 更新电参并上报
+//            g_strip.voltage = 220.0f + (rand()%10)/10.0f;
+//            upload_strip_status();
+//            
+//            last_report = HAL_GetTick();
+//        }
+//		
 		
 //		if (g_uart3_rx_end == 1)
 //        {
@@ -80,26 +120,26 @@ void hal_entry(void)
 //            BL0942_circlebuf_clear();
 //           
 //        }
-//		
-//		if (key1_sw2_press)
-//        {
-//            key1_sw2_press = false; //标志位清零
-//			sw_ctrl(true);
-//			printf("key0 is pressed\r\n");
-//			g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_LOW);
-//        }
+		
+		if (key1_sw2_press)
+        {
+            key1_sw2_press = false; //标志位清零
+			sw_ctrl(true);
+			printf("key0 is pressed\r\n");
+			g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_LOW);
+        }
 
-//		  /* 判断按键 KEY2_SW3 是否被按下 */
-//		 if (key2_sw3_press)
-//		{
-//				key2_sw3_press = false; //标志位清零
-//				sw_ctrl(false);
-//				printf("key1 is pressed\r\n");
-//			    g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_HIGH);
-//		}
-//		
-//		  Send_com();
-//		  R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS);
+		  /* 判断按键 KEY2_SW3 是否被按下 */
+		 if (key2_sw3_press)
+		{
+				key2_sw3_press = false; //标志位清零
+				sw_ctrl(false);
+				printf("key1 is pressed\r\n");
+			    g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_HIGH);
+		}
+		
+		  Send_com();
+		  R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS);
 
 				
     }

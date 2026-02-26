@@ -98,7 +98,7 @@ extern "C" {
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 1) /* CRC */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 3) /* CTSU */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 8) /* SSIE0 */ | \
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 12) /* SDHI0 */ | \
+            (((1 > 0) ? 0U : 1U) << 12) /* SDHI0 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 13) /* DOC */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 31) /* SCE9 */ | \
             0x7fffcef4) /* Unused */
@@ -140,7 +140,7 @@ extern "C" {
 #ifndef BSP_TZ_CFG_MSSAR
 #define BSP_TZ_CFG_MSSAR (\
             (((1 > 0) ? 0U : 1U) << 0) /* ELC */ | \
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 1) /* DTC_DMAC */ | \
+            (((1 > 0) ? 0U : 1U) << 1) /* DTC_DMAC */ | \
             0xfffffffc) /* Unused */
 #endif
 
@@ -216,7 +216,7 @@ extern "C" {
             /* Security attribution for registers for DMAC channels */
 #ifndef BSP_TZ_CFG_ICUSARC
 #define BSP_TZ_CFG_ICUSARC (\
-            (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 0U) /* DMAC Channel 0 */ | \
+            (((1 > 0) ? 0U : 1U) << 0U) /* DMAC Channel 0 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 1U) /* DMAC Channel 1 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 2U) /* DMAC Channel 2 */ | \
             (((RA_NOT_DEFINED > 0) ? 0U : 1U) << 3U) /* DMAC Channel 3 */ | \

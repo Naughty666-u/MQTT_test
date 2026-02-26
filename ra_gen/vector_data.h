@@ -6,7 +6,7 @@
         #endif
                 /* Number of interrupts allocated */
         #ifndef VECTOR_DATA_IRQ_COUNT
-        #define VECTOR_DATA_IRQ_COUNT    (15)
+        #define VECTOR_DATA_IRQ_COUNT    (18)
         #endif
         /* ISR prototypes */
         void sci_uart_rxi_isr(void);
@@ -15,6 +15,9 @@
         void sci_uart_eri_isr(void);
         void gpt_counter_overflow_isr(void);
         void r_icu_isr(void);
+        void sdhimmc_accs_isr(void);
+        void sdhimmc_card_isr(void);
+        void dmac_int_isr(void);
 
         /* Vector table allocations */
         #define VECTOR_NUMBER_SCI0_RXI ((IRQn_Type) 0) /* SCI0 RXI (Receive data full) */
@@ -47,8 +50,14 @@
         #define ICU_IRQ6_IRQn          ((IRQn_Type) 13) /* ICU IRQ6 (External pin interrupt 6) */
         #define VECTOR_NUMBER_ICU_IRQ7 ((IRQn_Type) 14) /* ICU IRQ7 (External pin interrupt 7) */
         #define ICU_IRQ7_IRQn          ((IRQn_Type) 14) /* ICU IRQ7 (External pin interrupt 7) */
+        #define VECTOR_NUMBER_SDHIMMC0_ACCS ((IRQn_Type) 15) /* SDHIMMC0 ACCS (Card access) */
+        #define SDHIMMC0_ACCS_IRQn          ((IRQn_Type) 15) /* SDHIMMC0 ACCS (Card access) */
+        #define VECTOR_NUMBER_SDHIMMC0_CARD ((IRQn_Type) 16) /* SDHIMMC0 CARD (Card detect) */
+        #define SDHIMMC0_CARD_IRQn          ((IRQn_Type) 16) /* SDHIMMC0 CARD (Card detect) */
+        #define VECTOR_NUMBER_DMAC0_INT ((IRQn_Type) 17) /* DMAC0 INT (DMAC0 transfer end) */
+        #define DMAC0_INT_IRQn          ((IRQn_Type) 17) /* DMAC0 INT (DMAC0 transfer end) */
         /* The number of entries required for the ICU vector table. */
-        #define BSP_ICU_VECTOR_NUM_ENTRIES (15)
+        #define BSP_ICU_VECTOR_NUM_ENTRIES (18)
 
         #ifdef __cplusplus
         }

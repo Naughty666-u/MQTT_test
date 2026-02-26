@@ -19,6 +19,9 @@
             [12] = sci_uart_eri_isr, /* SCI3 ERI (Receive error) */
             [13] = r_icu_isr, /* ICU IRQ6 (External pin interrupt 6) */
             [14] = r_icu_isr, /* ICU IRQ7 (External pin interrupt 7) */
+            [15] = sdhimmc_accs_isr, /* SDHIMMC0 ACCS (Card access) */
+            [16] = sdhimmc_card_isr, /* SDHIMMC0 CARD (Card detect) */
+            [17] = dmac_int_isr, /* DMAC0 INT (DMAC0 transfer end) */
         };
         #if BSP_FEATURE_ICU_HAS_IELSR
         const bsp_interrupt_event_t g_interrupt_event_link_select[BSP_ICU_VECTOR_NUM_ENTRIES] =
@@ -38,6 +41,9 @@
             [12] = BSP_PRV_VECT_ENUM(EVENT_SCI3_ERI,GROUP4), /* SCI3 ERI (Receive error) */
             [13] = BSP_PRV_VECT_ENUM(EVENT_ICU_IRQ6,GROUP5), /* ICU IRQ6 (External pin interrupt 6) */
             [14] = BSP_PRV_VECT_ENUM(EVENT_ICU_IRQ7,GROUP6), /* ICU IRQ7 (External pin interrupt 7) */
+            [15] = BSP_PRV_VECT_ENUM(EVENT_SDHIMMC0_ACCS,GROUP7), /* SDHIMMC0 ACCS (Card access) */
+            [16] = BSP_PRV_VECT_ENUM(EVENT_SDHIMMC0_CARD,GROUP0), /* SDHIMMC0 CARD (Card detect) */
+            [17] = BSP_PRV_VECT_ENUM(EVENT_DMAC0_INT,GROUP1), /* DMAC0 INT (DMAC0 transfer end) */
         };
         #endif
         #endif
