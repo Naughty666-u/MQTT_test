@@ -14,13 +14,16 @@ extern _Bool  Uart2_Send_Flag;
  int brace_count = 0; // 新增：大括号计数器
 
 
-// 初始化数据
+// 假设全局变量定义
 PowerStrip_t g_strip = {
     .voltage = 220.0f,
+    .total_current = 0.0f,
+    .total_power = 0.0f,
     .sockets = {
-        {false, 0.0f, "PC"},
+        // {on, power, device_name, prev_power}
+        {false, 0.0f, "None"}, 
         {false, 0.0f, "None"},
-        {false, 0.0f, "Lamp"},
+        {false, 0.0f, "None"},
         {false, 0.0f, "None"}
     }
 };

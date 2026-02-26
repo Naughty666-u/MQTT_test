@@ -3,7 +3,7 @@
 #include "stdio.h"
 #include "string.h"
 
-#define DEVICE_DB_PATH "1:Device.csv" // 定义数据库文件路径
+
 
 /* ----------------------- 手术 2：检查设备是否已存在 --------------------------- */
 /**
@@ -16,7 +16,7 @@ int Check_Device_Exist(const char *name)
     static FIL check_fil;   // 【关键修改】改为静态，不占用栈空间
     FRESULT res;
     char line[128];
-    char temp_name[20];
+    char temp_name[24];
     int found = 0;
 
     // 如果文件不存在，自然就不存在同名设备
@@ -69,7 +69,7 @@ FRESULT Save_Appliance_Data(Appliance_Data_t *device)
     if (f_size(&write_fil) == 0)
     {
         printf("[SD] 正在创建新数据库并写入表头...\r\n");
-        const char *header = "ID,Name,Power,PF,Startup,Weight\n";
+        const char *header = "ID,Name,Power,PF,SurgeRatio,Q_Reactive\n";
         f_write(&write_fil, header, (UINT)strlen(header), &bw);
     }
 
@@ -77,10 +77,10 @@ FRESULT Save_Appliance_Data(Appliance_Data_t *device)
     f_lseek(&write_fil, f_size(&write_fil));
 
     // 5. 手术 1：安全地格式化数据
-    // 使用 %.2f 规范化浮点数，并确保 buffer 不会溢出
-    snprintf(buffer, sizeof(buffer), "%d,%s,%.2f,%.2f,%ld,%.2f\n", 
+   // 格式化输出：ID,名称,功率,功率因数,激增比,无功功率
+    snprintf(buffer, sizeof(buffer), "%d,%s,%.2f,%.2f,%.2f,%.2f\n", 
              device->id, device->name, device->power, 
-             device->pf, device->startup_time, device->weight);
+             device->pf, device->i_surge_ratio, device->q_reactive);
 
     res = f_write(&write_fil, buffer, (UINT)strlen(buffer), &bw);
     
@@ -103,7 +103,7 @@ FRESULT Load_And_Print_All(void)
     if (res != FR_OK) return res;
 
     printf("\r\n--- SD卡内存放的用电器指纹库 ---\r\n");
-    printf("ID\t名称\t\t功率(W)\t功率因数\t启动时间\t权重\r\n");
+    printf("ID\t名称\t\t功率(W)\tPF\t激增比\t无功(Var)\r\n");
     printf("------------------------------------------------------------\r\n");
 
     // 循环读取每一行数据
@@ -113,15 +113,16 @@ FRESULT Load_And_Print_All(void)
         if (strstr(line, "ID")) continue;
 
         // 手术 1：使用 %19[^,] 防火墙，确保 temp.name 不会因为 CSV 损坏而溢出
-        int count = sscanf(line, "%hu,%19[^,],%f,%f,%ld,%f", 
+        // 严格对应五维度解析
+        int count = sscanf(line, "%hu,%19[^,],%f,%f,%f,%f", 
                            &temp.id, temp.name, &temp.power, 
-                           &temp.pf, &temp.startup_time, &temp.weight);
+                           &temp.pf, &temp.i_surge_ratio, &temp.q_reactive);
 
         if (count == 6)
         {
-            printf("%-4d\t%-10s\t%.2f\t%.2f\t\t%dms\t\t%.2f\r\n", 
+           printf("%-4d\t%-10s\t%.2f\t%.2f\t%.2f\t%.2f\r\n", 
                    temp.id, temp.name, temp.power, 
-                   temp.pf, temp.startup_time, temp.weight);
+                   temp.pf, temp.i_surge_ratio, temp.q_reactive);
         }
     }
 

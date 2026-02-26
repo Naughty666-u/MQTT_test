@@ -340,7 +340,7 @@
               <MiscControls>-Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal</MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\src\debug_uart;.\src\bsp_esp8266;.\src\circle_buf;.\ra_gen;.\ra\fsp\src;.\ra\fsp\inc\api;.\ra\fsp\inc;.\ra_cfg\fsp_cfg\bsp;.\ra\arm\CMSIS_6\CMSIS\Core\Include;.\ra\fsp\inc\instances;.\ra_cfg\fsp_cfg;.\src\cJSON;.\src\cJSON_handle;.\src\Systick;.\src\led;.\src\uart_hlw;.\src\Key;.\src\Relay;.\src\sdhi_sdcard;.\src\sdcard_data_handle;.\src\sdhi_sdcard;.\src\FatFs\ff15;..\Appliance identification</IncludePath>
+              <IncludePath>.\src\debug_uart;.\src\bsp_esp8266;.\src\circle_buf;.\ra_gen;.\ra\fsp\src;.\ra\fsp\inc\api;.\ra\fsp\inc;.\ra_cfg\fsp_cfg\bsp;.\ra\arm\CMSIS_6\CMSIS\Core\Include;.\ra\fsp\inc\instances;.\ra_cfg\fsp_cfg;.\src\cJSON;.\src\cJSON_handle;.\src\Systick;.\src\led;.\src\uart_hlw;.\src\Key;.\src\Relay;.\src\sdhi_sdcard;.\src\sdcard_data_handle;.\src\sdhi_sdcard;.\src\FatFs\ff15;..\Appliance identification;.\src\Appliance identification algorithm</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -511,6 +511,16 @@
               <FileName>sdcard_data_handle.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\src\sdcard_data_handle\sdcard_data_handle.h</FilePath>
+            </File>
+            <File>
+              <FileName>appliance_identification.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\Appliance identification algorithm\appliance_identification.c</FilePath>
+            </File>
+            <File>
+              <FileName>appliance_identification.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\src\Appliance identification algorithm\appliance_identification.h</FilePath>
             </File>
           </Files>
         </Group>

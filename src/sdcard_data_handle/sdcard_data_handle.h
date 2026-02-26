@@ -8,11 +8,13 @@
 typedef struct {
     uint16_t id;            // 设备 ID
     char name[20];          // 设备名称
-    float power;            // 典型功率 (W)
+    float power;            // 稳态有功功率 (W)
     float pf;               // 典型功率因数
-    uint32_t startup_time;  // 启动时间参考 (ms)
-    float weight;           // 特征权重
+    float i_surge_ratio;    // 启动激增比 (I_max / I_steady)
+    float q_reactive;       // 无功功率 (Var)
 } Appliance_Data_t;
+
+#define DEVICE_DB_PATH "1:Device.csv" // 定义数据库文件路径
 
 int Check_Device_Exist(const char *name);
 FRESULT Save_Appliance_Data(Appliance_Data_t *device);

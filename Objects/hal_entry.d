@@ -51,4 +51,5 @@
   src\circle_buf\circle_buf.h src\cJSON_handle\cJSON_handle.h \
   src\Systick\Systick.h src\Key\Key.h src\Relay\Relay.h \
   src\uart_hlw\uart_hlw.h src\sdcard_data_handle\sdcard_data_handle.h \
-  src\FatFs\ff15\ff.h src\FatFs\ff15\ffconf.h
+  src\FatFs\ff15\ff.h src\FatFs\ff15\ffconf.h \
+  src\Appliance\ identification\ algorithm\appliance_identification.h

@@ -5,10 +5,17 @@
 #include "cJSON_handle.h"
 #include "stdlib.h"
 #include <time.h>   // 用于 srand()
+#include "appliance_identification.h"
 #define MAX_C 20
 
 
 //BL0942波特率为9600
+
+// 定义模式
+#define MODE_RECOGNITION 0
+#define MODE_LEARNING    1
+
+uint8_t g_ai_mode = MODE_LEARNING; // 默认是识别模式
 
 
 static volatile int g_uart3_tx_complete = 0;
@@ -164,6 +171,13 @@ void Data_Processing(unsigned char *data,uint8_t index)
 			E_con=PF_COUNT/5350.632;//计算已用电量，5350.632为固定值，和选购的量程有关
 		}
 		printf("C=%0.3fA;V=%0.2fV;P1=%0.2fW;P2=%0.2fW;P3=%0.1f;E_con=%0.4fkWh\r\n",C1,V1,P1,P2,P3,E_con);
+		
+		// 根据当前模式，选择调用哪个 AI 引擎
+        if (g_ai_mode == MODE_LEARNING) {
+            AI_Learning_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
+        } else {
+            AI_Recognition_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
+        }
 	}
 	else
 	{
@@ -189,6 +203,8 @@ void Data_Processing(unsigned char *data,uint8_t index)
         }
         g_strip.total_power = temp_p_sum;
         g_strip.total_current= temp_c_sum;
+		
+		
     }
 }
 

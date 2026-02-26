@@ -15,7 +15,7 @@ FSP_CPP_FOOTER
 #include "uart_hlw.h"
 #include <time.h>   // 用于 srand()
 #include "sdcard_data_handle.h"
-
+#include "appliance_identification.h"
 
 MKFS_PARM f_opt = {
     .fmt = FM_FAT32,       //格式选项
@@ -46,6 +46,9 @@ extern volatile bool g_uart3_rx_end;
 void hal_entry(void)
 {
     /* TODO: add your own code here */
+	/* 1. 【最高优先级】继电器复位：确保上电瞬间全路切断 */
+    Relay_Reset_All();
+	
     Debug_UART0_Init(); // SCI0 UART 调试串口初始化
 	SystickInit();
 	Key_IRQ_Init();
@@ -124,7 +127,7 @@ void hal_entry(void)
 		if (key1_sw2_press)
         {
             key1_sw2_press = false; //标志位清零
-			sw_ctrl(true);
+			Socket_Command_Handler(0, true); // 开启 1 号插座并触发 AI
 			printf("key0 is pressed\r\n");
 			g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_LOW);
         }
@@ -132,10 +135,10 @@ void hal_entry(void)
 		  /* 判断按键 KEY2_SW3 是否被按下 */
 		 if (key2_sw3_press)
 		{
-				key2_sw3_press = false; //标志位清零
-				sw_ctrl(false);
-				printf("key1 is pressed\r\n");
-			    g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_HIGH);
+			key2_sw3_press = false; //标志位清零
+			Socket_Command_Handler(0, false); // 开启 1 号插座并触发 AI
+			printf("key1 is pressed\r\n");
+			g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_HIGH);
 		}
 		
 		  Send_com();

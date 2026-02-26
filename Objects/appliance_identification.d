@@ -1,7 +1,10 @@
-./objects/relay.o: src\Relay\Relay.c src\Relay\Relay.h ra_gen\hal_data.h \
-  ra\fsp\inc\api\bsp_api.h ra\fsp\inc\api\fsp_common_api.h \
-  ra\fsp\inc\fsp_version.h ra_cfg\fsp_cfg\bsp\bsp_cfg.h \
-  ra_gen\bsp_clock_cfg.h ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \
+./objects/appliance_identification.o: \
+  src\Appliance\ identification\ algorithm\appliance_identification.c \
+  src\Appliance\ identification\ algorithm\appliance_identification.h \
+  ra_gen\hal_data.h ra\fsp\inc\api\bsp_api.h \
+  ra\fsp\inc\api\fsp_common_api.h ra\fsp\inc\fsp_version.h \
+  ra_cfg\fsp_cfg\bsp\bsp_cfg.h ra_gen\bsp_clock_cfg.h \
+  ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \
   ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h \
   ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h \
   ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h \
@@ -47,4 +50,6 @@
   ra\fsp\inc\api\r_sdmmc_api.h ra\fsp\inc\instances\r_sci_uart.h \
   ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h \
   ra\fsp\inc\instances\r_gpt.h ra\fsp\inc\api\r_timer_api.h \
-  src\cJSON_handle\cJSON_handle.h
+  src\Systick\Systick.h src\cJSON_handle\cJSON_handle.h \
+  src\FatFs\ff15\ff.h src\FatFs\ff15\ffconf.h \
+  src\sdcard_data_handle\sdcard_data_handle.h src\Relay\Relay.h
