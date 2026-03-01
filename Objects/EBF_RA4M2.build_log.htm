@@ -22,75 +22,12 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 D:\RA6M5_project\SD\Appliance identification\EBF_RA4M2.uvprojx
-Project File Date:  02/26/2026
+Project File Date:  03/01/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'D:\keil_MDK\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-src/debug_uart/bsp_debug_uart.c(8): warning: variable 'err' set but not used [-Wunused-but-set-variable]
-    8 |     fsp_err_t err = FSP_SUCCESS;
-      |               ^
-src/debug_uart/bsp_debug_uart.c(3): warning: In file included from...
-./src/circle_buf\circle_buf.h(16): warning: unused function 'circlebuf_put' [-Wunused-function]
-   16 | static int32_t circlebuf_put(struct circle_buf *pcb, uint8_t v);  //写缓冲区
-      |                ^~~~~~~~~~~~~
-./src/circle_buf\circle_buf.h(17): warning: unused function 'circlebuf_get' [-Wunused-function]
-   17 | static int32_t circlebuf_get(struct circle_buf *pcb, uint8_t *pv);//读缓冲区
-      |                ^~~~~~~~~~~~~
-3 warnings generated.
-compiling bsp_debug_uart.c...
-src/cJSON_handle/cJSON_handle.c(116): warning: implicit conversion loses integer precision: 'int' to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  116 |                                 Socket_Command_Handler(index, true);
-      |                                 ~~~~~~~~~~~~~~~~~~~~~~ ^~~~~
-src/cJSON_handle/cJSON_handle.c(119): warning: implicit conversion loses integer precision: 'int' to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
-  119 |                                 Socket_Command_Handler(index, false);
-      |                                 ~~~~~~~~~~~~~~~~~~~~~~ ^~~~~
-src/cJSON_handle/cJSON_handle.c(153): warning: declaration shadows a variable in the global scope [-Wshadow]
-  153 |     static int brace_count = 0; 
-      |                ^
-src/cJSON_handle/cJSON_handle.c(15): note: previous declaration is here
-   15 |  int brace_count = 0; // 新增：大括号计数器
-      |      ^
-src/cJSON_handle/cJSON_handle.c(3): warning: In file included from...
-./src/circle_buf\circle_buf.h(16): warning: unused function 'circlebuf_put' [-Wunused-function]
-   16 | static int32_t circlebuf_put(struct circle_buf *pcb, uint8_t v);  //写缓冲区
-      |                ^~~~~~~~~~~~~
-./src/circle_buf\circle_buf.h(17): warning: unused function 'circlebuf_get' [-Wunused-function]
-   17 | static int32_t circlebuf_get(struct circle_buf *pcb, uint8_t *pv);//读缓冲区
-      |                ^~~~~~~~~~~~~
-5 warnings generated.
-compiling cJSON_handle.c...
-src/hal_entry.c(9): warning: In file included from...
-./src/circle_buf\circle_buf.h(16): warning: unused function 'circlebuf_put' [-Wunused-function]
-   16 | static int32_t circlebuf_put(struct circle_buf *pcb, uint8_t v);  //写缓冲区
-      |                ^~~~~~~~~~~~~
-./src/circle_buf\circle_buf.h(17): warning: unused function 'circlebuf_get' [-Wunused-function]
-   17 | static int32_t circlebuf_get(struct circle_buf *pcb, uint8_t *pv);//读缓冲区
-      |                ^~~~~~~~~~~~~
-2 warnings generated.
-compiling hal_entry.c...
-src/bsp_esp8266/bsp_wifi_esp8266.c(69): warning: variable 'err' set but not used [-Wunused-but-set-variable]
-   69 |     fsp_err_t err = FSP_SUCCESS;
-      |               ^
-src/bsp_esp8266/bsp_wifi_esp8266.c(390): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-  390 |     uint16_t data_len = strlen(data);
-      |              ~~~~~~~~   ^~~~~~~~~~~~
-src/bsp_esp8266/bsp_wifi_esp8266.c(438): warning: label followed by a declaration is a C23 extension [-Wc23-extensions]
-  438 |               uint8_t data = (uint8_t)p_args->data;
-      |               ^
-src/bsp_esp8266/bsp_wifi_esp8266.c(3): warning: In file included from...
-./src/circle_buf\circle_buf.h(16): warning: unused function 'circlebuf_put' [-Wunused-function]
-   16 | static int32_t circlebuf_put(struct circle_buf *pcb, uint8_t v);  //写缓冲区
-      |                ^~~~~~~~~~~~~
-./src/circle_buf\circle_buf.h(17): warning: unused function 'circlebuf_get' [-Wunused-function]
-   17 | static int32_t circlebuf_get(struct circle_buf *pcb, uint8_t *pv);//读缓冲区
-      |                ^~~~~~~~~~~~~
-5 warnings generated.
-compiling bsp_wifi_esp8266.c...
-linking...
-Program Size: Code=38500 RO-data=90716 RW-data=220 ZI-data=40120  
-After Build - User command #1: cmd /c "start "Renesas" /w cmd /c ""D:/keil_MDK/Renesas/RA_DFP/6.3.1/launcher\rasc_launcher.bat" "4.1.0" -nosplash --gensmartbundle --compiler ARMv6 "D:\RA6M5_project\SD\Appliance identification\configuration.xml" "D:\RA6M5_project\SD\Appliance identification\Objects\EBF_RA4M2.axf" 2> "%TEMP%\rasc_stderr.out"""
-".\Objects\EBF_RA4M2.axf" - 0 Error(s), 15 Warning(s).
+".\Objects\EBF_RA4M2.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -122,149 +59,149 @@ Package Vendor: Renesas
 <h2>Collection of Component Files used:</h2>
 
    * Component: Renesas::Flex Software:Build Configuration
-      Include file:  ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h
-      Include file:  ra_cfg/fsp_cfg/bsp/board_cfg.h
-      Include file:  ra_cfg/fsp_cfg/r_dmac_cfg.h
-      Include file:  ra_cfg/fsp_cfg/r_elc_cfg.h
-      Include file:  ra_cfg/fsp_cfg/bsp/bsp_mcu_device_pn_cfg.h
-      Include file:  ra_cfg/fsp_cfg/r_gpt_cfg.h
-      Include file:  ra_cfg/fsp_cfg/r_icu_cfg.h
-      Include file:  ra_cfg/fsp_cfg/bsp/bsp_mcu_family_cfg.h
-      Include file:  ra_cfg/fsp_cfg/bsp/bsp_cfg.h
       Include file:  ra_cfg/fsp_cfg/bsp/bsp_mcu_device_cfg.h
+      Include file:  ra_cfg/fsp_cfg/bsp/bsp_cfg.h
+      Include file:  ra_cfg/fsp_cfg/bsp/board_cfg.h
+      Include file:  ra_cfg/fsp_cfg/bsp/bsp_mcu_device_pn_cfg.h
+      Include file:  ra_cfg/fsp_cfg/bsp/bsp_mcu_family_cfg.h
       Include file:  ra_cfg/fsp_cfg/bsp/bsp_mcu_ofs_cfg.h
-      Include file:  ra_cfg/fsp_cfg/r_ioport_cfg.h
+      Include file:  ra_cfg/fsp_cfg/r_elc_cfg.h
       Include file:  ra_cfg/fsp_cfg/r_sdhi_cfg.h
+      Include file:  ra_cfg/fsp_cfg/r_icu_cfg.h
+      Include file:  ra_cfg/fsp_cfg/r_gpt_cfg.h
       Include file:  ra_cfg/fsp_cfg/r_sci_uart_cfg.h
+      Include file:  ra_cfg/fsp_cfg/r_dmac_cfg.h
+      Include file:  ra_cfg/fsp_cfg/bsp/bsp_pin_cfg.h
+      Include file:  ra_cfg/fsp_cfg/r_ioport_cfg.h
 
    * Component: Renesas::Flex Software:Components:ra
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm4.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm3.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_clang_a.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/irq_ctrl.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_cp15.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_version.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm1.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm23.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm33.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_clang.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_compiler.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm35p.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm52.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm55.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm7.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_gcc_a.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_iccarm_a.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_cp15.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm85.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_sc000.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_armclang.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_gcc.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_sc300.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_starmc1.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv7m_cachel1.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm0.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv7m_mpu.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_ca.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_gcc_a.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/irq_ctrl.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_armclang.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_armclang_a.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_gcc.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm0plus.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv8m_mpu.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/tz_context.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_iccarm_m.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/r-profile/cmsis_gcc_r.h
-      Include file:  ra/fsp/inc/api/fsp_common_api.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_clang_a.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_compiler.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_version.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm1.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm35p.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/a-profile/cmsis_iccarm_a.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm3.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/cmsis_clang.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm4.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_cm55.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_ca.h
       Include file:  ra/fsp/inc/instances/r_dmac.h
-      Include file:  ra/fsp/inc/api/r_ioport_api.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_armclang_m.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv81m_pac.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h
-      Include file:  ra/fsp/inc/api/r_external_irq_api.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_clang_m.h
-      Include file:  ra/fsp/inc/api/bsp_api.h
-      Include file:  ra/fsp/inc/api/r_sdmmc_api.h
-      Include file:  ra/fsp/inc/api/r_timer_api.h
-      Include file:  ra/fsp/inc/api/r_transfer_api.h
-      Include file:  ra/fsp/inc/api/r_uart_api.h
-      Include file:  ra/fsp/inc/fsp_features.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_tiarmclang_m.h
-      Include file:  ra/fsp/inc/fsp_version.h
       Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv8m_pmu.h
-      Include file:  ra/fsp/inc/instances/r_elc.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/r-profile/cmsis_clang_r.h
-      Include file:  ra/fsp/inc/instances/r_gpt.h
-      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/r-profile/cmsis_armclang_r.h
-      Include file:  ra/fsp/inc/instances/r_icu.h
-      Include file:  ra/fsp/inc/instances/r_ioport.h
-      Include file:  ra/fsp/inc/instances/r_sci_uart.h
-      Include file:  ra/fsp/inc/instances/r_sdhi.h
-      Include file:  ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/R7FA4M2AD.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_starmc1.h
+      Include file:  ra/fsp/inc/api/fsp_common_api.h
+      Include file:  ra/fsp/inc/api/r_uart_api.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_tiarmclang_m.h
+      Include file:  ra/fsp/inc/api/r_timer_api.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/r-profile/cmsis_gcc_r.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_iccarm_m.h
       Include file:  ra/fsp/inc/api/r_elc_api.h
-      Include file:  ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/system.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_register_protection.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_compiler_support.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_io.h
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_sbrk.c
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_common.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv81m_pac.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/tz_context.h
+      Include file:  ra/fsp/inc/api/r_external_irq_api.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv7m_mpu.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_armclang_m.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/r-profile/cmsis_armclang_r.h
+      Include file:  ra/fsp/inc/api/bsp_api.h
+      Include file:  ra/fsp/inc/api/r_ioport_api.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/r-profile/cmsis_clang_r.h
+      Include file:  ra/fsp/inc/api/r_transfer_api.h
+      Include file:  ra/fsp/inc/fsp_features.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_sc000.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv7m_cachel1.h
+      Include file:  ra/fsp/inc/fsp_version.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/core_sc300.h
+      Include file:  ra/fsp/inc/api/r_sdmmc_api.h
+      Include file:  ra/fsp/inc/instances/r_elc.h
+      Include file:  ra/fsp/inc/instances/r_gpt.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_clang_m.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h
+      Include file:  ra/arm/CMSIS_6/CMSIS/Core/Include/m-profile/armv8m_mpu.h
       Include file:  ra/fsp/src/bsp/mcu/all/bsp_group_irq.h
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_ipc.c
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_delay.c
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_mcu_api.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_module_stop.h
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_clocks.c
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_mmf.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_exceptions.h
-      Source file:   ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.c
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_guard.c
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_irq.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_macl.h
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_ospi_b.c
-      Source file:   ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.c
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_ospi_b.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_delay.h
       Include file:  ra/fsp/src/bsp/mcu/all/bsp_guard.h
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_io.c
       Source file:   ra/fsp/src/bsp/mcu/all/bsp_common.c
-      Include file:  ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/renesas.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_clocks.h
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_group_irq.c
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_clocks.c
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_guard.c
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_io.c
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_io.h
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_ipc.c
       Include file:  ra/fsp/src/bsp/mcu/all/bsp_ipc.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_compiler_support.h
+      Source file:   ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.c
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_irq.h
+      Include file:  ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/system.h
+      Include file:  ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/R7FA4M2AD.h
       Source file:   ra/fsp/src/bsp/mcu/all/bsp_irq.c
+      Include file:  ra/fsp/inc/instances/r_icu.h
+      Include file:  ra/fsp/inc/instances/r_sci_uart.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_macl.h
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_group_irq.c
       Source file:   ra/fsp/src/bsp/mcu/all/bsp_macl.c
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_register_protection.c
-      Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_feature.h
-      Include file:  ra/fsp/src/r_sdhi/r_sdhi_private.h
-      Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_mcu_info.h
-      Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_peripheral.h
-      Source file:   ra/fsp/src/r_dmac/r_dmac.c
-      Source file:   ra/fsp/src/bsp/mcu/ra4m2/bsp_linker.c
-      Source file:   ra/fsp/src/r_sdhi/r_sdhi.c
-      Source file:   ra/fsp/src/bsp/mcu/all/bsp_security.c
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_exceptions.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_mcu_api.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_mmf.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_module_stop.h
+      Include file:  ra/fsp/inc/instances/r_ioport.h
+      Include file:  ra/fsp/src/bsp/cmsis/Device/RENESAS/Include/renesas.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_common.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_clocks.h
+      Include file:  ra/fsp/inc/instances/r_sdhi.h
+      Source file:   ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.c
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_delay.c
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_delay.h
       Include file:  ra/fsp/src/bsp/mcu/all/bsp_security.h
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_sbrk.c
       Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_elc.h
-      Source file:   ra/fsp/src/r_sci_uart/r_sci_uart.c
+      Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_peripheral.h
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_register_protection.c
       Source file:   ra/fsp/src/bsp/mcu/all/bsp_sdram.c
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_sdram.h
-      Include file:  ra/fsp/src/bsp/mcu/all/bsp_tfu.h
-      Source file:   ra/fsp/src/r_gpt/r_gpt.c
+      Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_mcu_info.h
       Source file:   ra/fsp/src/r_elc/r_elc.c
+      Source file:   ra/fsp/src/bsp/mcu/ra4m2/bsp_linker.c
+      Source file:   ra/fsp/src/r_dmac/r_dmac.c
+      Include file:  ra/fsp/src/r_sdhi/r_sdhi_private.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_ospi_b.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_sdram.h
+      Source file:   ra/fsp/src/r_sdhi/r_sdhi.c
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_register_protection.h
+      Source file:   ra/fsp/src/r_gpt/r_gpt.c
+      Source file:   ra/fsp/src/r_sci_uart/r_sci_uart.c
       Source file:   ra/fsp/src/r_ioport/r_ioport.c
       Source file:   ra/fsp/src/r_icu/r_icu.c
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_ospi_b.c
+      Source file:   ra/fsp/src/bsp/mcu/all/bsp_security.c
+      Include file:  ra/fsp/src/bsp/mcu/ra4m2/bsp_feature.h
+      Include file:  ra/fsp/src/bsp/mcu/all/bsp_tfu.h
 
    * Component: Renesas::Flex Software:Generated Data
-      Source file:   ra_gen/common_data.c
-      Source file:   ra_gen/vector_data.c
-      Source file:   ra_gen/pin_data.c
-      Include file:  ra_gen/hal_data.h
-      Source file:   ra_gen/hal_data.c
-      Include file:  ra_gen/common_data.h
       Source file:   ra_gen/elc_data.c
+      Include file:  ra_gen/hal_data.h
+      Source file:   ra_gen/common_data.c
       Include file:  ra_gen/bsp_clock_cfg.h
-      Source file:   ra_gen/main.c
       Include file:  ra_gen/vector_data.h
+      Source file:   ra_gen/pin_data.c
+      Include file:  ra_gen/common_data.h
+      Source file:   ra_gen/hal_data.c
+      Source file:   ra_gen/main.c
+      Source file:   ra_gen/vector_data.c
 
    * Component: Renesas::Flex Software:Linker Script
 
    * Component: Renesas::Flex Software:RA Configuration@1.0.0
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

@@ -21,6 +21,7 @@ void Socket_Command_Handler(uint8_t index, bool target_on);
 void AI_Recognition_Engine(uint8_t index, float p_now,float v_now ,float i_now, float pf_now);
 void AI_Learning_Engine(uint8_t index, float p_now,float v_now ,float i_now, float pf_now);
 char* Identify_Appliance_In_SD(float p_now, float pf_now, float i_max, float v_now, float i_steady);
-
+void AI_Trigger_Sampling(uint8_t index);
+void AI_Reset(uint8_t index);  // 可选：关断/离线时复位AI
 #endif
 

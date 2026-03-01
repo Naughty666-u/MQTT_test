@@ -12,6 +12,31 @@ extern PowerStrip_t g_strip;
 
 
 
+void AI_Trigger_Sampling(uint8_t index)
+{
+    if (index >= 4) return;
+    Socket_AI_Ctrl_t *p_ai = &g_ai_ctrl[index];
+
+    // 只在空闲时触发，防止重复触发干扰一次识别
+    if (p_ai->state == AI_IDLE)
+    {
+        p_ai->state = AI_SAMPLING;
+        p_ai->start_tick = HAL_GetTick();
+        p_ai->i_max = 0.0f;
+        strncpy(g_strip.sockets[index].device_name, "Detecting...", 15);
+    }
+}
+
+void AI_Reset(uint8_t index)
+{
+    if (index >= 4) return;
+    Socket_AI_Ctrl_t *p_ai = &g_ai_ctrl[index];
+    p_ai->state = AI_IDLE;
+    p_ai->i_max = 0.0f;
+    p_ai->start_tick = 0;
+}
+
+
 /**
  * @brief  人工/指令控制插座开关 (含 AI 同步触发)
  */
@@ -26,13 +51,11 @@ void Socket_Command_Handler(uint8_t index, bool target_on)
         
         // 2. AI：强制进入采样状态，准备捕捉这 2 秒的电流
         Socket_AI_Ctrl_t *p_ai = &g_ai_ctrl[index];
-        p_ai->state = AI_SAMPLING;
-        p_ai->start_tick = HAL_GetTick();
-        p_ai->i_max = 0;
         
         // 3. 状态更新
         g_strip.sockets[index].on = true;
-        strncpy(g_strip.sockets[index].device_name, "Detecting...", 15);
+        strncpy(g_strip.sockets[index].device_name, "Idle", 15); // 或者 "On"
+		AI_Reset(index);
     }
     else 
     {
@@ -42,6 +65,7 @@ void Socket_Command_Handler(uint8_t index, bool target_on)
         // 状态更新
         g_strip.sockets[index].on = false;
         strncpy(g_strip.sockets[index].device_name, "None", 15);
+		AI_Reset(index);
     }
 }
 /**

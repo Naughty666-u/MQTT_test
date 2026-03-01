@@ -29,7 +29,7 @@ FIL fnew;                         /* 文件对象 */
 UINT fnum;                        /* 文件成功读写数量 */
 FRESULT res_sd;                   /* 文件操作结果 */
 
-
+static uint32_t last_poll = 0;
 uint32_t last_report = 0;
 extern PowerStrip_t g_strip;
 uint8_t g_force_upload_flag = 0; // 全局标志位
@@ -65,13 +65,13 @@ void hal_entry(void)
 
  
 	
-	ESP8266_MQTT_Test();
+//	ESP8266_MQTT_Test();
 
     while(1)
 	{
 		
 		
-		// 1. 随时解析串口进来的 JSON 指令
+//		// 1. 随时解析串口进来的 JSON 指令
 		handle_uart_json_stream();
 
 		// 3s 定时或被标志位触发
@@ -84,19 +84,11 @@ void hal_entry(void)
         }
 		
 		
-		if (g_uart3_rx_end == 1)
-        {
-            g_uart3_rx_end = 0;
-            
-            Data_Processing(g_BL0942_rx_buf.buffer,0);
-            BL0942_circlebuf_clear();
-           
-        }
 		
 		if (key1_sw2_press)
         {
             key1_sw2_press = false; //标志位清零
-			Socket_Command_Handler(0, true); // 开启 1 号插座并触发 AI
+			Socket_Command_Handler(0, true); // 开启1号插座并触发 AI
 			printf("key0 is pressed\r\n");
 			g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_LOW);
         }
@@ -105,13 +97,26 @@ void hal_entry(void)
 		 if (key2_sw3_press)
 		{
 			key2_sw3_press = false; //标志位清零
-			Socket_Command_Handler(0, false); // 开启 1 号插座并触发 AI
+			Socket_Command_Handler(0, false); // 关闭1号插座并触发 AI
 			printf("key1 is pressed\r\n");
 			g_ioport.p_api->pinWrite(g_ioport.p_ctrl,BSP_IO_PORT_01_PIN_02,BSP_IO_LEVEL_HIGH);
 		}
 		
-		  Send_com();
-		  R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS);
+		
+		 if (g_uart3_rx_end == 1)
+        {
+            g_uart3_rx_end = 0;
+            
+            Data_Processing(g_BL0942_rx_buf.buffer,0);
+            BL0942_circlebuf_clear();
+           
+        }
+
+		if (HAL_GetTick() - last_poll >= 100)   // 先设 100ms，后面再调
+		{
+			last_poll = HAL_GetTick();
+			Send_com();
+		}
 
 				
     }

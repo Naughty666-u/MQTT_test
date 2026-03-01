@@ -13,6 +13,7 @@
 ".\objects\bsp_sdhi_sdcard.o"
 ".\objects\sdcard_data_handle.o"
 ".\objects\appliance_identification.o"
+".\objects\event_detector.o"
 ".\objects\diskio.o"
 ".\objects\ff.o"
 ".\objects\ffunicode.o"

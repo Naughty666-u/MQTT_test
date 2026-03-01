@@ -6,6 +6,10 @@
 #include "stdlib.h"
 #include <time.h>   // 用于 srand()
 #include "appliance_identification.h"
+#include "event_detector.h"
+#include "Systick.h"
+static EventDetector_t g_evt_det[4];
+static bool g_evt_inited = false;
 #define MAX_C 20
 
 
@@ -105,7 +109,7 @@ void Send_com(void)
 void Data_Processing(unsigned char *data,uint8_t index)
 {
 	if (index >= 4) return;
-	
+	uint32_t now = HAL_GetTick();
 	// ... 此处保留你原有的校验和 24 位转 32 位计算逻辑 ...
     // 假设计算出的局部变量为：V_val, C_val, P_val, E_val
 	uint8_t i=0,check_num=0;
@@ -123,6 +127,8 @@ void Data_Processing(unsigned char *data,uint8_t index)
 //	printf("%02X\r\n",data[22]);
 	check_num=~(count&0xFF);//取最后一个字节，然后按位取反
 	//printf("\r\nChecknum=%02X;Data_num=%02X\r\n",check_num,USART2_RX_BUF[22]);
+	
+	
 	if(check_num==data[22])//校验数据是正确
 	{
 		//printf("Check_OK\r\n");
@@ -172,12 +178,7 @@ void Data_Processing(unsigned char *data,uint8_t index)
 		}
 //		printf("C=%0.3fA;V=%0.2fV;P1=%0.2fW;P2=%0.2fW;P3=%0.1f;E_con=%0.4fkWh\r\n",C1,V1,P1,P2,P3,E_con);
 		
-		// 根据当前模式，选择调用哪个 AI 引擎
-        if (g_ai_mode == MODE_LEARNING) {
-            AI_Learning_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
-        } else {
-            AI_Recognition_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
-        }
+		
 	}
 	else
 	{
@@ -204,6 +205,34 @@ void Data_Processing(unsigned char *data,uint8_t index)
         g_strip.total_power = temp_p_sum;
         g_strip.total_current= temp_c_sum;
 		
+		// ② 事件检测：OFF->ON 触发 AI 采样（不动继电器）
+    bool need_trigger = EventDetector_Update(&g_evt_det[index],
+                                             g_strip.sockets[index].on,
+                                             (float)P1,
+                                             HAL_GetTick());
+    if (need_trigger)
+    {
+        AI_Trigger_Sampling(index);
+    }
+
+    // ③ 再推进 AI 状态机（这样触发后的同一帧就能计 i_max）
+    if (g_ai_mode == MODE_LEARNING) {
+        AI_Learning_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
+    } else {
+        AI_Recognition_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
+    }
+	
+	// ================== 【新增】关断检测与AI复位 ==================
+	if (g_strip.sockets[index].on && g_evt_det[index].state == EVT_STATE_OFF)
+	{
+		// 低功率稳定OFF时，把显示回到 None
+		if (g_strip.sockets[index].power < 1.0f&& g_evt_det[index].off_cnt >= 3)
+		{
+			strncpy(g_strip.sockets[index].device_name, "None", 15);
+			AI_Reset(index);
+		}
+	}
+		
 		
     }
 }
@@ -214,6 +243,12 @@ void uart_hlw_init(void)
     ELCDrvInit();
     GPTDrvInit_elc();
     BL0942_UART3_Init();
+	
+	 if (!g_evt_inited)
+    {
+        for (int i = 0; i < 4; i++) EventDetector_Init(&g_evt_det[i]);
+        g_evt_inited = true;
+    }
    
 }
 
