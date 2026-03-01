@@ -6,6 +6,7 @@
 #include "bsp_wifi_esp8266.h"
 #include "bsp_led.h"
 #include "Systick.h"
+#include "appliance_identification.h"
 extern circle_buf_t g_rx_buf;
 #define MAX_JSON_SIZE 512
 static char json_process_buf[MAX_JSON_SIZE]; // 线性缓冲区，用于解析
@@ -110,6 +111,13 @@ void process_cloud_cmd(const char *json_str)
             // 更新硬件状态结构体
             // 假设你使用的是 g_strip.socket_on[4] 或者 g_strip.sockets[index].on
             g_strip.sockets[index].on = is_on;
+			if(g_strip.sockets[index].on ==true)
+			{
+				Socket_Command_Handler(index, true);
+			}else
+			{
+				Socket_Command_Handler(index, false);
+			}
 
             // 4. 打印对应的 LED 亮灭状态（满足你的需求）
             printf("\r\n[Hardware Control] 插座 %d 状态更新!\r\n", id_val);

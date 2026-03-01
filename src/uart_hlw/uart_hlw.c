@@ -114,13 +114,13 @@ void Data_Processing(unsigned char *data,uint8_t index)
 	int32_t C_REG=0;
 	double V1=0,C1=0,P1=0,P2=0,P3=0,E_con=0;
 	
-	printf("\r\nRaW_data:");
+//	printf("\r\nRaW_data:");
 	for(i=0;i<22;i++)//求和，用来计算校验码
 	{
 		count=count+data[i];
-		printf("%02X ",data[i]);
+//		printf("%02X ",data[i]);
 	}
-	printf("%02X\r\n",data[22]);
+//	printf("%02X\r\n",data[22]);
 	check_num=~(count&0xFF);//取最后一个字节，然后按位取反
 	//printf("\r\nChecknum=%02X;Data_num=%02X\r\n",check_num,USART2_RX_BUF[22]);
 	if(check_num==data[22])//校验数据是正确
@@ -170,7 +170,7 @@ void Data_Processing(unsigned char *data,uint8_t index)
 		{
 			E_con=PF_COUNT/5350.632;//计算已用电量，5350.632为固定值，和选购的量程有关
 		}
-		printf("C=%0.3fA;V=%0.2fV;P1=%0.2fW;P2=%0.2fW;P3=%0.1f;E_con=%0.4fkWh\r\n",C1,V1,P1,P2,P3,E_con);
+//		printf("C=%0.3fA;V=%0.2fV;P1=%0.2fW;P2=%0.2fW;P3=%0.1f;E_con=%0.4fkWh\r\n",C1,V1,P1,P2,P3,E_con);
 		
 		// 根据当前模式，选择调用哪个 AI 引擎
         if (g_ai_mode == MODE_LEARNING) {

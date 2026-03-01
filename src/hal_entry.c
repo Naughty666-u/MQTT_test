@@ -46,83 +46,52 @@ extern volatile bool g_uart3_rx_end;
 void hal_entry(void)
 {
     /* TODO: add your own code here */
-	/* 1. 【最高优先级】继电器复位：确保上电瞬间全路切断 */
-    Relay_Reset_All();
 	
     Debug_UART0_Init(); // SCI0 UART 调试串口初始化
+	
 	SystickInit();
+	/* 1. 【最高优先级】继电器复位：确保上电瞬间全路切断 */
+    Relay_Reset_All();
 	Key_IRQ_Init();
 	uart_hlw_init();
 	
 	circlebuf_init();
 	BL0942_circlebuf_init();
 	
-	// 1. 初始化随机数种子（可以用系统滴答定时器的值）
-    // 在 hal_entry.c 中
-     srand(HAL_GetTick()); // 现在绝对不会报错了，因为 HAL_GetTick 已经有了明确的声明
-	
-
-
-    // 2. 默认先把插座全部打开，方便观察测试
-    for(int i=0; i<4; i++) {
-        g_strip.sockets[i].on = true;
-    }
 	
 	/* 1. 初始化与挂载逻辑 (沿用你之前的代码) */
     res_sd = f_mount(&fs, "1:", 1);
     if(res_sd != FR_OK) { /* 错误处理... */ }
 
-    /* 2. 构造几条测试用的“指纹”数据 */
-    Appliance_Data_t test_dev1 = {1, "PC_Host", 150.5, 0.92, 200, 0.85};
-    Appliance_Data_t test_dev2 = {2, "LED_Lamp", 9.2,  0.51, 20,  1.00};
-    Appliance_Data_t test_dev3 = {3, "Fan",      45.0, 0.78, 500, 0.75};
-    Appliance_Data_t test_dev4 = {4, "nitama的", 220, 660, 201, 0.85};
-    printf("\r\n****** 开始指纹库存取实验 ******\r\n");
-
-    // 存入数据
-    if(Save_Appliance_Data(&test_dev1) == FR_OK) printf("已保存: %s\r\n", test_dev1.name);
-    if(Save_Appliance_Data(&test_dev2) == FR_OK) printf("已保存: %s\r\n", test_dev2.name);
-    if(Save_Appliance_Data(&test_dev3) == FR_OK) printf("已保存: %s\r\n", test_dev3.name);
-	if(Save_Appliance_Data(&test_dev4) == FR_OK) printf("已保存: %s\r\n", test_dev4.name);
-
-    /* 3. 从SD卡中读出并格式化打印 */
-    if(Load_And_Print_All() != FR_OK)
-    {
-        printf("指纹库读取失败！\r\n");
-    }
-
-    printf("\r\n实验结束。\r\n");
+ 
 	
-//	ESP8266_MQTT_Test();
+	ESP8266_MQTT_Test();
 
     while(1)
 	{
-		 Simulation_Random_Load_Test();
 		
-//		// 1. 随时解析串口进来的 JSON 指令
-//		handle_uart_json_stream();
+		
+		// 1. 随时解析串口进来的 JSON 指令
+		handle_uart_json_stream();
 
-//		// 3s 定时或被标志位触发
-//        if((HAL_GetTick() - last_report >= 3000) || g_force_upload_flag) 
-//        {
-//            g_force_upload_flag = 0; // 清除标志
-//            
-//            // 更新电参并上报
-//            g_strip.voltage = 220.0f + (rand()%10)/10.0f;
-//            upload_strip_status();
-//            
-//            last_report = HAL_GetTick();
-//        }
-//		
+		// 3s 定时或被标志位触发
+        if((HAL_GetTick() - last_report >= 3000) || g_force_upload_flag) 
+        {
+            g_force_upload_flag = 0; // 清除标志
+            upload_strip_status();
+            
+            last_report = HAL_GetTick();
+        }
 		
-//		if (g_uart3_rx_end == 1)
-//        {
-//            g_uart3_rx_end = 0;
-//            
-//            Data_Processing(g_BL0942_rx_buf.buffer,0);
-//            BL0942_circlebuf_clear();
-//           
-//        }
+		
+		if (g_uart3_rx_end == 1)
+        {
+            g_uart3_rx_end = 0;
+            
+            Data_Processing(g_BL0942_rx_buf.buffer,0);
+            BL0942_circlebuf_clear();
+           
+        }
 		
 		if (key1_sw2_press)
         {

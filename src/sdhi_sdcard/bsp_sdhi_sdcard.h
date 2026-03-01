@@ -4,7 +4,8 @@
 #include "hal_data.h"
 #include "stdio.h"
 
-/*ÉùÃ÷±äÁ¿*/
+
+/*å£°æ˜å˜é‡*/
 extern __IO uint32_t g_transfer_complete;
 extern __IO bool g_card_inserted;
 

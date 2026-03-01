@@ -1,6 +1,6 @@
 #include "Key.h"
 
-/* 按键按下标志 */
+/* 鎸夐敭鎸変笅鏍囧織 */
 volatile bool key1_sw2_press = false;
 volatile bool key2_sw3_press = false;
 
@@ -11,22 +11,24 @@ void Key_IRQ_Init(void)
    /* Open ICU module */
    err = R_ICU_ExternalIrqOpen(&g_external_irq6_ctrl, &g_external_irq6_cfg);
    err = R_ICU_ExternalIrqOpen(&g_external_irq7_ctrl, &g_external_irq7_cfg);
-   /* 允许中断 */
+   /* 鍏佽涓柇 */
    err = R_ICU_ExternalIrqEnable(&g_external_irq6_ctrl);
    err = R_ICU_ExternalIrqEnable(&g_external_irq7_ctrl);
 }
 
 
-/* 按键中断回调函数 */
+/* 鎸夐敭涓柇鍥炶皟鍑芥暟 */
 void key_externel_irq_callback(external_irq_callback_args_t *p_args)
 {
-   /* 判断中断通道 */
+   /* 鍒ゆ柇涓柇閫氶亾 */
    if (6 == p_args->channel)
    {
-      key1_sw2_press = true;   // 按键KEY1_SW2按下
+      key1_sw2_press = true;   // 鎸夐敭KEY1_SW2鎸変笅
    }
    else if (7 == p_args->channel)
    {
-      key2_sw3_press = true;   // 按键KEY2_SW3按下
+      key2_sw3_press = true;   // 鎸夐敭KEY2_SW3鎸変笅
    }
 }
+//}
+
