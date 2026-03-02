@@ -91,7 +91,7 @@ void AI_Learning_Engine(uint8_t index, float p_now,float v_now ,float i_now, flo
             if (i_now > p_ai->i_max) p_ai->i_max = i_now;
 
             // 2秒采样窗口，捕捉电器从“暂态”进入“稳态”的过程
-            if (HAL_GetTick() - p_ai->start_tick > 2000)
+            if (HAL_GetTick() - p_ai->start_tick > 8000)
             {
                 p_ai->state = AI_READY;
             }
@@ -165,7 +165,7 @@ void AI_Recognition_Engine(uint8_t index, float p_now,float v_now ,float i_now, 
             if (i_now > p_ai->i_max) p_ai->i_max = i_now;
 
             // 2秒采样窗口，捕捉电器从“暂态”进入“稳态”的过程
-            if (HAL_GetTick() - p_ai->start_tick > 2000)
+            if (HAL_GetTick() - p_ai->start_tick > 8000)
             {
                 p_ai->state = AI_READY;
             }
@@ -180,92 +180,134 @@ void AI_Recognition_Engine(uint8_t index, float p_now,float v_now ,float i_now, 
 			
 			printf("[Recognition] 插座[%d] 识别成功: %s\r\n", index, match_name);
 
-            p_ai->state = AI_IDLE; 
+            p_ai->state = AI_LOCKED; 
+		    
+		    break;
+		
+		case AI_LOCKED:
+			 // 什么都不做，等 OFF 时由外部逻辑 Reset
+	
             break;
     }
 
 }
 
 
-/**
- * @brief  AI 负载识别算法（基于更新后的五维度结构体）
- * @param  p_now: 实时有功功率 (P1)
- * @param  pf_now: 实时功率因数 (P3)
- * @param  i_max: 采样周期内的峰值电流 (C1_Max)
- * @param  v_now: 实时电压 (V1)
- * @param  i_steady: 采样结束时的稳态电流 (C1)
- * @return 匹配到的设备名称 (返回静态字符串指针)
- */
+
 char* Identify_Appliance_In_SD(float p_now, float pf_now, float i_max, float v_now, float i_steady)
 {
-    static FIL db_fil;
-    char line[128];
-    static char best_match_name[20]; 
-    float min_distance = 999999.0f;
-    
-    // 初始化返回名称
-    strcpy(best_match_name, "Unknown Device");
+    // 显式忽略暂时不用的 2D 参数，防止编译器产生警告
+    (void)i_max; (void)v_now; (void)i_steady; 
 
-    // 1. 计算当前测得的派生特征值
-    float s_now = v_now * i_steady;                                // 视在功率 S
-    float surge_ratio_now = (i_steady > 0.05f) ? (i_max / i_steady) : 1.0f; // 激增比 (避开分母过小)
-    float q_now = sqrtf(fabsf(s_now * s_now - p_now * p_now));     // 无功功率 Q
+    static FIL fil;
+    static char best_name[20]; // 加上 static，确保函数返回后字符串内存依然有效
+    char line[160];
 
-    // 2. 打开 SD 卡数据库
-    if (f_open(&db_fil, DEVICE_DB_PATH, FA_READ | FA_OPEN_EXISTING) != FR_OK) {
+    // 初始化：将最小距离（best）和第二小距离（second）设为极大值
+    float best = 999999.0f;
+    float second = 999999.0f;
+
+    // 默认返回“未知设备”
+    strcpy(best_name, "Unknown Device");
+
+    /* --- 1. 打开数据库 --- */
+    FRESULT res = f_open(&fil, DEVICE_DB_PATH, FA_READ | FA_OPEN_EXISTING);
+    if (res != FR_OK)
+    {
+        printf("[REC] open failed path=%s res=%d\r\n", DEVICE_DB_PATH, res);
         return "SD Error";
     }
 
-    // 3. 逐行搜索特征库
-    while (f_gets(line, sizeof(line), &db_fil))
+    // 先读一行（跳过表头），若读取失败则说明是空文件
+    if (!f_gets(line, sizeof(line), &fil))
     {
-        if (strstr(line, "ID")) continue; // 跳过 CSV 表头
-
-        Appliance_Data_t lib;
-        // 严格按照：ID,Name,Power,PF,SurgeRatio,Q_Reactive 解析
-        int count = sscanf(line, "%hu,%19[^,],%f,%f,%f,%f", 
-                           &lib.id, lib.name, &lib.power, 
-                           &lib.pf, &lib.i_surge_ratio, &lib.q_reactive);
-
-        if (count == 6)
-        {
-            /* 4. 计算加权欧几里得距离 */
-            // 为了让不同量级的物理量可以比较，我们进行简单的归一化(Normalization)
-            
-            // 维度1: 有功功率 (权重 0.4) - 以100W为基准缩放
-            float d_p  = powf((p_now - lib.power) / 100.0f, 2) * 0.40f;
-            
-            // 维度2: 功率因数 (权重 0.25) - PF本身在0-1之间
-            float d_pf = powf(pf_now - lib.pf, 2) * 0.25f;
-            
-            // 维度3: 激增比 (权重 0.2)
-            float d_sr = powf(surge_ratio_now - lib.i_surge_ratio, 2) * 0.20f;
-            
-            // 维度4: 无功功率 (权重 0.1) - 以100Var为基准缩放
-            float d_q  = powf((q_now - lib.q_reactive) / 100.0f, 2) * 0.10f;
-            
-            // 维度5: 视在功率 (权重 0.05) - 综合电压波动影响
-            float s_lib = lib.power / (lib.pf + 0.001f); // 估算库中设备的视在功率
-            float d_s  = powf((s_now - s_lib) / 100.0f, 2) * 0.05f;
-
-            // 计算总距离
-            float total_distance = sqrtf(d_p + d_pf + d_sr + d_q + d_s);
-
-            // 5. 寻找最优解
-            if (total_distance < min_distance) {
-                min_distance = total_distance;
-                strncpy(best_match_name, lib.name, sizeof(best_match_name) - 1);
-            }
-        }
-    }
-    f_close(&db_fil);
-
-    // 6. 判定门限：如果最小距离还是很大，说明库里没这玩意
-    // 0.5f 是一个经验值，距离越小匹配度越高
-    if (min_distance > 0.6f) { 
+        f_close(&fil);
+        printf("[REC] empty file\r\n");
         return "Unknown Device";
     }
 
-    return best_match_name;
-}
+    int parsed_ok = 0;
+    int parsed_bad = 0;
 
+    /* --- 2. 遍历所有样本进行比对 --- */
+    while (f_gets(line, sizeof(line), &fil))
+    {
+        // 过滤空行和重复出现的表头
+        if (line[0] == '\0' || line[0] == '\r' || line[0] == '\n') continue;
+        if (strstr(line, "ID,Name,Power") != NULL) continue;
+
+        unsigned long id;
+        char name[20] = {0};
+        float p_lib, pf_lib, sr, q;
+
+        // 尝试解析 6 个维度的数据
+        int cnt = sscanf(line, "%lu,%19[^,],%f,%f,%f,%f",
+                         &id, name, &p_lib, &pf_lib, &sr, &q);
+
+        if (cnt != 6) // 如果这一行格式不对，记录并报错
+        {
+            parsed_bad++;
+            if (parsed_bad <= 3) // 仅打印前3条，防止串口日志刷屏
+            {
+                printf("[REC] parse fail line: %s\r\n", line);
+            }
+            continue;
+        }
+
+        parsed_ok++;
+
+        // 清理字符串：去掉末尾可能存在的 Windows 回车符
+        size_t len = strlen(name);
+        if (len && name[len - 1] == '\r') name[len - 1] = '\0';
+
+        /* --- 3. 核心算法：计算加权欧式距离 --- */
+        // 归一化处理：功率(P)差值除以 100，使其与功率因数(PF, 0-1之间)在数量级上可比
+        float dp  = (p_now - p_lib) / 100.0f;
+        float dpf = (pf_now - pf_lib);
+        
+        // 计算 2D 距离公式：
+        // $d = \sqrt{\Delta P^2 \times 0.85 + \Delta PF^2 \times 0.15}$
+        // 这里的 0.85 和 0.15 是权重，说明该算法更看重功率的准确性
+        float d = sqrtf(dp * dp * 0.85f + dpf * dpf * 0.15f);
+
+        // 维护一个“最近”和“次近”的记录（用于后续可能的置信度判断）
+        if (d < best)
+        {
+            second = best;
+            best = d;
+            // 找到了更像的设备，拷贝其名称
+            strncpy(best_name, name, sizeof(best_name) - 1);
+            best_name[sizeof(best_name) - 1] = '\0';
+        }
+        else if (d < second)
+        {
+            second = d;
+        }
+    }
+
+    f_close(&fil); // 关闭文件
+
+    // 计算最小距离与次小距离的差值（边际误差）
+    float margin = second - best;
+
+    // 打印详细识别过程，方便现场调试
+    printf("[REC] p=%.2f pf=%.2f parsed_ok=%d bad=%d d1=%.3f d2=%.3f margin=%.3f best=%s\r\n",
+           p_now, pf_now, parsed_ok, parsed_bad, best, second, margin, best_name);
+
+    if (parsed_ok == 0)
+    {
+        return "Unknown Device";
+    }
+
+    /* --- 4. 最终裁定 --- */
+    // 识别门限：如果最小距离 d1 依然大于 0.12，说明数据库里最像的电器其实也不怎么像
+    const float THRESH_D1 = 0.12f;
+
+    if (best > THRESH_D1)
+    {
+        // 距离太远，宁愿说不知道，也不要乱猜
+        return "Unknown Device";
+    }
+
+    return best_name; // 成功匹配！
+}

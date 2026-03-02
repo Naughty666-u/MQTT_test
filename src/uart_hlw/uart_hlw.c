@@ -11,6 +11,9 @@
 static EventDetector_t g_evt_det[4];
 static bool g_evt_inited = false;
 #define MAX_C 20
+#define LOW_POWER_THRESHOLD_W 6.0f
+#define MAX_VALID_POWER_W 5000.0f
+static uint32_t g_lowpower_log_tick[4] = {0};
 
 
 //BL0942波特率为9600
@@ -19,7 +22,7 @@ static bool g_evt_inited = false;
 #define MODE_RECOGNITION 0
 #define MODE_LEARNING    1
 
-uint8_t g_ai_mode = MODE_LEARNING; // 默认是识别模式
+uint8_t g_ai_mode = MODE_RECOGNITION; // 默认是识别模式
 
 
 static volatile int g_uart3_tx_complete = 0;
@@ -114,8 +117,8 @@ void Data_Processing(unsigned char *data,uint8_t index)
     // 假设计算出的局部变量为：V_val, C_val, P_val, E_val
 	uint8_t i=0,check_num=0;
 	uint32_t count=88;
-	uint32_t V_REG=0,P_REG=0,PF_COUNT=0;
-	int32_t C_REG=0;
+	uint32_t V_REG=0,PF_COUNT=0;
+	int32_t C_REG=0,P_REG=0;
 	double V1=0,C1=0,P1=0,P2=0,P3=0,E_con=0;
 	
 //	printf("\r\nRaW_data:");
@@ -187,8 +190,19 @@ void Data_Processing(unsigned char *data,uint8_t index)
 	
 	if(check_num == data[22]) 
     {
+        float p_used = (P1 >= 0.0) ? (float)P1 : (float)(-P1);
+
+        /* 过滤明显异常功率，避免污染触发和识别。 */
+        if (p_used > MAX_VALID_POWER_W)
+        {
+            printf("[PWR] drop abnormal power: %.2fW\r\n", p_used);
+            AI_Reset(index);
+            EventDetector_Init(&g_evt_det[index]);
+            return;
+        }
+
         // 1. 更新该路功率
-        g_strip.sockets[index].power = (float)P1; 
+        g_strip.sockets[index].power = p_used; 
         
         // 2. 更新全局电压 (因为4路电压物理上是一致的，取最后一次解析的结果即可)
         g_strip.voltage = (float)V1;
@@ -204,11 +218,27 @@ void Data_Processing(unsigned char *data,uint8_t index)
         }
         g_strip.total_power = temp_p_sum;
         g_strip.total_current= temp_c_sum;
+
+        /* 小功率统一归类，不触发学习和识别。 */
+        if (g_strip.sockets[index].on &&
+            g_strip.sockets[index].power < LOW_POWER_THRESHOLD_W)
+        {
+            uint32_t now_tick = HAL_GetTick();
+            if (now_tick - g_lowpower_log_tick[index] >= 1000U)
+            {
+                g_lowpower_log_tick[index] = now_tick;
+                printf("[LP] socket=%d power=%.2fW (skip AI)\r\n", index, g_strip.sockets[index].power);
+            }
+            strncpy(g_strip.sockets[index].device_name, "LowPower", 15);
+            AI_Reset(index);
+            EventDetector_Init(&g_evt_det[index]);
+            return;
+        }
 		
 		// ② 事件检测：OFF->ON 触发 AI 采样（不动继电器）
     bool need_trigger = EventDetector_Update(&g_evt_det[index],
                                              g_strip.sockets[index].on,
-                                             (float)P1,
+                                             p_used,
                                              HAL_GetTick());
     if (need_trigger)
     {
@@ -217,9 +247,9 @@ void Data_Processing(unsigned char *data,uint8_t index)
 
     // ③ 再推进 AI 状态机（这样触发后的同一帧就能计 i_max）
     if (g_ai_mode == MODE_LEARNING) {
-        AI_Learning_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
+        AI_Learning_Engine(index, p_used, (float)V1, (float)C1, (float)P3);
     } else {
-        AI_Recognition_Engine(index, (float)P1, (float)V1, (float)C1, (float)P3);
+        AI_Recognition_Engine(index, p_used, (float)V1, (float)C1, (float)P3);
     }
 	
 	// ================== 【新增】关断检测与AI复位 ==================

@@ -16,6 +16,7 @@ FSP_CPP_FOOTER
 #include <time.h>   // 用于 srand()
 #include "sdcard_data_handle.h"
 #include "appliance_identification.h"
+#include "ai_validate.h"
 
 MKFS_PARM f_opt = {
     .fmt = FM_FAT32,       //格式选项
@@ -61,7 +62,6 @@ void hal_entry(void)
 	
 	/* 1. 初始化与挂载逻辑 (沿用你之前的代码) */
     res_sd = f_mount(&fs, "1:", 1);
-    if(res_sd != FR_OK) { /* 错误处理... */ }
 
  
 	
@@ -72,16 +72,16 @@ void hal_entry(void)
 		
 		
 //		// 1. 随时解析串口进来的 JSON 指令
-		handle_uart_json_stream();
+//		handle_uart_json_stream();
 
-		// 3s 定时或被标志位触发
-        if((HAL_GetTick() - last_report >= 3000) || g_force_upload_flag) 
-        {
-            g_force_upload_flag = 0; // 清除标志
-            upload_strip_status();
-            
-            last_report = HAL_GetTick();
-        }
+//		// 3s 定时或被标志位触发
+//        if((HAL_GetTick() - last_report >= 3000) || g_force_upload_flag) 
+//        {
+//            g_force_upload_flag = 0; // 清除标志
+//            upload_strip_status();
+//            
+//            last_report = HAL_GetTick();
+//        }
 		
 		
 		

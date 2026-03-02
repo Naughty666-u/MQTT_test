@@ -3,12 +3,13 @@
 
 #include "hal_data.h"
 
-
 typedef enum {
-    AI_IDLE,          // 待机：插座无电器或处于稳态
-    AI_SAMPLING,      // 采样：检测到功率跳变，正在记录峰值
-    AI_READY          // 完成：特征已提取，等待匹配数据库
+    AI_IDLE = 0,       // 等触发
+    AI_SAMPLING,       // 采样窗口中
+    AI_READY,          // 采样结束待识别
+    AI_LOCKED          // 已识别，结果锁住（直到 OFF 或低功耗）
 } AI_State_t;
+
 
 typedef struct {
     float i_max;            // 启动瞬间最大电流
