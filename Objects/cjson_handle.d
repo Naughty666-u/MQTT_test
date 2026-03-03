@@ -49,5 +49,7 @@
   ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h \
   ra\fsp\inc\instances\r_gpt.h ra\fsp\inc\api\r_timer_api.h \
   src\cJSON_handle\cJSON_handle.h src\bsp_esp8266\bsp_wifi_esp8266.h \
-  src\led\bsp_led.h src\Systick\Systick.h \
-  src\Appliance\ identification\ algorithm\appliance_identification.h
+  src\Systick\Systick.h \
+  src\Appliance\ identification\ algorithm\appliance_identification.h \
+  src\sdcard_data_handle\sdcard_data_handle.h src\FatFs\ff15\ff.h \
+  src\FatFs\ff15\ffconf.h

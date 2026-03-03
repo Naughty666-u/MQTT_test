@@ -1,4 +1,4 @@
-#ifndef __UART_HLW_H
+﻿#ifndef __UART_HLW_H
 #define __UART_HLW_H
 #include "hal_data.h"
 void uart_hlw_init(void);

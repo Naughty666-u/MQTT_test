@@ -51,4 +51,6 @@
   src\debug_uart\bsp_debug_uart.h src\circle_buf\circle_buf.h \
   src\cJSON_handle\cJSON_handle.h \
   src\Appliance\ identification\ algorithm\appliance_identification.h \
-  src\event_detector\event_detector.h src\Systick\Systick.h
+  src\sdcard_data_handle\sdcard_data_handle.h src\FatFs\ff15\ff.h \
+  src\FatFs\ff15\ffconf.h src\event_detector\event_detector.h \
+  src\Systick\Systick.h

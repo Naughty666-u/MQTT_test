@@ -50,6 +50,6 @@
   ra\fsp\inc\api\r_sdmmc_api.h ra\fsp\inc\instances\r_sci_uart.h \
   ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h \
   ra\fsp\inc\instances\r_gpt.h ra\fsp\inc\api\r_timer_api.h \
-  src\Systick\Systick.h src\cJSON_handle\cJSON_handle.h \
-  src\FatFs\ff15\ff.h src\FatFs\ff15\ffconf.h \
-  src\sdcard_data_handle\sdcard_data_handle.h src\Relay\Relay.h
+  src\sdcard_data_handle\sdcard_data_handle.h src\FatFs\ff15\ff.h \
+  src\FatFs\ff15\ffconf.h src\Systick\Systick.h \
+  src\cJSON_handle\cJSON_handle.h src\Relay\Relay.h
