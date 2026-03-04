@@ -25,6 +25,11 @@ static char json_process_buf[MAX_JSON_SIZE];
  */
 extern uint8_t g_force_upload_flag;
 
+void request_status_upload(void)
+{
+    g_force_upload_flag = 1;
+}
+
 /*
  * 全局排插状态：
  * - 由电参采样链路持续更新功率/电压/电流
@@ -139,14 +144,27 @@ static bool send_ack(const char *cmd_id, const char *status, const char *reason,
 
     /* 序列化并发布到 ACK 主题。 */
     char *ack_out = cJSON_PrintUnformatted(ack);
+    bool sent_ok = false;
     if (ack_out)
     {
-        Send_Data_Raw(MQTT_PUB_ACK, ack_out);
+        sent_ok = Send_Data_Raw(MQTT_PUB_ACK, ack_out);
+        if (!sent_ok)
+        {
+            /* ACK 丢失会导致前端卡住，失败时快速重试一次。 */
+            R_BSP_SoftwareDelay(20, BSP_DELAY_UNITS_MILLISECONDS);
+            sent_ok = Send_Data_Raw(MQTT_PUB_ACK, ack_out);
+        }
         free(ack_out);
     }
 
     cJSON_Delete(ack);
-    return true;
+    if (!sent_ok)
+    {
+        printf("[ACK] send failed cmdId=%s status=%s\r\n",
+               (cmd_id ? cmd_id : "null"),
+               (status ? status : "null"));
+    }
+    return sent_ok;
 }
 
 /**
@@ -155,6 +173,11 @@ static bool send_ack(const char *cmd_id, const char *status, const char *reason,
  */
 void upload_strip_status(void)
 {
+    static uint32_t s_last_upload_tick = 0;
+    uint32_t now_tick = HAL_GetTick();
+    uint32_t delta_ms = (s_last_upload_tick == 0U) ? 0U : (now_tick - s_last_upload_tick);
+    s_last_upload_tick = now_tick;
+
     cJSON *root = cJSON_CreateObject();
     if (!root) return;
 
@@ -194,10 +217,15 @@ void upload_strip_status(void)
     char *out = cJSON_PrintUnformatted(root);
     if (out)
     {
-        Send_Data_Raw(MQTT_PUB_STATUS, out);
+        bool ok = Send_Data_Raw(MQTT_PUB_STATUS, out);
+        if (!ok)
+        {
+            printf("[TX] status publish failed\r\n");
+        }
         free(out);
     }
 
+    printf("[PERF] status upload interval=%lu ms\r\n", (unsigned long)delta_ms);
     cJSON_Delete(root);
 }
 
@@ -254,16 +282,29 @@ void process_cloud_cmd(const char *json_str)
         *(json_end + 1) = backup;
         return;
     }
+    uint32_t cmd_start_tick = HAL_GetTick();
 
-    /* cmdId 用于 ACK 关联；允许不存在，但会导致 ACK 不能有效关联。 */
+    /* cmdId 用于 ACK 关联；若顶层缺失则回退查 payload.cmdId。 */
     cJSON *cmdId = cJSON_GetObjectItem(root, "cmdId");
+    if (!cJSON_IsString(cmdId))
+    {
+        cJSON *payload = cJSON_GetObjectItem(root, "payload");
+        if (cJSON_IsObject(payload))
+        {
+            cmdId = cJSON_GetObjectItem(payload, "cmdId");
+        }
+    }
     const char *cmd_id_str = cJSON_IsString(cmdId) ? cmdId->valuestring : NULL;
 
     /* type 是必须字段。 */
     cJSON *type = cJSON_GetObjectItem(root, "type");
     if (!cJSON_IsString(type))
     {
-        send_ack(cmd_id_str, "failed", "missing_type", 1);
+        uint32_t ack_cost_total = HAL_GetTick() - cmd_start_tick;
+        int ack_cost_ms = (ack_cost_total == 0U) ? 1 : (int)ack_cost_total;
+        bool ack_ok = send_ack(cmd_id_str, "failed", "missing_type", ack_cost_ms);
+        printf("[PERF] cmd=<missing> ack=%lu ms result=failed sent=%d\r\n",
+               (unsigned long)ack_cost_total, ack_ok ? 1 : 0);
         cJSON_Delete(root);
         *(json_end + 1) = backup;
         return;
@@ -339,18 +380,17 @@ void process_cloud_cmd(const char *json_str)
              * - pendingId 必须与缓存样本一致
              * - name 合法后才会写入 Device.csv
              */
-            FRESULT res = AI_Commit_Pending((uint8_t)index,
-                                            (uint32_t)pendingId->valuedouble,
-                                            name->valuestring);
-            if (res == FR_OK)
+            bool accepted = AI_Request_Commit_Pending((uint8_t)index,
+                                                      (uint32_t)pendingId->valuedouble,
+                                                      name->valuestring);
+            if (accepted)
             {
-                /* 提交成功：后续会发 success ACK，并触发状态立即上报。 */
+                /* 快速受理：实际写 SD 在主循环后台任务执行。 */
                 ok = true;
             }
             else
             {
-                /* 提交失败：统一返回 commit_failed 给网页端。 */
-                fail_reason = "commit_failed";
+                fail_reason = "commit_rejected";
             }
         }
     }
@@ -381,12 +421,24 @@ void process_cloud_cmd(const char *json_str)
     if (ok)
     {
         /* 成功后强制下一轮立即上报，网页尽快看到状态变化。 */
-        send_ack(cmd_id_str, "success", NULL, 50);
-        g_force_upload_flag = 1;
+        uint32_t ack_cost_total = HAL_GetTick() - cmd_start_tick;
+        int ack_cost_ms = (ack_cost_total == 0U) ? 1 : (int)ack_cost_total;
+        bool ack_ok = send_ack(cmd_id_str, "success", NULL, ack_cost_ms);
+        printf("[PERF] cmd=%s ack=%lu ms result=success sent=%d\r\n",
+               type_str, (unsigned long)ack_cost_total, ack_ok ? 1 : 0);
+        request_status_upload();
     }
     else
     {
-        send_ack(cmd_id_str, "failed", fail_reason, 50);
+        uint32_t ack_cost_total = HAL_GetTick() - cmd_start_tick;
+        int ack_cost_ms = (ack_cost_total == 0U) ? 1 : (int)ack_cost_total;
+        bool ack_ok = send_ack(cmd_id_str, "failed", fail_reason, ack_cost_ms);
+        printf("[PERF] cmd=%s ack=%lu ms result=failed reason=%s\r\n",
+               type_str, (unsigned long)ack_cost_total, fail_reason);
+        if (!ack_ok)
+        {
+            printf("[PERF] cmd=%s ack send failed\r\n", type_str);
+        }
     }
 
     cJSON_Delete(root);

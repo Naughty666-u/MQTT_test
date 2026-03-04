@@ -20,6 +20,8 @@ FSP_CPP_FOOTER
 
 /* 1=开启网页联调模拟数据；0=关闭（使用真实采样数据） */
 #define WEB_MQTT_TEST_MODE 0
+#define HEARTBEAT_MS 1500U
+#define UPLOAD_MIN_GAP_MS 200U
 
 MKFS_PARM f_opt = {
     .fmt = FM_FAT32,
@@ -36,6 +38,7 @@ FRESULT res_sd;
 
 static uint32_t last_poll = 0;
 uint32_t last_report = 0;
+static uint32_t last_upload_tick = 0;
 extern PowerStrip_t g_strip;
 uint8_t g_force_upload_flag = 0;
 
@@ -71,9 +74,14 @@ void hal_entry(void)
         /* 解析来自云端的 JSON 指令流 */
 		
         handle_uart_json_stream();
+        AI_Replug_Task();
+        AI_Commit_Task();
 
         /* 定时上报或被命令触发的立即上报 */
-        if ((HAL_GetTick() - last_report >= 3000U) || g_force_upload_flag)
+        uint32_t now_tick = HAL_GetTick();
+        bool heartbeat_due = (now_tick - last_report >= HEARTBEAT_MS);
+        bool event_due = g_force_upload_flag && (now_tick - last_upload_tick >= UPLOAD_MIN_GAP_MS);
+        if (heartbeat_due || event_due)
         {
 #if WEB_MQTT_TEST_MODE
             /* 上报前填充模拟数据，便于网页联调验证显示与控制链路。 */
@@ -81,7 +89,8 @@ void hal_entry(void)
 #endif
             g_force_upload_flag = 0;
             upload_strip_status();
-            last_report = HAL_GetTick();
+            last_report = now_tick;
+            last_upload_tick = now_tick;
         }
 
         if (key1_sw2_press)

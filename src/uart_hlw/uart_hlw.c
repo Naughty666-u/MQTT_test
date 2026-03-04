@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 #include "bsp_debug_uart.h"
 #include "circle_buf.h"
@@ -21,6 +22,7 @@ static bool g_evt_inited = false;
 /* 功率过滤阈值 */
 #define LOW_POWER_THRESHOLD_W 6.0f
 #define MAX_VALID_POWER_W 5000.0f
+#define POWER_UPLOAD_DELTA_W 10.0f
 
 /* 低功耗日志节流时间戳，避免串口刷屏 */
 static uint32_t g_lowpower_log_tick[4] = {0};
@@ -219,6 +221,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
     if (check_num == data[22])
     {
         float p_used = (P1 >= 0.0) ? (float)P1 : (float)(-P1);
+        float p_prev = g_strip.sockets[index].power;
 
         /* 异常功率过滤，避免污染识别状态 */
         if (p_used > MAX_VALID_POWER_W)
@@ -231,6 +234,10 @@ void Data_Processing(unsigned char *data, uint8_t index)
 
         /* 1) 更新该路实时功率 */
         g_strip.sockets[index].power = p_used;
+        if (fabsf(p_used - p_prev) >= POWER_UPLOAD_DELTA_W)
+        {
+            request_status_upload();
+        }
 
         /* 2) 更新全局电压 */
         g_strip.voltage = (float)V1;
@@ -250,12 +257,16 @@ void Data_Processing(unsigned char *data, uint8_t index)
         if (g_strip.sockets[index].on && g_strip.sockets[index].power < LOW_POWER_THRESHOLD_W)
         {
             uint32_t now_tick = HAL_GetTick();
-            if (now_tick - g_lowpower_log_tick[index] >= 1000U)
+            if (now_tick - g_lowpower_log_tick[index] >= 3000U)
             {
                 g_lowpower_log_tick[index] = now_tick;
                 printf("[LP] socket=%d power=%.2fW (skip AI)\r\n", index, g_strip.sockets[index].power);
             }
 
+            if (strcmp(g_strip.sockets[index].device_name, "LowPower") != 0)
+            {
+                request_status_upload();
+            }
             strncpy(g_strip.sockets[index].device_name, "LowPower", 15);
             AI_Reset(index);
             EventDetector_Init(&g_evt_det[index]);
@@ -282,6 +293,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
             {
                 strncpy(g_strip.sockets[index].device_name, "None", 15);
                 AI_Reset(index);
+                request_status_upload();
             }
         }
     }

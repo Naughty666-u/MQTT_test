@@ -54,7 +54,7 @@
 /*清除UART2数据缓冲区函数*/
 #define   Clear_Buff()   memset( At_Rx_Buff , 0 , sizeof(At_Rx_Buff) ); \
                          Uart2_Num = 0;
-void Send_Data_Raw( char * topics , char * data );
+bool Send_Data_Raw( char * topics , char * data );
 void  ESP8266_Hard_Reset(void);
 void ESP8266_MQTT_Test(void);
 void ESP8266_UART2_Init(void);

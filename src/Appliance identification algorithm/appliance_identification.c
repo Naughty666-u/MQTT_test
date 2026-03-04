@@ -37,6 +37,27 @@ static Socket_AI_Ctrl_t g_ai_ctrl[AI_SOCKET_NUM] = {0};
 static Socket_Pending_t g_pending[AI_SOCKET_NUM] = {0};
 static uint32_t g_pending_seed = 1;
 
+typedef enum {
+    REPLUG_IDLE = 0,
+    REPLUG_WAIT_OFF,
+    REPLUG_WAIT_ON_SETTLE,
+} Replug_State_t;
+
+typedef struct {
+    Replug_State_t state;
+    uint32_t deadline_tick;
+} Socket_Replug_Ctrl_t;
+
+static Socket_Replug_Ctrl_t g_replug[AI_SOCKET_NUM] = {0};
+
+typedef struct {
+    bool valid;
+    uint32_t pending_id;
+    char name[20];
+} Socket_Commit_Task_t;
+
+static Socket_Commit_Task_t g_commit_task[AI_SOCKET_NUM] = {0};
+
 extern PowerStrip_t g_strip;
 
 static bool is_unknown_name(const char *name)
@@ -98,6 +119,7 @@ static void clear_pending(uint8_t index)
 
     g_strip.sockets[index].pending_valid = false;
     g_strip.sockets[index].pending_id = 0;
+    g_commit_task[index].valid = false;
 }
 
 static void store_pending(uint8_t index, const Appliance_Data_t *feat)
@@ -167,6 +189,7 @@ void AI_Trigger_Sampling(uint8_t index)
 
         strncpy(g_strip.sockets[index].device_name, "Detecting...", sizeof(g_strip.sockets[index].device_name) - 1);
         g_strip.sockets[index].device_name[sizeof(g_strip.sockets[index].device_name) - 1] = '\0';
+        request_status_upload();
     }
 }
 
@@ -198,6 +221,8 @@ void Socket_Command_Handler(uint8_t index, bool target_on)
         g_strip.sockets[index].device_name[sizeof(g_strip.sockets[index].device_name) - 1] = '\0';
         AI_Reset(index);
         clear_pending(index);
+        g_replug[index].state = REPLUG_IDLE;
+        request_status_upload();
     }
     else
     {
@@ -211,6 +236,8 @@ void Socket_Command_Handler(uint8_t index, bool target_on)
         g_strip.sockets[index].device_name[sizeof(g_strip.sockets[index].device_name) - 1] = '\0';
         AI_Reset(index);
         clear_pending(index);
+        g_replug[index].state = REPLUG_IDLE;
+        request_status_upload();
     }
 }
 
@@ -224,6 +251,44 @@ uint32_t AI_Get_PendingId(uint8_t index)
 {
     if (index >= AI_SOCKET_NUM) return 0;
     return g_pending[index].valid ? g_pending[index].pending_id : 0;
+}
+
+bool AI_Request_Commit_Pending(uint8_t index, uint32_t pending_id, const char *name)
+{
+    if (index >= AI_SOCKET_NUM || name == NULL || name[0] == '\0') return false;
+    if (!g_pending[index].valid) return false;
+    if (g_pending[index].pending_id != pending_id) return false;
+    if (strlen(name) >= sizeof(g_pending[index].feat.name)) return false;
+
+    g_commit_task[index].valid = true;
+    g_commit_task[index].pending_id = pending_id;
+    strncpy(g_commit_task[index].name, name, sizeof(g_commit_task[index].name) - 1);
+    g_commit_task[index].name[sizeof(g_commit_task[index].name) - 1] = '\0';
+    return true;
+}
+
+void AI_Commit_Task(void)
+{
+    for (uint8_t i = 0; i < AI_SOCKET_NUM; i++)
+    {
+        if (!g_commit_task[i].valid) continue;
+
+        uint32_t t0 = HAL_GetTick();
+        FRESULT res = AI_Commit_Pending(i, g_commit_task[i].pending_id, g_commit_task[i].name);
+        uint32_t cost_ms = HAL_GetTick() - t0;
+        if (res != FR_OK)
+        {
+            printf("[PERF] learn commit socket=%u cost=%lu ms result=fail res=%d\r\n",
+                   i, (unsigned long)cost_ms, res);
+            request_status_upload();
+        }
+        else
+        {
+            printf("[PERF] learn commit socket=%u cost=%lu ms result=ok\r\n",
+                   i, (unsigned long)cost_ms);
+        }
+        g_commit_task[i].valid = false;
+    }
 }
 
 FRESULT AI_Commit_Pending(uint8_t index, uint32_t pending_id, const char *name)
@@ -270,6 +335,7 @@ FRESULT AI_Commit_Pending(uint8_t index, uint32_t pending_id, const char *name)
         strncpy(g_strip.sockets[index].device_name, name, sizeof(g_strip.sockets[index].device_name) - 1);
         g_strip.sockets[index].device_name[sizeof(g_strip.sockets[index].device_name) - 1] = '\0';
         clear_pending(index);
+        request_status_upload();
     }
 
     /* 上层依据返回值回 ACK（success/fail + reason）。 */
@@ -288,21 +354,51 @@ void AI_Request_Relearn_Replug(uint8_t index)
     clear_pending(index);
     AI_Reset(index);
 
-    if (g_strip.sockets[index].on)
-    {
-        Relay_Set_OFF(index);
-        R_BSP_SoftwareDelay(AI_REPLUG_OFF_MS, BSP_DELAY_UNITS_MILLISECONDS);
-        Relay_Set_ON(index);
-        R_BSP_SoftwareDelay(AI_REPLUG_ON_SETTLE_MS, BSP_DELAY_UNITS_MILLISECONDS);
-    }
-    else
-    {
-        Relay_Set_ON(index);
-        g_strip.sockets[index].on = true;
-        R_BSP_SoftwareDelay(AI_REPLUG_ON_SETTLE_MS, BSP_DELAY_UNITS_MILLISECONDS);
-    }
+    Relay_Set_OFF(index);
+    g_strip.sockets[index].on = false;
+    strncpy(g_strip.sockets[index].device_name, "Idle", sizeof(g_strip.sockets[index].device_name) - 1);
+    g_strip.sockets[index].device_name[sizeof(g_strip.sockets[index].device_name) - 1] = '\0';
 
-    AI_Trigger_Sampling(index);
+    g_replug[index].state = REPLUG_WAIT_OFF;
+    g_replug[index].deadline_tick = HAL_GetTick() + AI_REPLUG_OFF_MS;
+    request_status_upload();
+}
+
+void AI_Replug_Task(void)
+{
+    uint32_t now = HAL_GetTick();
+
+    for (uint8_t i = 0; i < AI_SOCKET_NUM; i++)
+    {
+        switch (g_replug[i].state)
+        {
+            case REPLUG_IDLE:
+                break;
+
+            case REPLUG_WAIT_OFF:
+                if ((int32_t)(now - g_replug[i].deadline_tick) >= 0)
+                {
+                    Relay_Set_ON(i);
+                    g_strip.sockets[i].on = true;
+                    g_replug[i].state = REPLUG_WAIT_ON_SETTLE;
+                    g_replug[i].deadline_tick = now + AI_REPLUG_ON_SETTLE_MS;
+                    request_status_upload();
+                }
+                break;
+
+            case REPLUG_WAIT_ON_SETTLE:
+                if ((int32_t)(now - g_replug[i].deadline_tick) >= 0)
+                {
+                    AI_Trigger_Sampling(i);
+                    g_replug[i].state = REPLUG_IDLE;
+                }
+                break;
+
+            default:
+                g_replug[i].state = REPLUG_IDLE;
+                break;
+        }
+    }
 }
 
 void AI_Learning_Engine(uint8_t index, float p_now, float v_now, float i_now, float pf_now)
@@ -340,9 +436,12 @@ void AI_Recognition_Engine(uint8_t index, float p_now, float v_now, float i_now,
 
             if (is_unknown_name(match_name)) {
                 store_pending(index, &feat); // 没搜到：进入影子学习流程
+                request_status_upload();
             } else {
                 clear_pending(index);        // 搜到了：直接更新显示
-                strncpy(g_strip.sockets[index].device_name, match_name, 31);
+                strncpy(g_strip.sockets[index].device_name, match_name, sizeof(g_strip.sockets[index].device_name) - 1);
+                g_strip.sockets[index].device_name[sizeof(g_strip.sockets[index].device_name) - 1] = '\0';
+                request_status_upload();
             }
             p_ai->state = AI_LOCKED; // 识别完成，锁定状态防止跳变
             break;

@@ -384,48 +384,80 @@ void Send_Data( char * topics , char * data )
        }
 }
 
-void Send_Data_Raw( char * topics , char * data )
+bool Send_Data_Raw( char * topics , char * data )
 {
     char cmd_buf[256];
-    uint16_t data_len = strlen(data);
 
-    // 1. 发送请求
+    if ((topics == NULL) || (data == NULL))
+    {
+        return false;
+    }
+
+    uint16_t data_len = (uint16_t)strlen(data);
+    if (data_len == 0U)
+    {
+        return false;
+    }
+
+    // 1) 发送发布命令并准备等待提示符
     sprintf(cmd_buf, "AT+MQTTPUBRAW=0,\"%s\",%d,1,0\r\n", topics, data_len);
-    // 不要直接全部清除，可以只清除特定的标志位或等待窗口
-    // Clear_Buff(); // 建议慎用，除非你确定缓冲区没别的东西
-    ESP8266_AT_Send(cmd_buf); 
+    Clear_Buff();
+    ESP8266_AT_Send(cmd_buf);
 
-    // 2. 等待 > (不需要再判 Uart2_Send_Flag，因为 AT_Send 发完就完了)
-    uint32_t timeout = 200; 
-    while (timeout--) {
-        if (strchr(At_Rx_Buff, '>')) break; // 只要看到 > 就跳出
+    // 2) 等待 ESP8266 返回 '>' 提示符
+    uint32_t timeout = 200;
+    while (timeout--)
+    {
+        if (strchr(At_Rx_Buff, '>')) break;
         R_BSP_SoftwareDelay(5, BSP_DELAY_UNITS_MILLISECONDS);
     }
-    if(timeout == 0) return; // 没等到 > 直接退出，不要强行发载荷
-    // 3. 直接发送数据载荷
-    // 这里不再使用 ESP8266_AT_Send，因为数据载荷不需要加 \r\n，且不需要等回应
-    Uart2_Send_Flag = false;
-    R_SCI_UART_Write(&g_uart2_esp8266_ctrl, (uint8_t *)data, data_len);
-    
-    // 等待这波数据物理发送完成，防止后面立即 Clear_Buff 导致数据没发完
-    uint32_t safety = 0xFFFF;
-    while(!Uart2_Send_Flag && safety--); 
+    if (timeout == 0)
+    {
+        printf("[TX] RAW prompt timeout topic=%s\r\n", topics);
+        Clear_Buff();
+        return false;
+    }
 
-    // 4. 最后等待一次 OK
+    // 3) 发送消息载荷
+    Uart2_Send_Flag = false;
+    fsp_err_t werr = R_SCI_UART_Write(&g_uart2_esp8266_ctrl, (uint8_t *)data, data_len);
+    if (werr != FSP_SUCCESS)
+    {
+        printf("[TX] RAW write fail err=%d topic=%s\r\n", (int)werr, topics);
+        Clear_Buff();
+        return false;
+    }
+
+    uint32_t safety = 0xFFFF;
+    while(!Uart2_Send_Flag && safety--);
+    if (safety == 0)
+    {
+        printf("[TX] RAW tx complete timeout topic=%s\r\n", topics);
+        Clear_Buff();
+        return false;
+    }
+
+    // 4) 等待最终 "OK" 回执
     timeout = 200;
-    while(timeout--) {
-        if (strstr(At_Rx_Buff, "OK")) {
+    bool ok = false;
+    while (timeout--)
+    {
+        if (strstr(At_Rx_Buff, "OK"))
+        {
             ESP8266_DEBUG_MSG("RAW发送成功\r\n");
+            ok = true;
             break;
         }
         R_BSP_SoftwareDelay(5, BSP_DELAY_UNITS_MILLISECONDS);
     }
-   // 关键添加：把刚刚发送产生的 OK、+MQTTPUB:OK 从环形缓冲区里“吃掉”
-   // 防止它们留给 handle_uart_json_stream
-   uint8_t dummy;
-   while (g_rx_buf.get(&g_rx_buf, &dummy) == 0); 
 
-   memset(At_Rx_Buff, 0, sizeof(At_Rx_Buff));
+    if (!ok)
+    {
+        printf("[TX] RAW publish timeout topic=%s\r\n", topics);
+    }
+
+    Clear_Buff();
+    return ok;
 }
 
 /*Wifi串口回调函数*/

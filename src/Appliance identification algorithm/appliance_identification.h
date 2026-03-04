@@ -43,7 +43,13 @@ bool AI_Is_Pending(uint8_t index);
 uint32_t AI_Get_PendingId(uint8_t index);
 /* 提交 Unknown 命名：校验 pendingId 后把样本写入 SD 设备库。 */
 FRESULT AI_Commit_Pending(uint8_t index, uint32_t pending_id, const char *name);
+/* 快速受理 LEARN_COMMIT：仅做轻量校验并排队，实际写 SD 在后台任务执行。 */
+bool AI_Request_Commit_Pending(uint8_t index, uint32_t pending_id, const char *name);
+/* 后台提交任务推进器：主循环高频调用。 */
+void AI_Commit_Task(void);
 /* 软件插拔重学习：OFF->ON 生成干净上电瞬态后再触发采样。 */
 void AI_Request_Relearn_Replug(uint8_t index);
+/* 非阻塞软件插拔任务推进器：主循环高频调用。 */
+void AI_Replug_Task(void);
 
 #endif
