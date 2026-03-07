@@ -11,6 +11,10 @@
     <generator id="Renesas RA Smart Configurator">
       <project_files>
         <file category="include" name="src/"/>
+        <file category="source" name="src/ai_validate.c"/>
+        <file category="header" name="src/ai_validate.h" path=""/>
+        <file category="source" name="src/Appliance identification algorithm/appliance_identification.c"/>
+        <file category="header" name="src/Appliance identification algorithm/appliance_identification.h" path=""/>
         <file category="source" name="src/bsp_esp8266/bsp_wifi_esp8266.c"/>
         <file category="header" name="src/bsp_esp8266/bsp_wifi_esp8266.h" path=""/>
         <file category="source" name="src/circle_buf/circle_buf.c"/>
@@ -21,6 +25,8 @@
         <file category="header" name="src/cJSON_handle/cJSON_handle.h" path=""/>
         <file category="source" name="src/debug_uart/bsp_debug_uart.c"/>
         <file category="header" name="src/debug_uart/bsp_debug_uart.h" path=""/>
+        <file category="source" name="src/event_detector/event_detector.c"/>
+        <file category="header" name="src/event_detector/event_detector.h" path=""/>
         <file category="other" name="src/FatFs/ff15/00history.txt"/>
         <file category="other" name="src/FatFs/ff15/00readme.txt"/>
         <file category="source" name="src/FatFs/ff15/diskio.c"/>
@@ -101,7 +107,6 @@
         <file category="header" name="ra/fsp/inc/api/bsp_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/fsp_common_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_elc_api.h" path=""/>
-        <file category="header" name="ra/fsp/inc/api/r_external_irq_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_ioport_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_sdmmc_api.h" path=""/>
         <file category="header" name="ra/fsp/inc/api/r_timer_api.h" path=""/>
@@ -112,7 +117,6 @@
         <file category="header" name="ra/fsp/inc/instances/r_dmac.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_elc.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_gpt.h" path=""/>
-        <file category="header" name="ra/fsp/inc/instances/r_icu.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_ioport.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_sci_uart.h" path=""/>
         <file category="header" name="ra/fsp/inc/instances/r_sdhi.h" path=""/>
@@ -162,7 +166,6 @@
         <file category="source" name="ra/fsp/src/r_dmac/r_dmac.c"/>
         <file category="source" name="ra/fsp/src/r_elc/r_elc.c"/>
         <file category="source" name="ra/fsp/src/r_gpt/r_gpt.c"/>
-        <file category="source" name="ra/fsp/src/r_icu/r_icu.c"/>
         <file category="source" name="ra/fsp/src/r_ioport/r_ioport.c"/>
         <file category="source" name="ra/fsp/src/r_sci_uart/r_sci_uart.c"/>
         <file category="source" name="ra/fsp/src/r_sdhi/r_sdhi.c"/>
@@ -183,7 +186,6 @@
         <file category="header" name="ra_cfg/fsp_cfg/r_dmac_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_elc_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_gpt_cfg.h" path=""/>
-        <file category="header" name="ra_cfg/fsp_cfg/r_icu_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_ioport_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_sci_uart_cfg.h" path=""/>
         <file category="header" name="ra_cfg/fsp_cfg/r_sdhi_cfg.h" path=""/>

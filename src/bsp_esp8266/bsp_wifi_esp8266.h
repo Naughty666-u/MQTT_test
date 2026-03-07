@@ -14,8 +14,8 @@
 #endif
 
 // WiFi 配置
-#define ID              "大宝贝儿"
-#define PASSWORD        "b37z198v4479"
+#define ID              "OPPO Reno12"
+#define PASSWORD        "88888888"
 
 // MQTT 服务器 (参照文档第5行)
 #define MQTT_IP         "175.27.162.174"  // [cite: 5]

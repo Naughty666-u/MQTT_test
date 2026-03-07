@@ -1,5 +1,5 @@
 ./objects/r_dmac.o: \
-  D:\RA6M5_project\SD\Appliance\ identification\ra\fsp\src\r_dmac\r_dmac.c \
+  D:\Embedded_systems_competition\Appliance\ identification\ra\fsp\src\r_dmac\r_dmac.c \
   ra\fsp\inc\instances\r_dmac.h ra\fsp\inc\api\bsp_api.h \
   ra\fsp\inc\api\fsp_common_api.h ra\fsp\inc\fsp_version.h \
   ra_cfg\fsp_cfg\bsp\bsp_cfg.h ra_gen\bsp_clock_cfg.h \

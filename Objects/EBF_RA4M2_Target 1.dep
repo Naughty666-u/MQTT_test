@@ -1,13 +1,13 @@
 Dependencies for Project 'EBF_RA4M2', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6220000::V6.22::ARMCLANG
-F (.\src\hal_entry.c)(0x69A7C6D0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/hal_entry.o -MMD)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+F (.\src\hal_entry.c)(0x69AAB78B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/hal_entry.o -MMD)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -16,7 +16,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -44,9 +44,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -54,6 +52,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -62,30 +62,28 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\debug_uart\bsp_debug_uart.h)(0x67EA54DA)
-I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69A7CD65)
+I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69ABD9E5)
 I (src\circle_buf\circle_buf.h)(0x699E8F8F)
 I (src\cJSON_handle\cJSON_handle.h)(0x69A7B9A9)
 I (src\Systick\Systick.h)(0x699C6D65)
-I (src\Key\Key.h)(0x699E8F8F)
+I (src\Key\Key.h)(0x69AA3CAD)
 I (src\Relay\Relay.h)(0x69A02B6D)
-I (src\uart_hlw\uart_hlw.h)(0x69A561CB)
+I (src\uart_hlw\uart_hlw.h)(0x69AAB715)
 I (src\sdcard_data_handle\sdcard_data_handle.h)(0x69A02B6D)
 I (src\FatFs\ff15\ff.h)(0x67EA54DA)
 I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
 I (src\Appliance identification algorithm\appliance_identification.h)(0x69A7C6B9)
 I (src\ai_validate.h)(0x69A4464B)
-F (.\src\bsp_esp8266\bsp_wifi_esp8266.c)(0x69A7D999)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_wifi_esp8266.o -MMD)
-I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69A7CD65)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+F (.\src\bsp_esp8266\bsp_wifi_esp8266.c)(0x69AAB600)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_wifi_esp8266.o -MMD)
+I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69ABD9E5)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -94,7 +92,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -122,9 +120,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -132,6 +128,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -140,20 +138,18 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\debug_uart\bsp_debug_uart.h)(0x67EA54DA)
 I (src\circle_buf\circle_buf.h)(0x699E8F8F)
-F (.\src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69A7CD65)()
+F (.\src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69ABD9E5)()
 F (.\src\debug_uart\bsp_debug_uart.c)(0x699AE517)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_debug_uart.o -MMD)
 I (src\debug_uart\bsp_debug_uart.h)(0x67EA54DA)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -162,7 +158,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -190,9 +186,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -200,6 +194,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -208,20 +204,18 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
-I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69A7CD65)
+I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69ABD9E5)
 I (src\circle_buf\circle_buf.h)(0x699E8F8F)
 F (.\src\debug_uart\bsp_debug_uart.h)(0x67EA54DA)()
 F (.\src\circle_buf\circle_buf.c)(0x69A3B9F9)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/circle_buf.o -MMD)
 I (src\circle_buf\circle_buf.h)(0x699E8F8F)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -230,7 +224,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -258,9 +252,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -268,6 +260,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -276,8 +270,6 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 F (.\src\circle_buf\circle_buf.h)(0x699E8F8F)()
 F (.\src\cJSON\cJSON.c)(0x699AB645)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/cjson.o -MMD)
 I (src\cJSON\cJSON.h)(0x699AB645)
@@ -285,13 +277,13 @@ F (.\src\cJSON\cJSON.h)(0x699AB645)()
 F (.\src\cJSON_handle\cJSON_handle.c)(0x69A7D4CA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/cjson_handle.o -MMD)
 I (src\cJSON\cJSON.h)(0x699AB645)
 I (src\circle_buf\circle_buf.h)(0x699E8F8F)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -300,7 +292,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -328,9 +320,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -338,6 +328,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -346,10 +338,8 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\cJSON_handle\cJSON_handle.h)(0x69A7B9A9)
-I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69A7CD65)
+I (src\bsp_esp8266\bsp_wifi_esp8266.h)(0x69ABD9E5)
 I (src\Systick\Systick.h)(0x699C6D65)
 I (src\Appliance identification algorithm\appliance_identification.h)(0x69A7C6B9)
 I (src\sdcard_data_handle\sdcard_data_handle.h)(0x69A02B6D)
@@ -358,13 +348,13 @@ I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
 F (.\src\cJSON_handle\cJSON_handle.h)(0x69A7B9A9)()
 F (.\src\Systick\Systick.c)(0x699C6D65)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/systick.o -MMD)
 I (src\Systick\Systick.h)(0x699C6D65)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -373,7 +363,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -401,9 +391,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -411,6 +399,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -419,18 +409,16 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 F (.\src\Systick\Systick.h)(0x699C6D65)()
 F (.\src\led\bsp_led.c)(0x67EA54DA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_led.o -MMD)
 I (src\led\bsp_led.h)(0x67EA54DA)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -439,7 +427,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -467,9 +455,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -477,6 +463,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -485,18 +473,16 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 F (.\src\led\bsp_led.h)(0x67EA54DA)()
-F (.\src\uart_hlw\uart_hlw.c)(0x69A7D3C4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/uart_hlw.o -MMD)
-I (src\uart_hlw\uart_hlw.h)(0x69A561CB)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+F (.\src\uart_hlw\uart_hlw.c)(0x69ABD358)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/uart_hlw.o -MMD)
+I (src\uart_hlw\uart_hlw.h)(0x69AAB715)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -505,7 +491,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -533,9 +519,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -543,6 +527,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -551,8 +537,6 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\debug_uart\bsp_debug_uart.h)(0x67EA54DA)
 I (src\circle_buf\circle_buf.h)(0x699E8F8F)
 I (src\cJSON_handle\cJSON_handle.h)(0x69A7B9A9)
@@ -562,16 +546,16 @@ I (src\FatFs\ff15\ff.h)(0x67EA54DA)
 I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
 I (src\event_detector\event_detector.h)(0x69A41D4B)
 I (src\Systick\Systick.h)(0x699C6D65)
-F (.\src\uart_hlw\uart_hlw.h)(0x69A561CB)()
-F (.\src\Key\Key.c)(0x69A14F69)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/key.o -MMD)
-I (src\Key\Key.h)(0x699E8F8F)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+F (.\src\uart_hlw\uart_hlw.h)(0x69AAB715)()
+F (.\src\Key\Key.c)(0x69AA3CEB)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/key.o -MMD)
+I (src\Key\Key.h)(0x69AA3CAD)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -580,7 +564,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -608,9 +592,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -618,6 +600,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -626,18 +610,16 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
-F (.\src\Key\Key.h)(0x699E8F8F)()
-F (.\src\Relay\Relay.c)(0x69A14F13)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/relay.o -MMD)
+F (.\src\Key\Key.h)(0x69AA3CAD)()
+F (.\src\Relay\Relay.c)(0x69AA46B6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/relay.o -MMD)
 I (src\Relay\Relay.h)(0x69A02B6D)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -646,7 +628,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -674,9 +656,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -684,6 +664,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -692,19 +674,17 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\cJSON_handle\cJSON_handle.h)(0x69A7B9A9)
 F (.\src\Relay\Relay.h)(0x69A02B6D)()
 F (.\src\sdhi_sdcard\bsp_sdhi_sdcard.c)(0x67EA54DA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_sdhi_sdcard.o -MMD)
 I (src\sdhi_sdcard\bsp_sdhi_sdcard.h)(0x69A14ED2)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -713,7 +693,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -741,9 +721,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -751,6 +729,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -759,18 +739,16 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 F (.\src\sdhi_sdcard\bsp_sdhi_sdcard.h)(0x69A14ED2)()
 F (.\src\sdcard_data_handle\sdcard_data_handle.c)(0x69A509C8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/sdcard_data_handle.o -MMD)
 I (src\sdcard_data_handle\sdcard_data_handle.h)(0x69A02B6D)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -779,7 +757,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -807,9 +785,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -817,6 +793,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -825,20 +803,18 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\FatFs\ff15\ff.h)(0x67EA54DA)
 I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
 F (.\src\sdcard_data_handle\sdcard_data_handle.h)(0x69A02B6D)()
 F (.\src\Appliance identification algorithm\appliance_identification.c)(0x69A7CA82)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/appliance_identification.o -MMD)
 I (src\Appliance identification algorithm\appliance_identification.h)(0x69A7C6B9)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -847,7 +823,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -875,9 +851,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -885,6 +859,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -893,8 +869,6 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (src\sdcard_data_handle\sdcard_data_handle.h)(0x69A02B6D)
 I (src\FatFs\ff15\ff.h)(0x67EA54DA)
 I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
@@ -910,13 +884,13 @@ I (src\FatFs\ff15\ff.h)(0x67EA54DA)
 I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
 I (src\FatFs\ff15\diskio.h)(0x67EA54DA)
 I (src\sdhi_sdcard\bsp_sdhi_sdcard.h)(0x69A14ED2)
-I (ra_gen\hal_data.h)(0x699FF1E2)
+I (ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -925,7 +899,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -953,9 +927,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -963,6 +935,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -971,8 +945,6 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 F (.\src\FatFs\ff15\diskio.h)(0x67EA54DA)()
 F (.\src\FatFs\ff15\ff.c)(0x67EA54DA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/ff.o -MMD)
 I (src\FatFs\ff15\ff.h)(0x67EA54DA)
@@ -983,13 +955,13 @@ F (.\src\FatFs\ff15\ffconf.h)(0x699FF3CF)()
 F (.\src\FatFs\ff15\ffunicode.c)(0x67EA54DA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/ffunicode.o -MMD)
 I (src\FatFs\ff15\ff.h)(0x67EA54DA)
 I (src\FatFs\ff15\ffconf.h)(0x699FF3CF)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/startup.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/startup.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/startup.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -998,7 +970,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1026,13 +998,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/system.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/cmsis/Device/RENESAS/Source/system.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/system.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1041,7 +1013,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1069,14 +1041,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_clocks.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_clocks.o -MMD)
-I (D:\RA6M5_project\SD\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_clocks.h)(0x693C4190)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_clocks.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_clocks.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_clocks.h)(0x693C4190)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1085,7 +1057,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1113,13 +1085,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_common.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_common.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_common.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_common.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1128,7 +1100,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1156,13 +1128,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_delay.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_delay.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_delay.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_delay.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1171,7 +1143,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1199,14 +1171,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (D:\RA6M5_project\SD\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_group_irq.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_group_irq.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_group_irq.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_group_irq.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1215,7 +1187,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1243,14 +1215,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_guard.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_guard.o -MMD)
-I (D:\RA6M5_project\SD\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_guard.h)(0x693C4190)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_guard.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_guard.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_guard.h)(0x693C4190)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1259,7 +1231,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1287,13 +1259,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_io.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_io.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_io.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_io.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1302,7 +1274,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1330,13 +1302,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_ipc.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_ipc.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_ipc.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_ipc.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1345,7 +1317,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1373,13 +1345,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_irq.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_irq.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_irq.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_irq.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1388,7 +1360,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1416,14 +1388,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_macl.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_macl.o -MMD)
-I (D:\RA6M5_project\SD\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_macl.h)(0x693C4190)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_macl.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_macl.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra\fsp\src\bsp\mcu\all\bsp_macl.h)(0x693C4190)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1432,7 +1404,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1460,13 +1432,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_ospi_b.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_ospi_b.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_ospi_b.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_ospi_b.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1475,7 +1447,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1503,13 +1475,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_register_protection.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_register_protection.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_register_protection.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_register_protection.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1518,7 +1490,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1546,14 +1518,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_sbrk.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_sbrk.o -MMD)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_sdram.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_sdram.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_sbrk.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_sbrk.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_sdram.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_sdram.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1562,7 +1534,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1590,13 +1562,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_security.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_security.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/all/bsp_security.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_security.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1605,7 +1577,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1633,13 +1605,13 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/bsp/mcu/ra4m2/bsp_linker.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_linker.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/bsp/mcu/ra4m2/bsp_linker.c)(0x693C4190)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/bsp_linker.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1648,7 +1620,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1676,14 +1648,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_dmac/r_dmac.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_dmac.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/r_dmac/r_dmac.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_dmac.o -MMD)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1692,7 +1664,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1722,14 +1694,14 @@ I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_dmac_cfg.h)(0x699FF1E2)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_elc/r_elc.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_elc.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/r_elc/r_elc.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_elc.o -MMD)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1738,7 +1710,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1768,14 +1740,14 @@ I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_gpt/r_gpt.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_gpt.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/r_gpt/r_gpt.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_gpt.o -MMD)
 I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1784,7 +1756,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1814,14 +1786,13 @@ I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
 I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_gpt_cfg.h)(0x699E751B)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_icu/r_icu.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_icu.o -MMD)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/r_ioport/r_ioport.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_ioport.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1830,52 +1801,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
-I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
-I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_armclang.h)(0x693C3FFA)
-I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\R7FA4M2AD.h)(0x693C4190)
-I (ra\arm\CMSIS_6\CMSIS\Core\Include\core_cm33.h)(0x693C3FFA)
-I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\system.h)(0x693C416A)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_common.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\inc\api\fsp_common_api.h)(0x693C416A)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_tfu.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_sdram.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mmf.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ipc.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_ospi_b.h)(0x693C4190)
-I (..\Appliance identification\bsp_linker_info.h)(0x69902E9A)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_register_protection.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_irq.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_io.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_group_irq.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_clocks.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_module_stop.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_security.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
-I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
-I (ra_cfg\fsp_cfg\r_icu_cfg.h)(0x699E751B)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_ioport/r_ioport.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_ioport.o -MMD)
-I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
-I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
-I (ra\fsp\inc\fsp_version.h)(0x693C416A)
-I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
-I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
-I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
-I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_elc.h)(0x693C4190)
-I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C4190)
-I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
-I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1906,13 +1832,13 @@ I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
 I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_sci_uart/r_sci_uart.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_sci_uart.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/r_sci_uart/r_sci_uart.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_sci_uart.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1921,7 +1847,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -1953,14 +1879,14 @@ I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-F (D:/RA6M5_project/SD/Appliance identification/ra/fsp/src/r_sdhi/r_sdhi.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_sdhi.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra/fsp/src/r_sdhi/r_sdhi.c)(0x693C416A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/r_sdhi.o -MMD)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -1969,7 +1895,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -2000,15 +1926,15 @@ I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\r_sdhi_cfg.h)(0x699FF1E2)
 I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
-I (D:\RA6M5_project\SD\Appliance identification\ra\fsp\src\r_sdhi\r_sdhi_private.h)(0x693C416A)
-F (D:/RA6M5_project/SD/Appliance identification/ra_gen/common_data.c)(0x699E751B)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/common_data.o -MMD)
-I (D:\RA6M5_project\SD\Appliance identification\ra_gen\common_data.h)(0x699E751B)
+I (D:\Embedded_systems_competition\Appliance identification\ra\fsp\src\r_sdhi\r_sdhi_private.h)(0x693C416A)
+F (D:/Embedded_systems_competition/Appliance identification/ra_gen/common_data.c)(0x69A95BD2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/common_data.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -2017,7 +1943,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -2045,8 +1971,6 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -2054,14 +1978,14 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
-F (D:/RA6M5_project/SD/Appliance identification/ra_gen/elc_data.c)(0x699E751C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/elc_data.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra_gen/elc_data.c)(0x699E751C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/elc_data.o -MMD)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -2070,7 +1994,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -2098,14 +2022,14 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-F (D:/RA6M5_project/SD/Appliance identification/ra_gen/hal_data.c)(0x699FF1E2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/hal_data.o -MMD)
-I (D:\RA6M5_project\SD\Appliance identification\ra_gen\hal_data.h)(0x699FF1E2)
+F (D:/Embedded_systems_competition/Appliance identification/ra_gen/hal_data.c)(0x69ABA868)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/hal_data.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -2114,7 +2038,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -2142,9 +2066,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (D:\RA6M5_project\SD\Appliance identification\ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (D:\Embedded_systems_competition\Appliance identification\ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -2152,6 +2074,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -2160,16 +2084,14 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
-F (D:/RA6M5_project/SD/Appliance identification/ra_gen/main.c)(0x69902E9A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/main.o -MMD)
-I (D:\RA6M5_project\SD\Appliance identification\ra_gen\hal_data.h)(0x699FF1E2)
+F (D:/Embedded_systems_competition/Appliance identification/ra_gen/main.c)(0x69902E9A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/main.o -MMD)
+I (D:\Embedded_systems_competition\Appliance identification\ra_gen\hal_data.h)(0x69A9552E)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -2178,7 +2100,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -2206,9 +2128,7 @@ I (ra\fsp\inc\api\..\..\inc\fsp_features.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\inc\..\..\fsp\src\bsp\mcu\all\bsp_compiler_support.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_delay.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
-I (D:\RA6M5_project\SD\Appliance identification\ra_gen\common_data.h)(0x699E751B)
-I (ra\fsp\inc\instances\r_icu.h)(0x693C416A)
-I (ra\fsp\inc\api\r_external_irq_api.h)(0x693C416C)
+I (D:\Embedded_systems_competition\Appliance identification\ra_gen\common_data.h)(0x69A95BD2)
 I (ra\fsp\inc\instances\r_elc.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_elc_cfg.h)(0x699E751B)
 I (ra\fsp\inc\api\r_elc_api.h)(0x693C416A)
@@ -2216,6 +2136,8 @@ I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_pin_cfg.h)(0x69902E9A)
+I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
+I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_dmac.h)(0x693C416A)
 I (ra\fsp\inc\api\r_transfer_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sdhi.h)(0x693C416A)
@@ -2224,15 +2146,13 @@ I (ra\fsp\inc\api\r_sdmmc_api.h)(0x693C416A)
 I (ra\fsp\inc\instances\r_sci_uart.h)(0x693C416A)
 I (ra\fsp\inc\api\r_uart_api.h)(0x693C416C)
 I (ra_cfg\fsp_cfg\r_sci_uart_cfg.h)(0x69902E9A)
-I (ra\fsp\inc\instances\r_gpt.h)(0x693C416A)
-I (ra\fsp\inc\api\r_timer_api.h)(0x693C416A)
-F (D:/RA6M5_project/SD/Appliance identification/ra_gen/pin_data.c)(0x699FF1E1)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/pin_data.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra_gen/pin_data.c)(0x69AA4F45)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/pin_data.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -2241,7 +2161,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)
@@ -2272,13 +2192,13 @@ I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_mcu_api.h)(0x693C4190)
 I (ra\fsp\inc\instances\r_ioport.h)(0x693C416A)
 I (ra\fsp\inc\api\r_ioport_api.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\r_ioport_cfg.h)(0x69902E9A)
-F (D:/RA6M5_project/SD/Appliance identification/ra_gen/vector_data.c)(0x699FF1E2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/vector_data.o -MMD)
+F (D:/Embedded_systems_competition/Appliance identification/ra_gen/vector_data.c)(0x69A95BD2)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m33 -mfpu=fpv5-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char-D__MICROLIB -gdwarf-4 -Os -ffunction-sections -I ./src/debug_uart -I ./src/bsp_esp8266 -I ./src/circle_buf -I ./ra_gen -I ./ra/fsp/src -I ./ra/fsp/inc/api -I ./ra/fsp/inc -I ./ra_cfg/fsp_cfg/bsp -I ./ra/arm/CMSIS_6/CMSIS/Core/Include -I ./ra/fsp/inc/instances -I ./ra_cfg/fsp_cfg -I ./src/cJSON -I ./src/cJSON_handle -I ./src/Systick -I ./src/led -I ./src/uart_hlw -I ./src/Key -I ./src/Relay -I ./src/sdhi_sdcard -I ./src/sdcard_data_handle -I ./src/sdhi_sdcard -I ./src/FatFs/ff15 -I "../Appliance identification" -I "./src/Appliance identification algorithm" -I ./src/event_detector -Wno-license-management -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wshadow -Waggregate-return -Wfloat-equal-I./RTE/_Target_1-I./ra/arm/CMSIS_6/CMSIS/Core/Include-I./ra/fsp/inc-I./ra/fsp/inc/api-I./ra/fsp/inc/instances-I./ra_cfg/fsp_cfg-I./ra_cfg/fsp_cfg/bsp-I./ra_gen-D__UVISION_VERSION="540" -D_RTE_-o ./objects/vector_data.o -MMD)
 I (ra\fsp\inc\api\bsp_api.h)(0x693C416A)
 I (ra\fsp\inc\api\fsp_common_api.h)(0x693C416A)
 I (ra\fsp\inc\fsp_version.h)(0x693C416A)
 I (ra_cfg\fsp_cfg\bsp\bsp_cfg.h)(0x699AF8BA)
 I (ra_gen\bsp_clock_cfg.h)(0x69902E99)
-I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x699FF1E2)
+I (ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h)(0x69A95BD2)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_pn_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_device_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_mcu_info.h)(0x693C4190)
@@ -2287,7 +2207,7 @@ I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_feature.h)(0x693C419
 I (ra_cfg\fsp_cfg\bsp\..\..\..\ra\fsp\src\bsp\mcu\ra4m2\bsp_peripheral.h)(0x693C4190)
 I (ra_cfg\fsp_cfg\bsp\bsp_mcu_ofs_cfg.h)(0x69902E9A)
 I (ra_cfg\fsp_cfg\bsp\board_cfg.h)(0x69902E9A)
-I (ra_gen\vector_data.h)(0x699FF1E2)
+I (ra_gen\vector_data.h)(0x69A95BD2)
 I (ra\fsp\inc\api\..\..\src\bsp\mcu\all\bsp_exceptions.h)(0x693C4190)
 I (ra\fsp\inc\api\..\..\src\bsp\cmsis\Device\RENESAS\Include\renesas.h)(0x693C416A)
 I (ra\arm\CMSIS_6\CMSIS\Core\Include\cmsis_compiler.h)(0x693C3FFA)

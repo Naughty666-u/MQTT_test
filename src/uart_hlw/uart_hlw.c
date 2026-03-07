@@ -35,10 +35,44 @@ extern circle_buf_t g_BL0942_rx_buf;
 /* BL0942 读取命令：0x58 0xAA */
 uint8_t com_data[2] = {0x58, 0xAA};
 
-/* UART3 一帧接收结束标志 */
-volatile bool g_uart3_rx_end = 0;
+/* CH444 选择脚：IN1=P603，IN0=P602 */
+#define CH444_IN1_PIN BSP_IO_PORT_06_PIN_03
+#define CH444_IN0_PIN BSP_IO_PORT_06_PIN_02
+
+#define BL0942_FRAME_LEN         23U
+#define BL0942_RX_TIMEOUT_MS     40U
+
+typedef enum
+{
+    BL_STATE_IDLE = 0,
+    BL_STATE_WAIT_FRAME,
+} bl_poll_state_t;
+
+static volatile uint8_t g_bl0942_rx_frame[BL0942_FRAME_LEN] = {0};
+static volatile uint8_t g_bl0942_rx_count = 0;
+static volatile bool g_bl0942_frame_ready = false;
+static volatile bl_poll_state_t g_bl_poll_state = BL_STATE_IDLE;
+static volatile uint8_t g_active_channel = 0;
+static volatile uint32_t g_bl_deadline_tick = 0;
 
 extern PowerStrip_t g_strip;
+
+static void CH444_Select_Channel(uint8_t channel)
+{
+    /* channel: 0..3 -> IN1/IN0: 00/01/10/11 */
+    bsp_io_level_t in0 = (channel & 0x01U) ? BSP_IO_LEVEL_HIGH : BSP_IO_LEVEL_LOW;
+    bsp_io_level_t in1 = (channel & 0x02U) ? BSP_IO_LEVEL_HIGH : BSP_IO_LEVEL_LOW;
+
+    g_ioport.p_api->pinWrite(g_ioport.p_ctrl, CH444_IN0_PIN, in0);
+    g_ioport.p_api->pinWrite(g_ioport.p_ctrl, CH444_IN1_PIN, in1);
+}
+
+static void BL0942_Rx_Reset(void)
+{
+    g_bl0942_rx_count = 0;
+    g_bl0942_frame_ready = false;
+    memset((void *)g_bl0942_rx_frame, 0, sizeof(g_bl0942_rx_frame));
+}
 
 void GPTDrvInit_elc(void)
 {
@@ -88,10 +122,7 @@ void BL0942_UART3_Init(void)
 
 void gpt_uart_callback(timer_callback_args_t *p_args)
 {
-    if (p_args->event == TIMER_EVENT_CYCLE_END)
-    {
-        g_uart3_rx_end = 1;
-    }
+    FSP_PARAMETER_NOT_USED(p_args);
 }
 
 void uart3_callback(uart_callback_args_t *p_args)
@@ -106,13 +137,19 @@ void uart3_callback(uart_callback_args_t *p_args)
 
         case UART_EVENT_RX_CHAR:
         {
-            if (g_uart3_rx_end)
+            if (g_bl_poll_state != BL_STATE_WAIT_FRAME)
             {
                 return;
             }
 
-            /* 接收字节写入 BL0942 专用环形缓冲区 */
-            g_BL0942_rx_buf.put(&g_BL0942_rx_buf, (uint8_t)p_args->data);
+            if (g_bl0942_rx_count < BL0942_FRAME_LEN)
+            {
+                g_bl0942_rx_frame[g_bl0942_rx_count++] = (uint8_t)p_args->data;
+                if (g_bl0942_rx_count >= BL0942_FRAME_LEN)
+                {
+                    g_bl0942_frame_ready = true;
+                }
+            }
             break;
         }
 
@@ -124,7 +161,55 @@ void uart3_callback(uart_callback_args_t *p_args)
 /* 主动向 BL0942 发起一次数据读取 */
 void Send_com(void)
 {
+    g_uart3_tx_complete = 0;
     g_uart3.p_api->write(g_uart3.p_ctrl, com_data, 2);
+}
+
+void BL0942_Poll_Task(void)
+{
+    uint32_t now = HAL_GetTick();
+
+    switch (g_bl_poll_state)
+    {
+        case BL_STATE_IDLE:
+        {
+            /* 切到当前通道并清理旧帧，防止串路污染 */
+            CH444_Select_Channel(g_active_channel);
+            BL0942_Rx_Reset();
+
+            Send_com();
+            g_bl_deadline_tick = now + BL0942_RX_TIMEOUT_MS;
+            g_bl_poll_state = BL_STATE_WAIT_FRAME;
+            break;
+        }
+
+        case BL_STATE_WAIT_FRAME:
+        {
+            if (g_bl0942_frame_ready)
+            {
+                uint8_t frame[BL0942_FRAME_LEN];
+                memcpy(frame, (const void *)g_bl0942_rx_frame, BL0942_FRAME_LEN);
+
+                Data_Processing(frame, g_active_channel);
+
+                g_active_channel = (uint8_t)((g_active_channel + 1U) & 0x03U);
+                g_bl_poll_state = BL_STATE_IDLE;
+            }
+            else if ((int32_t)(now - g_bl_deadline_tick) >= 0)
+            {
+                printf("[BL] timeout ch=%u rx=%u\r\n",
+                       (unsigned)(g_active_channel + 1U),
+                       (unsigned)g_bl0942_rx_count);
+                g_active_channel = (uint8_t)((g_active_channel + 1U) & 0x03U);
+                g_bl_poll_state = BL_STATE_IDLE;
+            }
+            break;
+        }
+
+        default:
+            g_bl_poll_state = BL_STATE_IDLE;
+            break;
+    }
 }
 
 /*
@@ -242,13 +327,21 @@ void Data_Processing(unsigned char *data, uint8_t index)
         /* 2) 更新全局电压 */
         g_strip.voltage = (float)V1;
 
-        /* 3) 重新计算总功率/总电流 */
+        /* 3) 重新计算总功率/总电流（仅统计 on=true 的插座，避免网页口径冲突） */
         float temp_p_sum = 0.0f;
         float temp_c_sum = 0.0f;
         for (int j = 0; j < 4; j++)
         {
+            if (!g_strip.sockets[j].on)
+            {
+                continue;
+            }
+
             temp_p_sum += g_strip.sockets[j].power;
-            temp_c_sum += (g_strip.sockets[j].power / g_strip.voltage);
+            if (g_strip.voltage > 1.0f)
+            {
+                temp_c_sum += (g_strip.sockets[j].power / g_strip.voltage);
+            }
         }
         g_strip.total_power = temp_p_sum;
         g_strip.total_current = temp_c_sum;
@@ -301,9 +394,15 @@ void Data_Processing(unsigned char *data, uint8_t index)
 
 void uart_hlw_init(void)
 {
+    
+
     ELCDrvInit();
     GPTDrvInit_elc();
     BL0942_UART3_Init();
+    CH444_Select_Channel(0);
+    BL0942_Rx_Reset();
+    g_bl_poll_state = BL_STATE_IDLE;
+    g_active_channel = 0;
 
     if (!g_evt_inited)
     {

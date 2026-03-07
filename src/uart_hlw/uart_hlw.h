@@ -5,5 +5,6 @@ void uart_hlw_init(void);
 void Data_Processing(unsigned char *data,uint8_t index);
 void BL0942_UART3_Init(void);
 void Send_com(void);
+void BL0942_Poll_Task(void);
 void Simulation_Random_Load_Test(void);
 #endif

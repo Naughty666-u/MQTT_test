@@ -105,13 +105,13 @@ void ESP8266_Hard_Reset(void)
     ESP8266_DEBUG_MSG("\r\n[HARDWARE] 执行 P111 硬件强制复位...\r\n");
 
     // 1. 先确保引脚输出低电平 (复位生效)
-    R_IOPORT_PinWrite(&g_ioport_ctrl, BSP_IO_PORT_01_PIN_11, BSP_IO_LEVEL_LOW);
+    R_IOPORT_PinWrite(&g_ioport_ctrl, BSP_IO_PORT_01_PIN_14, BSP_IO_LEVEL_LOW);
     
     // 2. 持续拉低 100ms (ESP8266 要求复位信号至少持续几百微秒，100ms 绰绰有余)
     R_BSP_SoftwareDelay(100, BSP_DELAY_UNITS_MILLISECONDS);
     
     // 3. 释放复位信号，拉高 (模块开始启动)
-    R_IOPORT_PinWrite(&g_ioport_ctrl, BSP_IO_PORT_01_PIN_11, BSP_IO_LEVEL_HIGH);
+    R_IOPORT_PinWrite(&g_ioport_ctrl, BSP_IO_PORT_01_PIN_14, BSP_IO_LEVEL_HIGH);
 
     // 4. 重要：等待模块内部初始化并输出 ready
     // 硬件复位后，模块至少需要 2-3 秒才能连上 WiFi 协议栈

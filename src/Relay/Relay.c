@@ -10,12 +10,12 @@ typedef struct {
     bsp_io_port_pin_t reset_pin; // 关闭脉冲引脚 (RESET)
 } Relay_Config_t;
 
-// 插座引脚映射表 (目前只有索引 0 有效，1-3 设为占位符)
+// 插座引脚映射表 
 const Relay_Config_t g_relays[4] = {
-    [0] = { .set_pin = BSP_IO_PORT_06_PIN_09, .reset_pin = BSP_IO_PORT_06_PIN_08 }, // 插座 1
-    [1] = { .set_pin = 0, .reset_pin = 0 }, // 待分配
-    [2] = { .set_pin = 0, .reset_pin = 0 }, // 待分配
-    [3] = { .set_pin = 0, .reset_pin = 0 }  // 待分配
+    [0] = { .set_pin = BSP_IO_PORT_01_PIN_02, .reset_pin = BSP_IO_PORT_01_PIN_03 }, // 插座 1
+    [1] = { .set_pin = BSP_IO_PORT_01_PIN_04, .reset_pin = BSP_IO_PORT_01_PIN_05 }, // 插座 2
+    [2] = { .set_pin = BSP_IO_PORT_01_PIN_06, .reset_pin = BSP_IO_PORT_01_PIN_07 }, // 插座 3
+    [3] = { .set_pin = BSP_IO_PORT_06_PIN_00, .reset_pin = BSP_IO_PORT_06_PIN_01 }  // 插座 4
 };
 
 

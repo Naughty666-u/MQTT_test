@@ -1,6 +1,6 @@
 ./objects/bsp_clocks.o: \
-  D:\RA6M5_project\SD\Appliance\ identification\ra\fsp\src\bsp\mcu\all\bsp_clocks.c \
-  D:\RA6M5_project\SD\Appliance\ identification\ra\fsp\src\bsp\mcu\all\bsp_clocks.h \
+  D:\Embedded_systems_competition\Appliance\ identification\ra\fsp\src\bsp\mcu\all\bsp_clocks.c \
+  D:\Embedded_systems_competition\Appliance\ identification\ra\fsp\src\bsp\mcu\all\bsp_clocks.h \
   ra_gen\bsp_clock_cfg.h ra\fsp\inc\api\bsp_api.h \
   ra\fsp\inc\api\fsp_common_api.h ra\fsp\inc\fsp_version.h \
   ra_cfg\fsp_cfg\bsp\bsp_cfg.h ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \

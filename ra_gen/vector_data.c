@@ -17,11 +17,10 @@
             [10] = sci_uart_txi_isr, /* SCI3 TXI (Transmit data empty) */
             [11] = sci_uart_tei_isr, /* SCI3 TEI (Transmit end) */
             [12] = sci_uart_eri_isr, /* SCI3 ERI (Receive error) */
-            [13] = r_icu_isr, /* ICU IRQ6 (External pin interrupt 6) */
-            [14] = r_icu_isr, /* ICU IRQ7 (External pin interrupt 7) */
-            [15] = sdhimmc_accs_isr, /* SDHIMMC0 ACCS (Card access) */
-            [16] = sdhimmc_card_isr, /* SDHIMMC0 CARD (Card detect) */
-            [17] = dmac_int_isr, /* DMAC0 INT (DMAC0 transfer end) */
+            [13] = sdhimmc_accs_isr, /* SDHIMMC0 ACCS (Card access) */
+            [14] = sdhimmc_card_isr, /* SDHIMMC0 CARD (Card detect) */
+            [15] = dmac_int_isr, /* DMAC0 INT (DMAC0 transfer end) */
+            [16] = gpt_counter_overflow_isr, /* GPT1 COUNTER OVERFLOW (Overflow) */
         };
         #if BSP_FEATURE_ICU_HAS_IELSR
         const bsp_interrupt_event_t g_interrupt_event_link_select[BSP_ICU_VECTOR_NUM_ENTRIES] =
@@ -39,11 +38,10 @@
             [10] = BSP_PRV_VECT_ENUM(EVENT_SCI3_TXI,GROUP2), /* SCI3 TXI (Transmit data empty) */
             [11] = BSP_PRV_VECT_ENUM(EVENT_SCI3_TEI,GROUP3), /* SCI3 TEI (Transmit end) */
             [12] = BSP_PRV_VECT_ENUM(EVENT_SCI3_ERI,GROUP4), /* SCI3 ERI (Receive error) */
-            [13] = BSP_PRV_VECT_ENUM(EVENT_ICU_IRQ6,GROUP5), /* ICU IRQ6 (External pin interrupt 6) */
-            [14] = BSP_PRV_VECT_ENUM(EVENT_ICU_IRQ7,GROUP6), /* ICU IRQ7 (External pin interrupt 7) */
-            [15] = BSP_PRV_VECT_ENUM(EVENT_SDHIMMC0_ACCS,GROUP7), /* SDHIMMC0 ACCS (Card access) */
-            [16] = BSP_PRV_VECT_ENUM(EVENT_SDHIMMC0_CARD,GROUP0), /* SDHIMMC0 CARD (Card detect) */
-            [17] = BSP_PRV_VECT_ENUM(EVENT_DMAC0_INT,GROUP1), /* DMAC0 INT (DMAC0 transfer end) */
+            [13] = BSP_PRV_VECT_ENUM(EVENT_SDHIMMC0_ACCS,GROUP5), /* SDHIMMC0 ACCS (Card access) */
+            [14] = BSP_PRV_VECT_ENUM(EVENT_SDHIMMC0_CARD,GROUP6), /* SDHIMMC0 CARD (Card detect) */
+            [15] = BSP_PRV_VECT_ENUM(EVENT_DMAC0_INT,GROUP7), /* DMAC0 INT (DMAC0 transfer end) */
+            [16] = BSP_PRV_VECT_ENUM(EVENT_GPT1_COUNTER_OVERFLOW,GROUP0), /* GPT1 COUNTER OVERFLOW (Overflow) */
         };
         #endif
         #endif

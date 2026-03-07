@@ -37,7 +37,6 @@
 ".\objects\r_dmac.o"
 ".\objects\r_elc.o"
 ".\objects\r_gpt.o"
-".\objects\r_icu.o"
 ".\objects\r_ioport.o"
 ".\objects\r_sci_uart.o"
 ".\objects\r_sdhi.o"
