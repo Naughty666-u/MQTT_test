@@ -5,10 +5,11 @@
 #include "cJSON_handle.h"
 #include "bsp_wifi_esp8266.h"
 #include "Systick.h"
+#include "log.h"
 #include "appliance_identification.h"
 
-/* ESP8266 UART 回调里会把接收到的数据写入这个环形缓冲区。 */
-extern circle_buf_t g_rx_buf;
+/* ESP8266 UART 回调里会把 +MQTTSUBRECV 命令行写入该环形缓冲区。 */
+extern circle_buf_t g_cmd_rx_buf;
 
 /* 单次 JSON 解析缓冲区大小。 */
 #define MAX_JSON_SIZE 512
@@ -113,7 +114,7 @@ void web_mqtt_test_fill_mock(void)
  * @param status  "success" / "failed"
  * @param reason  失败原因；成功可传 NULL
  * @param cost_ms 耗时统计（当前写固定值）
- * @return true 发送流程走通；false 参数不合法或构造失败
+ * @return true 入队成功；false 参数不合法或发送队列满
  */
 static bool send_ack(const char *cmd_id, const char *status, const char *reason, int cost_ms)
 {
@@ -144,27 +145,21 @@ static bool send_ack(const char *cmd_id, const char *status, const char *reason,
 
     /* 序列化并发布到 ACK 主题。 */
     char *ack_out = cJSON_PrintUnformatted(ack);
-    bool sent_ok = false;
+    bool queued_ok = false;
     if (ack_out)
     {
-        sent_ok = Send_Data_Raw(MQTT_PUB_ACK, ack_out);
-        if (!sent_ok)
-        {
-            /* ACK 丢失会导致前端卡住，失败时快速重试一次。 */
-            R_BSP_SoftwareDelay(20, BSP_DELAY_UNITS_MILLISECONDS);
-            sent_ok = Send_Data_Raw(MQTT_PUB_ACK, ack_out);
-        }
+        queued_ok = Send_Data_Raw(MQTT_PUB_ACK, ack_out);
         free(ack_out);
     }
 
     cJSON_Delete(ack);
-    if (!sent_ok)
+    if (!queued_ok)
     {
-        printf("[ACK] send failed cmdId=%s status=%s\r\n",
-               (cmd_id ? cmd_id : "null"),
-               (status ? status : "null"));
+        LOGW("[ACK] enqueue failed cmdId=%s status=%s\r\n",
+             (cmd_id ? cmd_id : "null"),
+             (status ? status : "null"));
     }
-    return sent_ok;
+    return queued_ok;
 }
 
 /**
@@ -217,15 +212,20 @@ void upload_strip_status(void)
     char *out = cJSON_PrintUnformatted(root);
     if (out)
     {
-        bool ok = Send_Data_Raw(MQTT_PUB_STATUS, out);
-        if (!ok)
+        bool queued_ok = Send_Data_Raw(MQTT_PUB_STATUS, out);
+        if (!queued_ok)
         {
-            printf("[TX] status publish failed\r\n");
+            LOGW("[TX] status enqueue failed\r\n");
         }
         free(out);
     }
 
-    printf("[PERF] status upload interval=%lu ms\r\n", (unsigned long)delta_ms);
+    {
+        static uint32_t s_status_perf_tick = 0;
+        LOG_THROTTLE_MS(s_status_perf_tick, 2000U,
+                        "[PERF] status upload interval=%lu ms\r\n",
+                        (unsigned long)delta_ms);
+    }
     cJSON_Delete(root);
 }
 
@@ -303,8 +303,8 @@ void process_cloud_cmd(const char *json_str)
         uint32_t ack_cost_total = HAL_GetTick() - cmd_start_tick;
         int ack_cost_ms = (ack_cost_total == 0U) ? 1 : (int)ack_cost_total;
         bool ack_ok = send_ack(cmd_id_str, "failed", "missing_type", ack_cost_ms);
-        printf("[PERF] cmd=<missing> ack=%lu ms result=failed sent=%d\r\n",
-               (unsigned long)ack_cost_total, ack_ok ? 1 : 0);
+        LOGI("[PERF] cmd=<missing> ack=%lu ms result=failed queued=%d\r\n",
+             (unsigned long)ack_cost_ms, ack_ok ? 1 : 0);
         cJSON_Delete(root);
         *(json_end + 1) = backup;
         return;
@@ -424,8 +424,8 @@ void process_cloud_cmd(const char *json_str)
         uint32_t ack_cost_total = HAL_GetTick() - cmd_start_tick;
         int ack_cost_ms = (ack_cost_total == 0U) ? 1 : (int)ack_cost_total;
         bool ack_ok = send_ack(cmd_id_str, "success", NULL, ack_cost_ms);
-        printf("[PERF] cmd=%s ack=%lu ms result=success sent=%d\r\n",
-               type_str, (unsigned long)ack_cost_total, ack_ok ? 1 : 0);
+        LOGI("[PERF] cmd=%s ack=%lu ms result=success queued=%d\r\n",
+             type_str, (unsigned long)ack_cost_ms, ack_ok ? 1 : 0);
         request_status_upload();
     }
     else
@@ -433,11 +433,11 @@ void process_cloud_cmd(const char *json_str)
         uint32_t ack_cost_total = HAL_GetTick() - cmd_start_tick;
         int ack_cost_ms = (ack_cost_total == 0U) ? 1 : (int)ack_cost_total;
         bool ack_ok = send_ack(cmd_id_str, "failed", fail_reason, ack_cost_ms);
-        printf("[PERF] cmd=%s ack=%lu ms result=failed reason=%s\r\n",
-               type_str, (unsigned long)ack_cost_total, fail_reason);
+        LOGI("[PERF] cmd=%s ack=%lu ms result=failed reason=%s\r\n",
+             type_str, (unsigned long)ack_cost_ms, fail_reason);
         if (!ack_ok)
         {
-            printf("[PERF] cmd=%s ack send failed\r\n", type_str);
+            LOGW("[PERF] cmd=%s ack enqueue failed\r\n", type_str);
         }
     }
 
@@ -458,9 +458,13 @@ void handle_uart_json_stream(void)
     static uint16_t pos = 0;
     static int brace_count = 0;
     static uint32_t last_byte_time = 0;
+    static bool drop_current_frame = false;
+    static uint32_t json_too_long_drop_cnt = 0;
+    static uint32_t json_too_long_last_print = 0;
+    static uint32_t json_too_long_last_tick = 0;
     uint8_t temp_byte;
 
-    while (g_rx_buf.get(&g_rx_buf, &temp_byte) == 0)
+    while (g_cmd_rx_buf.get(&g_cmd_rx_buf, &temp_byte) == 0)
     {
         uint32_t now = HAL_GetTick();
 
@@ -472,14 +476,51 @@ void handle_uart_json_stream(void)
         {
             pos = 0;
             brace_count = 0;
-            memset(json_process_buf, 0, MAX_JSON_SIZE);
+            json_process_buf[0] = '\0';
+            drop_current_frame = false;
+        }
+
+        /*
+         * 如果当前帧已被判定为“超长丢弃”，仅做括号计数直到本帧闭合，
+         * 闭合后再恢复正常解析，避免脏数据影响后续帧。
+         */
+        if (drop_current_frame)
+        {
+            if (temp_byte == '{')
+            {
+                brace_count++;
+            }
+            else if (temp_byte == '}')
+            {
+                if (brace_count > 0)
+                {
+                    brace_count--;
+                }
+                if (brace_count == 0)
+                {
+                    drop_current_frame = false;
+                    pos = 0;
+                    json_process_buf[0] = '\0';
+                }
+            }
+
+            last_byte_time = now;
+            continue;
         }
 
         /* 写入线性缓冲区。 */
-        if (pos < MAX_JSON_SIZE - 1)
+        if (pos < (MAX_JSON_SIZE - 1))
         {
             json_process_buf[pos++] = (char)temp_byte;
             json_process_buf[pos] = '\0';
+        }
+        else
+        {
+            /* 单帧超过解析上限：丢弃当前帧并等待括号重新闭合 */
+            json_too_long_drop_cnt++;
+            drop_current_frame = true;
+            pos = 0;
+            json_process_buf[0] = '\0';
         }
 
         /* 大括号计数，用于判断 JSON 是否闭合。 */
@@ -501,8 +542,21 @@ void handle_uart_json_stream(void)
 
                 /* 一帧处理完成，清空缓冲准备下一帧。 */
                 pos = 0;
-                memset(json_process_buf, 0, MAX_JSON_SIZE);
+                json_process_buf[0] = '\0';
             }
+        }
+
+        /* 每 1s 最多打印一次 JSON 超长丢弃统计，避免日志风暴 */
+        if ((uint32_t)(now - json_too_long_last_tick) >= 1000U)
+        {
+            if (json_too_long_drop_cnt != json_too_long_last_print)
+            {
+                LOGW("[CMD] json_drop reason=too_long count=%lu (+%lu)\r\n",
+                     (unsigned long)json_too_long_drop_cnt,
+                     (unsigned long)(json_too_long_drop_cnt - json_too_long_last_print));
+                json_too_long_last_print = json_too_long_drop_cnt;
+            }
+            json_too_long_last_tick = now;
         }
 
         last_byte_time = now;

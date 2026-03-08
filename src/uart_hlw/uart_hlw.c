@@ -11,6 +11,7 @@
 #include "appliance_identification.h"
 #include "event_detector.h"
 #include "Systick.h"
+#include "log.h"
 
 /* 每路插孔事件检测器 */
 static EventDetector_t g_evt_det[4];
@@ -79,13 +80,13 @@ void GPTDrvInit_elc(void)
     fsp_err_t err = g_timer0.p_api->open(g_timer0.p_ctrl, g_timer0.p_cfg);
     if (FSP_SUCCESS != err)
     {
-        printf("timer0 open failed\r\n");
+        LOGE("timer0 open failed\r\n");
     }
 
     err = g_timer0.p_api->enable(g_timer0.p_ctrl);
     if (FSP_SUCCESS != err)
     {
-        printf("timer0 enable failed\r\n");
+        LOGE("timer0 enable failed\r\n");
     }
 }
 
@@ -94,14 +95,14 @@ void ELCDrvInit(void)
     fsp_err_t err = g_elc.p_api->open(g_elc.p_ctrl, g_elc.p_cfg);
     if (FSP_SUCCESS != err)
     {
-        printf("Elc open failed\r\n");
+        LOGE("Elc open failed\r\n");
         return;
     }
 
     err = g_elc.p_api->enable(g_elc.p_ctrl);
     if (FSP_SUCCESS != err)
     {
-        printf("Elc enable failed\r\n");
+        LOGE("Elc enable failed\r\n");
         return;
     }
 }
@@ -112,11 +113,11 @@ void BL0942_UART3_Init(void)
     fsp_err_t err = g_uart3.p_api->open(g_uart3.p_ctrl, g_uart3.p_cfg);
     if (FSP_SUCCESS != err)
     {
-        printf("uart_hlw open failed\r\n");
+        LOGE("uart_hlw open failed\r\n");
     }
     else
     {
-        printf("uart_hlw open success\r\n");
+        LOGI("uart_hlw open success\r\n");
     }
 }
 
@@ -197,9 +198,9 @@ void BL0942_Poll_Task(void)
             }
             else if ((int32_t)(now - g_bl_deadline_tick) >= 0)
             {
-                printf("[BL] timeout ch=%u rx=%u\r\n",
-                       (unsigned)(g_active_channel + 1U),
-                       (unsigned)g_bl0942_rx_count);
+                LOGW("[BL] timeout ch=%u rx=%u\r\n",
+                     (unsigned)(g_active_channel + 1U),
+                     (unsigned)g_bl0942_rx_count);
                 g_active_channel = (uint8_t)((g_active_channel + 1U) & 0x03U);
                 g_bl_poll_state = BL_STATE_IDLE;
             }
@@ -300,7 +301,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
     }
     else
     {
-        printf("Check Error\r\n");
+        LOGW("Check Error\r\n");
     }
 
     if (check_num == data[22])
@@ -311,7 +312,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
         /* 异常功率过滤，避免污染识别状态 */
         if (p_used > MAX_VALID_POWER_W)
         {
-            printf("[PWR] drop abnormal power: %.2fW\r\n", p_used);
+            LOGW("[PWR] drop abnormal power: %.2fW\r\n", p_used);
             AI_Reset(index);
             EventDetector_Init(&g_evt_det[index]);
             return;
@@ -353,7 +354,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
             if (now_tick - g_lowpower_log_tick[index] >= 3000U)
             {
                 g_lowpower_log_tick[index] = now_tick;
-                printf("[LP] socket=%d power=%.2fW (skip AI)\r\n", index, g_strip.sockets[index].power);
+                LOGI("[LP] socket=%d power=%.2fW (skip AI)\r\n", index, g_strip.sockets[index].power);
             }
 
             if (strcmp(g_strip.sockets[index].device_name, "LowPower") != 0)

@@ -52,4 +52,4 @@
   src\uart_hlw\uart_hlw.h src\sdcard_data_handle\sdcard_data_handle.h \
   src\FatFs\ff15\ff.h src\FatFs\ff15\ffconf.h \
   src\Appliance\ identification\ algorithm\appliance_identification.h \
-  src\ai_validate.h
+  src\ai_validate.h src\log.h

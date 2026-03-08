@@ -52,4 +52,4 @@
   src\Appliance\ identification\ algorithm\appliance_identification.h \
   src\sdcard_data_handle\sdcard_data_handle.h src\FatFs\ff15\ff.h \
   src\FatFs\ff15\ffconf.h src\event_detector\event_detector.h \
-  src\Systick\Systick.h
+  src\Systick\Systick.h src\log.h

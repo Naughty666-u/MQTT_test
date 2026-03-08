@@ -1,4 +1,4 @@
-#include "appliance_identification.h"
+﻿#include "appliance_identification.h"
 #include "Systick.h"
 #include "stdio.h"
 #include "cJSON_handle.h"
@@ -7,6 +7,7 @@
 #include "ff.h"
 #include "sdcard_data_handle.h"
 #include "Relay.h"
+#include "log.h"
 
 /* 系统支持的插孔路数。 */
 #define AI_SOCKET_NUM 4
@@ -37,26 +38,70 @@ static Socket_AI_Ctrl_t g_ai_ctrl[AI_SOCKET_NUM] = {0};
 static Socket_Pending_t g_pending[AI_SOCKET_NUM] = {0};
 static uint32_t g_pending_seed = 1;
 
+/* 软插拔重学习状态机：
+ * - REPLUG_IDLE：空闲
+ * - REPLUG_WAIT_OFF：已执行断电，等待 OFF 保持时间
+ * - REPLUG_WAIT_ON_SETTLE：已重新上电，等待电参稳定后触发采样
+ */
 typedef enum {
     REPLUG_IDLE = 0,
     REPLUG_WAIT_OFF,
     REPLUG_WAIT_ON_SETTLE,
 } Replug_State_t;
 
+/* 每路插座的软插拔控制上下文 */
 typedef struct {
-    Replug_State_t state;
-    uint32_t deadline_tick;
+    Replug_State_t state;   /* 当前软插拔阶段 */
+    uint32_t deadline_tick; /* 当前阶段截止时刻（毫秒 tick） */
 } Socket_Replug_Ctrl_t;
 
 static Socket_Replug_Ctrl_t g_replug[AI_SOCKET_NUM] = {0};
 
+/* LEARN_COMMIT 请求的轻量任务描述：
+ * 只在这里缓存“要提交什么”，具体 SD 写入由后台状态机执行。
+ */
 typedef struct {
-    bool valid;
-    uint32_t pending_id;
-    char name[20];
+    bool valid;         /* 该槽位是否有待处理任务 */
+    uint32_t pending_id;/* 需要提交的 pending 样本 ID */
+    char name[20];      /* 用户命名 */
 } Socket_Commit_Task_t;
 
 static Socket_Commit_Task_t g_commit_task[AI_SOCKET_NUM] = {0};
+
+/* SD 提交状态机：
+ * 目标是把原先一次性阻塞的 f_open/f_write/f_close 拆到多轮主循环里推进。
+ */
+typedef enum {
+    COMMIT_SM_IDLE = 0,   /* 空闲态 */
+    COMMIT_SM_OPEN,       /* 打开/创建 Device.csv */
+    COMMIT_SM_SCAN_PREPARE,/* 扫描前准备（定位到文件头） */
+    COMMIT_SM_SCAN_STEP,  /* 每次扫描一行，检查是否重名 */
+    COMMIT_SM_WRITE_HEADER,/* 文件为空时写入表头 */
+    COMMIT_SM_SEEK_END,   /* 定位到文件末尾准备追加 */
+    COMMIT_SM_WRITE_ROW,  /* 追加一行设备数据 */
+    COMMIT_SM_CLOSE,      /* 关闭文件 */
+    COMMIT_SM_DONE        /* 收尾：更新状态、打日志、释放上下文 */
+} Commit_Sm_State_t;
+
+/* SD 提交状态机运行时上下文（全局单实例） */
+typedef struct {
+    bool active;            /* 状态机是否在运行 */
+    bool file_opened;       /* 文件是否已打开，决定是否需要 close */
+    bool need_write_header; /* 目标文件是否为空，是否要写表头 */
+    bool duplicate_found;   /* 扫描到同名记录时置位（跳过追加） */
+    uint8_t index;          /* 当前处理的插座索引 */
+    uint32_t pending_id;    /* 提交事务对应的 pending ID */
+    uint32_t start_tick;    /* 事务开始时间，用于耗时统计 */
+    Appliance_Data_t feat;  /* 待写入（或比对）的特征快照 */
+    Commit_Sm_State_t state;/* 当前状态机阶段 */
+    FRESULT res;            /* 当前/最终 FatFs 结果码 */
+    FIL fil;                /* FatFs 文件句柄 */
+    char line[160];         /* 扫描 CSV 用的行缓冲 */
+    char out[160];          /* 追加写入用的输出缓冲 */
+    UINT bw;                /* 本次写入字节数 */
+} Commit_Sm_Ctx_t;
+
+static Commit_Sm_Ctx_t g_commit_sm = {0};
 
 extern PowerStrip_t g_strip;
 
@@ -267,28 +312,228 @@ bool AI_Request_Commit_Pending(uint8_t index, uint32_t pending_id, const char *n
     return true;
 }
 
+static bool commit_sm_start(uint8_t index, uint32_t pending_id, const char *name)
+{
+    if (index >= AI_SOCKET_NUM || name == NULL || name[0] == '\0') return false;
+    if (!g_pending[index].valid) return false;
+    if (g_pending[index].pending_id != pending_id) return false;
+    if (strlen(name) >= sizeof(g_pending[index].feat.name)) return false;
+
+    memset(&g_commit_sm, 0, sizeof(g_commit_sm));
+    g_commit_sm.active = true;
+    g_commit_sm.index = index;
+    g_commit_sm.pending_id = pending_id;
+    g_commit_sm.start_tick = HAL_GetTick();
+    g_commit_sm.feat = g_pending[index].feat;
+    strncpy(g_commit_sm.feat.name, name, sizeof(g_commit_sm.feat.name) - 1);
+    g_commit_sm.feat.name[sizeof(g_commit_sm.feat.name) - 1] = '\0';
+    g_commit_sm.state = COMMIT_SM_OPEN;
+    g_commit_sm.res = FR_OK;
+    return true;
+}
+
+static void commit_sm_finalize(void)
+{
+    uint32_t cost_ms = HAL_GetTick() - g_commit_sm.start_tick;
+
+    if (g_commit_sm.res == FR_OK)
+    {
+        if (g_commit_sm.duplicate_found)
+        {
+            LOGI("[SD] duplicate name='%s', skip append\r\n", g_commit_sm.feat.name);
+        }
+
+        strncpy(g_strip.sockets[g_commit_sm.index].device_name,
+                g_commit_sm.feat.name,
+                sizeof(g_strip.sockets[g_commit_sm.index].device_name) - 1);
+        g_strip.sockets[g_commit_sm.index].device_name[sizeof(g_strip.sockets[g_commit_sm.index].device_name) - 1] = '\0';
+        clear_pending(g_commit_sm.index);
+        request_status_upload();
+
+        LOGI("[PERF] learn commit socket=%u cost=%lu ms result=ok\r\n",
+             g_commit_sm.index, (unsigned long)cost_ms);
+    }
+    else
+    {
+        LOGW("[PERF] learn commit socket=%u cost=%lu ms result=fail res=%d\r\n",
+             g_commit_sm.index, (unsigned long)cost_ms, g_commit_sm.res);
+        request_status_upload();
+    }
+
+    memset(&g_commit_sm, 0, sizeof(g_commit_sm));
+}
+
+static void commit_sm_step(void)
+{
+    if (!g_commit_sm.active) return;
+
+    /* 事务一致性保护：pending 上下文失效时立即中止 */
+    if ((g_commit_sm.state != COMMIT_SM_DONE) &&
+        (g_commit_sm.state != COMMIT_SM_CLOSE) &&
+        ((g_commit_sm.index >= AI_SOCKET_NUM) ||
+         (!g_pending[g_commit_sm.index].valid) ||
+         (g_pending[g_commit_sm.index].pending_id != g_commit_sm.pending_id)))
+    {
+        g_commit_sm.res = FR_INVALID_OBJECT;
+        g_commit_sm.state = g_commit_sm.file_opened ? COMMIT_SM_CLOSE : COMMIT_SM_DONE;
+    }
+
+    switch (g_commit_sm.state)
+    {
+        case COMMIT_SM_OPEN:
+            g_commit_sm.res = f_open(&g_commit_sm.fil, DEVICE_DB_PATH, FA_OPEN_ALWAYS | FA_WRITE | FA_READ);
+            if (g_commit_sm.res != FR_OK)
+            {
+                g_commit_sm.state = COMMIT_SM_DONE;
+                break;
+            }
+            g_commit_sm.file_opened = true;
+            g_commit_sm.need_write_header = (f_size(&g_commit_sm.fil) == 0U);
+            g_commit_sm.state = COMMIT_SM_SCAN_PREPARE;
+            break;
+
+        case COMMIT_SM_SCAN_PREPARE:
+            if (g_commit_sm.need_write_header)
+            {
+                g_commit_sm.state = COMMIT_SM_WRITE_HEADER;
+                break;
+            }
+            g_commit_sm.res = f_lseek(&g_commit_sm.fil, 0U);
+            if (g_commit_sm.res != FR_OK)
+            {
+                g_commit_sm.state = COMMIT_SM_CLOSE;
+                break;
+            }
+            (void)f_gets(g_commit_sm.line, sizeof(g_commit_sm.line), &g_commit_sm.fil); /* skip header line */
+            g_commit_sm.state = COMMIT_SM_SCAN_STEP;
+            break;
+
+        case COMMIT_SM_SCAN_STEP:
+        {
+            char *line = f_gets(g_commit_sm.line, sizeof(g_commit_sm.line), &g_commit_sm.fil);
+            if (line == NULL)
+            {
+                g_commit_sm.state = COMMIT_SM_SEEK_END;
+                break;
+            }
+
+            if (line[0] == '\0' || line[0] == '\r' || line[0] == '\n')
+            {
+                break;
+            }
+            if (strstr(line, "ID,Name,Power") != NULL)
+            {
+                break;
+            }
+
+            unsigned long id_dummy;
+            char lib_name[20] = {0};
+            float p, pf, sr, q;
+            int cnt = sscanf(line, "%lu,%19[^,],%f,%f,%f,%f", &id_dummy, lib_name, &p, &pf, &sr, &q);
+            if (cnt == 6)
+            {
+                size_t len = strlen(lib_name);
+                if (len && lib_name[len - 1] == '\r') lib_name[len - 1] = '\0';
+                if (strcmp(lib_name, g_commit_sm.feat.name) == 0)
+                {
+                    g_commit_sm.duplicate_found = true;
+                    g_commit_sm.res = FR_OK;
+                    g_commit_sm.state = COMMIT_SM_CLOSE;
+                }
+            }
+            break;
+        }
+
+        case COMMIT_SM_WRITE_HEADER:
+        {
+            const char *header = "ID,Name,Power,PF,SurgeRatio,Q_Reactive\r\n";
+            g_commit_sm.res = f_write(&g_commit_sm.fil, header, (UINT)strlen(header), &g_commit_sm.bw);
+            if (g_commit_sm.res != FR_OK)
+            {
+                g_commit_sm.state = COMMIT_SM_CLOSE;
+                break;
+            }
+            g_commit_sm.state = COMMIT_SM_SEEK_END;
+            break;
+        }
+
+        case COMMIT_SM_SEEK_END:
+            if (g_commit_sm.duplicate_found)
+            {
+                g_commit_sm.state = COMMIT_SM_CLOSE;
+                break;
+            }
+            g_commit_sm.res = f_lseek(&g_commit_sm.fil, f_size(&g_commit_sm.fil));
+            if (g_commit_sm.res != FR_OK)
+            {
+                g_commit_sm.state = COMMIT_SM_CLOSE;
+                break;
+            }
+            snprintf(g_commit_sm.out, sizeof(g_commit_sm.out), "%lu,%s,%.2f,%.2f,%.2f,%.2f\r\n",
+                     (unsigned long)g_commit_sm.feat.id,
+                     g_commit_sm.feat.name,
+                     g_commit_sm.feat.power,
+                     g_commit_sm.feat.pf,
+                     g_commit_sm.feat.i_surge_ratio,
+                     g_commit_sm.feat.q_reactive);
+            g_commit_sm.state = COMMIT_SM_WRITE_ROW;
+            break;
+
+        case COMMIT_SM_WRITE_ROW:
+            g_commit_sm.res = f_write(&g_commit_sm.fil,
+                                      g_commit_sm.out,
+                                      (UINT)strlen(g_commit_sm.out),
+                                      &g_commit_sm.bw);
+            g_commit_sm.state = COMMIT_SM_CLOSE;
+            break;
+
+        case COMMIT_SM_CLOSE:
+            if (g_commit_sm.file_opened)
+            {
+                FRESULT close_res = f_close(&g_commit_sm.fil);
+                if ((g_commit_sm.res == FR_OK) && (close_res != FR_OK))
+                {
+                    g_commit_sm.res = close_res;
+                }
+                g_commit_sm.file_opened = false;
+            }
+            g_commit_sm.state = COMMIT_SM_DONE;
+            break;
+
+        case COMMIT_SM_DONE:
+            commit_sm_finalize();
+            break;
+
+        case COMMIT_SM_IDLE:
+        default:
+            break;
+    }
+}
+
 void AI_Commit_Task(void)
 {
-    for (uint8_t i = 0; i < AI_SOCKET_NUM; i++)
+    if (!g_commit_sm.active)
     {
-        if (!g_commit_task[i].valid) continue;
-
-        uint32_t t0 = HAL_GetTick();
-        FRESULT res = AI_Commit_Pending(i, g_commit_task[i].pending_id, g_commit_task[i].name);
-        uint32_t cost_ms = HAL_GetTick() - t0;
-        if (res != FR_OK)
+        for (uint8_t i = 0; i < AI_SOCKET_NUM; i++)
         {
-            printf("[PERF] learn commit socket=%u cost=%lu ms result=fail res=%d\r\n",
-                   i, (unsigned long)cost_ms, res);
-            request_status_upload();
+            if (!g_commit_task[i].valid) continue;
+            if (commit_sm_start(i, g_commit_task[i].pending_id, g_commit_task[i].name))
+            {
+                g_commit_task[i].valid = false;
+                break;
+            }
+            else
+            {
+                g_commit_task[i].valid = false;
+                LOGW("[PERF] learn commit socket=%u cost=0 ms result=fail res=%d\r\n",
+                     i, FR_INVALID_OBJECT);
+                request_status_upload();
+            }
         }
-        else
-        {
-            printf("[PERF] learn commit socket=%u cost=%lu ms result=ok\r\n",
-                   i, (unsigned long)cost_ms);
-        }
-        g_commit_task[i].valid = false;
     }
+
+    /* 每轮只推进一步，避免 SD 操作长时间独占主循环。 */
+    commit_sm_step();
 }
 
 FRESULT AI_Commit_Pending(uint8_t index, uint32_t pending_id, const char *name)
@@ -476,7 +721,7 @@ char * Identify_Appliance_In_SD(float p_now, float pf_now, float i_max, float v_
     FRESULT res = f_open(&fil, DEVICE_DB_PATH, FA_READ | FA_OPEN_EXISTING);
     if (res != FR_OK)
     {
-        printf("[REC] open failed path=%s res=%d\r\n", DEVICE_DB_PATH, res);
+        LOGW("[REC] open failed path=%s res=%d\r\n", DEVICE_DB_PATH, res);
         return "SD Error";
     }
 
@@ -484,7 +729,7 @@ char * Identify_Appliance_In_SD(float p_now, float pf_now, float i_max, float v_
     if (!f_gets(line, sizeof(line), &fil))
     {
         f_close(&fil);
-        printf("[REC] empty file\r\n");
+        LOGI("[REC] empty file\r\n");
         return UNKNOWN_NAME;
     }
 
@@ -508,7 +753,7 @@ char * Identify_Appliance_In_SD(float p_now, float pf_now, float i_max, float v_
             parsed_bad++;
             if (parsed_bad <= 3)
             {
-                printf("[REC] parse fail line: %s\r\n", line);
+                LOGW("[REC] parse fail line: %s\r\n", line);
             }
             continue;
         }
@@ -544,8 +789,8 @@ char * Identify_Appliance_In_SD(float p_now, float pf_now, float i_max, float v_
 
     float margin = second - best;
 
-    printf("[REC] p=%.2f pf=%.2f parsed_ok=%d bad=%d d1=%.3f d2=%.3f margin=%.3f best=%s\r\n",
-           p_now, pf_now, parsed_ok, parsed_bad, best, second, margin, best_name);
+    LOGI("[REC] p=%.2f pf=%.2f parsed_ok=%d bad=%d d1=%.3f d2=%.3f margin=%.3f best=%s\r\n",
+         p_now, pf_now, parsed_ok, parsed_bad, best, second, margin, best_name);
 
     if (parsed_ok == 0)
     {

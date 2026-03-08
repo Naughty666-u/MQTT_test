@@ -17,6 +17,7 @@ FSP_CPP_FOOTER
 #include "sdcard_data_handle.h"
 #include "appliance_identification.h"
 #include "ai_validate.h"
+#include "log.h"
 #include <stdio.h>
 
 /* 1=开启网页联调模拟数据；0=关闭（使用真实采样数据） */
@@ -41,6 +42,45 @@ uint32_t last_report = 0;
 static uint32_t last_upload_tick = 0;
 extern PowerStrip_t g_strip;
 uint8_t g_force_upload_flag = 0;
+static bool g_net_ready = false;
+static uint8_t g_net_retry_idx = 0;
+static uint32_t g_net_next_retry_tick = 0;
+
+static void Net_Task(void)
+{
+    static const uint32_t k_retry_backoff_ms[] = {1000U, 2000U, 5000U, 10000U, 30000U};
+    uint32_t now = HAL_GetTick();
+
+    if (g_net_ready)
+    {
+        return;
+    }
+
+    if ((int32_t)(now - g_net_next_retry_tick) < 0)
+    {
+        return;
+    }
+
+    LOGI("[NET] reconnect attempt idx=%u\r\n", (unsigned)g_net_retry_idx);
+    g_net_ready = ESP8266_MQTT_Test();
+    if (g_net_ready)
+    {
+        LOGI("[NET] reconnect success\r\n");
+        g_net_retry_idx = 0;
+        g_net_next_retry_tick = now;
+        return;
+    }
+
+    uint8_t max_idx = (uint8_t)(sizeof(k_retry_backoff_ms) / sizeof(k_retry_backoff_ms[0]) - 1U);
+    uint8_t use_idx = (g_net_retry_idx <= max_idx) ? g_net_retry_idx : max_idx;
+    uint32_t delay_ms = k_retry_backoff_ms[use_idx];
+    if (g_net_retry_idx < max_idx)
+    {
+        g_net_retry_idx++;
+    }
+    g_net_next_retry_tick = now + delay_ms;
+    LOGW("[NET] reconnect failed, next in %lu ms\r\n", (unsigned long)delay_ms);
+}
 
 void hal_entry(void)
 {
@@ -56,10 +96,19 @@ void hal_entry(void)
 
     res_sd = f_mount(&fs, "1:", 1);
 
-    ESP8266_MQTT_Test();
+    g_net_ready = ESP8266_MQTT_Test();
+    if (!g_net_ready)
+    {
+        g_net_retry_idx = 0;
+        g_net_next_retry_tick = HAL_GetTick() + 1000U;
+        LOGW("[NET] init failed, enter degraded mode\r\n");
+    }
 
     while (1)
     {
+        Net_Task();
+        Relay_Task();
+        ESP8266_TxTask();
         handle_uart_json_stream();
         AI_Replug_Task();
         AI_Commit_Task();
@@ -71,17 +120,17 @@ void hal_entry(void)
             {
                 bool target_on = !g_strip.sockets[i].on;
                 Socket_Command_Handler(i, target_on);
-                printf("[KEY] key%u pressed, relay%u -> %s\r\n",
-                       (unsigned)(i + 1),
-                       (unsigned)(i + 1),
-                       target_on ? "ON" : "OFF");
+                LOGD("[KEY] key%u pressed, relay%u -> %s\r\n",
+                     (unsigned)(i + 1),
+                     (unsigned)(i + 1),
+                     target_on ? "ON" : "OFF");
             }
         }
 
         uint32_t now_tick = HAL_GetTick();
         bool heartbeat_due = (now_tick - last_report >= HEARTBEAT_MS);
         bool event_due = g_force_upload_flag && (now_tick - last_upload_tick >= UPLOAD_MIN_GAP_MS);
-        if (heartbeat_due || event_due)
+        if (g_net_ready && (heartbeat_due || event_due))
         {
 #if WEB_MQTT_TEST_MODE
             web_mqtt_test_fill_mock();
@@ -90,6 +139,11 @@ void hal_entry(void)
             upload_strip_status();
             last_report = now_tick;
             last_upload_tick = now_tick;
+        }
+        else if (!g_net_ready)
+        {
+            /* 离线模式下不发送网络上报，避免发送队列堆积 */
+            g_force_upload_flag = 0;
         }
 
         /* CH444 + UART3 分时轮询四路 BL0942 */
