@@ -17,6 +17,7 @@ FSP_CPP_FOOTER
 #include "sdcard_data_handle.h"
 #include "appliance_identification.h"
 #include "ai_validate.h"
+#include "SoftAP_connect_wifi/SoftAP_connect_wifi.h"
 #include "log.h"
 #include <stdio.h>
 
@@ -42,45 +43,6 @@ uint32_t last_report = 0;
 static uint32_t last_upload_tick = 0;
 extern PowerStrip_t g_strip;
 uint8_t g_force_upload_flag = 0;
-static bool g_net_ready = false;
-static uint8_t g_net_retry_idx = 0;
-static uint32_t g_net_next_retry_tick = 0;
-
-static void Net_Task(void)
-{
-    static const uint32_t k_retry_backoff_ms[] = {1000U, 2000U, 5000U, 10000U, 30000U};
-    uint32_t now = HAL_GetTick();
-
-    if (g_net_ready)
-    {
-        return;
-    }
-
-    if ((int32_t)(now - g_net_next_retry_tick) < 0)
-    {
-        return;
-    }
-
-    LOGI("[NET] reconnect attempt idx=%u\r\n", (unsigned)g_net_retry_idx);
-    g_net_ready = ESP8266_MQTT_Test();
-    if (g_net_ready)
-    {
-        LOGI("[NET] reconnect success\r\n");
-        g_net_retry_idx = 0;
-        g_net_next_retry_tick = now;
-        return;
-    }
-
-    uint8_t max_idx = (uint8_t)(sizeof(k_retry_backoff_ms) / sizeof(k_retry_backoff_ms[0]) - 1U);
-    uint8_t use_idx = (g_net_retry_idx <= max_idx) ? g_net_retry_idx : max_idx;
-    uint32_t delay_ms = k_retry_backoff_ms[use_idx];
-    if (g_net_retry_idx < max_idx)
-    {
-        g_net_retry_idx++;
-    }
-    g_net_next_retry_tick = now + delay_ms;
-    LOGW("[NET] reconnect failed, next in %lu ms\r\n", (unsigned long)delay_ms);
-}
 
 void hal_entry(void)
 {
@@ -96,17 +58,11 @@ void hal_entry(void)
 
     res_sd = f_mount(&fs, "1:", 1);
 
-    g_net_ready = ESP8266_MQTT_Test();
-    if (!g_net_ready)
-    {
-        g_net_retry_idx = 0;
-        g_net_next_retry_tick = HAL_GetTick() + 1000U;
-        LOGW("[NET] init failed, enter degraded mode\r\n");
-    }
+    NET_Manager_Init();
 
     while (1)
     {
-        Net_Task();
+        NET_Manager_Task();
         Relay_Task();
         ESP8266_TxTask();
         handle_uart_json_stream();
@@ -130,7 +86,7 @@ void hal_entry(void)
         uint32_t now_tick = HAL_GetTick();
         bool heartbeat_due = (now_tick - last_report >= HEARTBEAT_MS);
         bool event_due = g_force_upload_flag && (now_tick - last_upload_tick >= UPLOAD_MIN_GAP_MS);
-        if (g_net_ready && (heartbeat_due || event_due))
+        if (NET_Manager_IsReady() && (heartbeat_due || event_due))
         {
 #if WEB_MQTT_TEST_MODE
             web_mqtt_test_fill_mock();
@@ -140,7 +96,7 @@ void hal_entry(void)
             last_report = now_tick;
             last_upload_tick = now_tick;
         }
-        else if (!g_net_ready)
+        else if (!NET_Manager_IsReady())
         {
             /* 离线模式下不发送网络上报，避免发送队列堆积 */
             g_force_upload_flag = 0;

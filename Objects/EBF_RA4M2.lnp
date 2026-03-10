@@ -14,6 +14,7 @@
 ".\objects\sdcard_data_handle.o"
 ".\objects\appliance_identification.o"
 ".\objects\event_detector.o"
+".\objects\softap_connect_wifi.o"
 ".\objects\diskio.o"
 ".\objects\ff.o"
 ".\objects\ffunicode.o"

@@ -1,13 +1,16 @@
 ﻿#include "bsp_wifi_esp8266.h"
 #include "bsp_debug_uart.h"
 #include "circle_buf.h"
+#include "SoftAP_connect_wifi/SoftAP_connect_wifi.h"
 #include "Systick.h"
 #include "log.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 extern circle_buf_t g_rx_buf;
 extern circle_buf_t g_cmd_rx_buf;
+extern circle_buf_t g_http_rx_buf;
 
 _Bool               Uart2_Send_Flag = false; // 用来判断 UART2 接收以及发送数据是否完成
 _Bool               Uart2_Show_Flag = false; // 控制 UART2 收发数据显示标志
@@ -78,6 +81,7 @@ static uint32_t g_tx_deadline = 0;
 static char g_tx_cmd_buf[160];
 static bool g_uart2_opened = false;
 
+
 static bool tx_queue_push(const char *topic, const char *payload, uint16_t payload_len)
 {
     if ((topic == NULL) || (payload == NULL) || (payload_len == 0U))
@@ -117,89 +121,6 @@ static bool tx_queue_pop(mqtt_tx_item_t *out)
     g_tx_q_count--;
     return true;
 }
-
-/* 在初始化路径中等待关键响应；命中 ok 则返回 true，命中 err 或超时返回 false。 */
-static bool esp_wait_response(const char *ok, const char *err, uint32_t timeout_ms)
-{
-    uint32_t start = HAL_GetTick();
-    while ((uint32_t)(HAL_GetTick() - start) < timeout_ms)
-    {
-        if ((ok != NULL) && (strstr(At_Rx_Buff, ok) != NULL))
-        {
-            return true;
-        }
-        if ((err != NULL) && (strstr(At_Rx_Buff, err) != NULL))
-        {
-            return false;
-        }
-        R_BSP_SoftwareDelay(10, BSP_DELAY_UNITS_MILLISECONDS);
-    }
-    return false;
-}
-
-
-bool ESP8266_MQTT_Test(void)
-{
-    ESP8266_DEBUG_MSG("\r\n[SYSTEM] 开始初始化智能排插...\r\n");
-    ESP8266_UART2_Init();
-    ESP8266_Hard_Reset();
-	R_BSP_SoftwareDelay(1, BSP_DELAY_UNITS_SECONDS); // 复位后多等 1s
-    ESP8266_STA(); 
-	R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); // 给 ATE0 处理时间
-    if (ESP8266_ATE0() != 0)
-    {
-        ESP8266_DEBUG_MSG("[NET] 初始化失败：ATE0 无响应\r\n");
-        return false;
-    }
-	R_BSP_SoftwareDelay(500, BSP_DELAY_UNITS_MILLISECONDS); // 给 ATE0 处理时间
-	
-	// 4. 【新增】降低发射功率(针对供电不稳的 ESP-01S 非常有效)
-    // 降低到 50 (最大 82)，减小瞬间电流峰值，防止电压跌落导致重启
-    ESP8266_AT_Send("AT+RFPOWER=50\r\n");
-    R_BSP_SoftwareDelay(200, BSP_DELAY_UNITS_MILLISECONDS);
-
-	
-    if (!ESP8266_STA_JoinAP(ID, PASSWORD, 20))
-    {
-        ESP8266_DEBUG_MSG("[NET] 初始化失败：WiFi 连接失败\r\n");
-        return false;
-    }
-
-    // 4. 配置 MQTT 属性(注意：如果你的函数支持，应在这里传入遗嘱参数)
-    // 根据文档 [cite: 147, 148]，遗嘱 Payload 应为 {"reason": "power_off"}
-    ESP8266_DEBUG_MSG("配置 MQTT 用户属性\r\n");
-    MQTT_SetUserProperty(CLIENT_ID, USER_NAME, USER_PASSWORD);
-    
-
-    // 5. 连接 MQTT 服务器
-    ESP8266_DEBUG_MSG("连接 MQTT 服务器..\r\n");
-    if (!Connect_MQTT(MQTT_IP, MQTT_Port, 100))
-    {
-        ESP8266_DEBUG_MSG("[NET] 初始化失败：MQTT 连接失败\r\n");
-        return false;
-    }
-
-    // 6. 订阅指令主题 [cite: 28, 29]
-    ESP8266_DEBUG_MSG("订阅命令主题: %s\r\n", MQTT_SUB_TOPIC);
-    if (!Subscribes_Topics(MQTT_SUB_TOPIC))
-    {
-        ESP8266_DEBUG_MSG("[NET] 初始化失败：订阅主题失败\r\n");
-        return false;
-    }
-
-//    // 7. 第一次上线状态上报(参照文档 7.2 节) [cite: 161]
-//    ESP8266_DEBUG_MSG("上报初始在线状态...\r\n");
-//    // 构造一个符合文档要求的简易 JSON [cite: 165-174]
-//    char *init_payload = "{\"ts\":1772000100,\"online\":true,\"total_power_w\":0.0,\"voltage_v\":220.0,\"current_a\":0.0,\"sockets\":[]}";
-//    Send_Data_Raw(MQTT_PUB_STATUS, init_payload);
-		ESP8266_DEBUG_MSG("初始化完成，进入监听模式...\r\n");
-		memset(At_Rx_Buff, 0, sizeof(At_Rx_Buff)); // 清除阻塞缓冲区
-		// 重点：排空命令环形缓冲区，防止初始化期间残留字符干扰 JSON 解析
-		uint8_t dummy;
-		while (g_cmd_rx_buf.get(&g_cmd_rx_buf, &dummy) == 0);
-    return true;
-}
-
 
 /* ESP8266 UART2 初始化 */
 void ESP8266_UART2_Init(void)
@@ -327,150 +248,6 @@ void ESP8266_Rst(void)
     }
 }
 
-/* ESP8266 连接 WiFi（阻塞式初始化路径） */
-bool ESP8266_STA_JoinAP( char * id ,  char * password , uint8_t timeout )
-{
-    char  JoinAP_AT[256];
-
-    sprintf( JoinAP_AT , "AT+CWJAP=\"%s\",\"%s\"\r\n" , id , password);
-
-    Clear_Buff();
-    ESP8266_AT_Send( JoinAP_AT );
-
-    /* timeout 参数沿用“秒”语义 */
-    if (esp_wait_response("OK\r\n", "ERROR\r\n", ((uint32_t)timeout) * 1000U))
-    {
-        ESP8266_DEBUG_MSG("\r\nWifi连接成功\r\n");
-        Clear_Buff();
-        return true;
-    }
-
-    if ( strstr( At_Rx_Buff , "+CWJAP:1\r\n" ))
-    {
-        ESP8266_DEBUG_MSG("\r\nWifi连接超时，请检查各项配置是否正确\r\n");
-    }
-    else if ( strstr( At_Rx_Buff , "+CWJAP:2\r\n" ))
-    {
-        ESP8266_DEBUG_MSG("\r\nWifi密码错误，请检查Wifi密码是否正确\r\n");
-    }
-    else if ( strstr( At_Rx_Buff , "+CWJAP:3\r\n" ))
-    {
-        ESP8266_DEBUG_MSG("\r\n无法找到目标Wifi，请检查Wifi是否打开或Wifi名称是否正确\r\n");
-    }
-    else if ( strstr( At_Rx_Buff , "+CWJAP:4\r\n" ))
-    {
-        ESP8266_DEBUG_MSG("\r\nWifi连接失败，请检查各项配置是否正确\r\n");
-    }
-    else
-    {
-        ESP8266_DEBUG_MSG("\r\nWifi连接超出期望时间，请检查各项配置是否正确\r\n");
-    }
-
-    return false;
-}
-
-/* 设置 MQTT 用户属性 */
-void MQTT_SetUserProperty( char * client_id , char * user_name, char * user_password )
-{
-    char  SetUserProperty_AT[256];
-
-    sprintf( SetUserProperty_AT , "AT+MQTTUSERCFG=0,1,\"%s\",\"%s\",\"%s\",0,0,\"\"\r\n" , client_id , user_name , user_password);
-
-    ESP8266_AT_Send ( SetUserProperty_AT );
-
-    /*等待设置完成*/
-    while ( !Uart2_Send_Flag )
-    {
-         if (strstr( At_Rx_Buff , "OK\r\n" ))
-         {
-         ESP8266_DEBUG_MSG("\r\nMQTT用户属性已设置完成\r\n");
-         Clear_Buff();      //清除缓冲区数据
-         }
-    }
-
-}
-
-/* 连接 MQTT Broker（阻塞式初始化路径） */
-bool Connect_MQTT( char * mqtt_ip , char * mqtt_port , uint8_t timeout )
-{
-	
-    char  Connect_MQTT_AT[256];
-
-    sprintf( Connect_MQTT_AT , "AT+MQTTCONN=0,\"%s\",%s,1\r\n" , mqtt_ip , mqtt_port);
-
-    Clear_Buff();
-    ESP8266_AT_Send( Connect_MQTT_AT );
-
-    if (esp_wait_response("OK\r\n", "ERROR\r\n", ((uint32_t)timeout) * 1000U))
-    {
-        ESP8266_DEBUG_MSG("\r\nMQTT服务器连接成功\r\n");
-        Clear_Buff();
-        return true;
-    }
-
-    if (strstr(At_Rx_Buff, "ERROR\r\n") != NULL)
-    {
-        ESP8266_DEBUG_MSG("\r\nMQTT服务器连接失败，请检查各项配置是否正确\r\n");
-    }
-    else
-    {
-        ESP8266_DEBUG_MSG("\r\nMQTT服务器连接超出期望时间，请检查各项配置是否正确\r\n");
-    }
-
-    return false;
-}
-
-/*订阅主题函数*/
-bool Subscribes_Topics( char * topics )
-{
-    char  Sub_Topics_AT[256];
-
-    sprintf( Sub_Topics_AT , "AT+MQTTSUB=0,\"%s\",1\r\n" , topics);
-
-    Clear_Buff();
-    ESP8266_AT_Send( Sub_Topics_AT );
-
-    if (esp_wait_response("OK", "ERROR\r\n", 3000U))
-    {
-        ESP8266_DEBUG_MSG("\r\n主题订阅成功\r\n");
-        Clear_Buff();
-        return true;
-    }
-
-    if (strstr(At_Rx_Buff, "ALREADY\r\n") != NULL)
-    {
-        ESP8266_DEBUG_MSG("\r\n已经订阅过该主题\r\n");
-        Clear_Buff();
-        return true;
-    }
-
-    ESP8266_DEBUG_MSG("\r\n主题订阅失败或超时\r\n");
-    return false;
-}
-/**
- * @brief 关闭 ESP8266 命令回显 (ATE0)
- * @return 0: 成功, -1: 超时
- */
-int ESP8266_ATE0(void)
-{
-    ESP8266_DEBUG_MSG("[SYSTEM] 正在关闭 ATE 回显...\r\n");
-    Clear_Buff();
-    ESP8266_AT_Send("ATE0\r\n");
-
-    uint32_t timeout = 100; // 500ms
-    while (timeout--)
-    {
-        if (strstr(At_Rx_Buff, "OK"))
-        {
-            ESP8266_DEBUG_MSG("[SYSTEM] 回显已成功关闭！\r\n");
-            Clear_Buff();
-            return 0;
-        }
-        R_BSP_SoftwareDelay(5, BSP_DELAY_UNITS_MILLISECONDS);
-    }
-    ESP8266_DEBUG_MSG("[ERROR] ATE0 无响应\r\n");
-    return -1;
-}
 /*发布MQTT消息函数*/
 void Send_Data( char * topics , char * data )
 {
@@ -671,6 +448,15 @@ void esp8266_uart2_callback(uart_callback_args_t * p_args)
                 At_Rx_Buff[Uart2_Num++] = (char)data;
                 At_Rx_Buff[Uart2_Num] = '\0'; // 随时封端，防止 strstr 跑飞
             }
+
+            /* SoftAP 配网模式下，保留原始字节流给 +IPD 组帧器 */
+            if (NET_Manager_IsProvisioningRunning() && (g_http_rx_buf.put != NULL))
+            {
+                if (g_http_rx_buf.put(&g_http_rx_buf, data) != 0)
+                {
+                    g_uart2_rb_overflow_cnt++;
+                }
+            }
             
 
             /* 2) 将 UART2 文本按行组装，只转发 +MQTTSUBRECV 到命令环形缓冲区 */
@@ -703,7 +489,6 @@ void esp8266_uart2_callback(uart_callback_args_t * p_args)
                         }
                     }
                 }
-
                 g_cmd_line_len = 0;
                 g_cmd_line_overflow = false;
                 g_cmd_line_buf[0] = '\0';

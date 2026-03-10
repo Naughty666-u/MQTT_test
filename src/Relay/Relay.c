@@ -17,10 +17,10 @@ typedef struct {
 
 /* 插座引脚映射表 */
 static const Relay_Config_t g_relays[RELAY_COUNT] = {
-    [0] = { .set_pin = BSP_IO_PORT_01_PIN_02, .reset_pin = BSP_IO_PORT_01_PIN_03 }, /* 插座 1 */
-    [1] = { .set_pin = BSP_IO_PORT_01_PIN_04, .reset_pin = BSP_IO_PORT_01_PIN_05 }, /* 插座 2 */
-    [2] = { .set_pin = BSP_IO_PORT_01_PIN_06, .reset_pin = BSP_IO_PORT_01_PIN_07 }, /* 插座 3 */
-    [3] = { .set_pin = BSP_IO_PORT_06_PIN_00, .reset_pin = BSP_IO_PORT_06_PIN_01 }  /* 插座 4 */
+    [0] = { .set_pin = BSP_IO_PORT_01_PIN_03, .reset_pin = BSP_IO_PORT_01_PIN_02 }, /* 插座 1 */
+    [1] = { .set_pin = BSP_IO_PORT_01_PIN_05, .reset_pin = BSP_IO_PORT_01_PIN_04 }, /* 插座 2 */
+    [2] = { .set_pin = BSP_IO_PORT_01_PIN_07, .reset_pin = BSP_IO_PORT_01_PIN_06 }, /* 插座 3 */
+    [3] = { .set_pin = BSP_IO_PORT_06_PIN_01, .reset_pin = BSP_IO_PORT_06_PIN_00 }  /* 插座 4 */
 };
 
 /* 每路继电器的非阻塞脉冲上下文 */

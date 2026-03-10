@@ -1,4 +1,7 @@
-./objects/hal_entry.o: src\hal_entry.c ra_gen\hal_data.h \
+./objects/softap_connect_wifi.o: \
+  src\SoftAP_connect_wifi\SoftAP_connect_wifi.c \
+  src\SoftAP_connect_wifi\SoftAP_connect_wifi.h \
+  src\bsp_esp8266\bsp_wifi_esp8266.h ra_gen\hal_data.h \
   ra\fsp\inc\api\bsp_api.h ra\fsp\inc\api\fsp_common_api.h \
   ra\fsp\inc\fsp_version.h ra_cfg\fsp_cfg\bsp\bsp_cfg.h \
   ra_gen\bsp_clock_cfg.h ra_cfg\fsp_cfg\bsp\bsp_mcu_family_cfg.h \
@@ -46,11 +49,4 @@
   ra\fsp\inc\instances\r_sdhi.h ra_cfg\fsp_cfg\r_sdhi_cfg.h \
   ra\fsp\inc\api\r_sdmmc_api.h ra\fsp\inc\instances\r_sci_uart.h \
   ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h \
-  src\debug_uart\bsp_debug_uart.h src\bsp_esp8266\bsp_wifi_esp8266.h \
-  src\circle_buf\circle_buf.h src\cJSON_handle\cJSON_handle.h \
-  src\Systick\Systick.h src\Key\Key.h src\Relay\Relay.h \
-  src\uart_hlw\uart_hlw.h src\sdcard_data_handle\sdcard_data_handle.h \
-  src\FatFs\ff15\ff.h src\FatFs\ff15\ffconf.h \
-  src\Appliance\ identification\ algorithm\appliance_identification.h \
-  src\ai_validate.h src\SoftAP_connect_wifi\SoftAP_connect_wifi.h \
-  src\log.h
+  src\circle_buf\circle_buf.h src\log.h src\Systick\Systick.h

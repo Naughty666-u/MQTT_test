@@ -48,4 +48,5 @@
   ra\fsp\inc\api\r_sdmmc_api.h ra\fsp\inc\instances\r_sci_uart.h \
   ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h \
   src\debug_uart\bsp_debug_uart.h src\circle_buf\circle_buf.h \
-  src\Systick\Systick.h src\log.h
+  src\SoftAP_connect_wifi\SoftAP_connect_wifi.h src\Systick\Systick.h \
+  src\log.h
