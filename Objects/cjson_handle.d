@@ -51,4 +51,4 @@
   src\Systick\Systick.h src\log.h \
   src\Appliance\ identification\ algorithm\appliance_identification.h \
   src\sdcard_data_handle\sdcard_data_handle.h src\FatFs\ff15\ff.h \
-  src\FatFs\ff15\ffconf.h
+  src\FatFs\ff15\ffconf.h src\SoftAP_connect_wifi\SoftAP_connect_wifi.h

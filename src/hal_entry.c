@@ -22,10 +22,6 @@ FSP_CPP_FOOTER
 #include <stdio.h>
 
 /* 1=开启网页联调模拟数据；0=关闭（使用真实采样数据） */
-#define WEB_MQTT_TEST_MODE 0
-#define HEARTBEAT_MS 1500U
-#define UPLOAD_MIN_GAP_MS 200U
-
 MKFS_PARM f_opt = {
     .fmt = FM_FAT32,
     .n_fat = 0,
@@ -38,11 +34,6 @@ FATFS fs;
 FIL fnew;
 UINT fnum;
 FRESULT res_sd;
-
-uint32_t last_report = 0;
-static uint32_t last_upload_tick = 0;
-extern PowerStrip_t g_strip;
-uint8_t g_force_upload_flag = 0;
 
 void hal_entry(void)
 {
@@ -57,50 +48,21 @@ void hal_entry(void)
     BL0942_circlebuf_init();
 
     res_sd = f_mount(&fs, "1:", 1);
-
-    NET_Manager_Init();
+    /*
+     * 第一阶段先保持裸机轮询模式，但把 ESP8266 相关逻辑全部收口到 WiFi 总管入口。
+     * 这样后续迁移到 FreeRTOS 时，只需要把 WiFi_ServiceTask() 挪进独立任务即可。
+     */
+    WiFi_Init();
 
     while (1)
     {
-        NET_Manager_Task();
+        /* WiFi 总管：统一推进联网、配网、MQTT 发送和 MQTT 下行解析。 */
+        WiFi_ServiceTask();
         Relay_Task();
-        ESP8266_TxTask();
-        handle_uart_json_stream();
         AI_Replug_Task();
         AI_Commit_Task();
-
-        int key_evt = key_control();
-        for (uint8_t i = 0; i < 4; i++)
-        {
-            if (key_evt & (1 << i))
-            {
-                bool target_on = !g_strip.sockets[i].on;
-                Socket_Command_Handler(i, target_on);
-                LOGD("[KEY] key%u pressed, relay%u -> %s\r\n",
-                     (unsigned)(i + 1),
-                     (unsigned)(i + 1),
-                     target_on ? "ON" : "OFF");
-            }
-        }
-
-        uint32_t now_tick = HAL_GetTick();
-        bool heartbeat_due = (now_tick - last_report >= HEARTBEAT_MS);
-        bool event_due = g_force_upload_flag && (now_tick - last_upload_tick >= UPLOAD_MIN_GAP_MS);
-        if (NET_Manager_IsReady() && (heartbeat_due || event_due))
-        {
-#if WEB_MQTT_TEST_MODE
-            web_mqtt_test_fill_mock();
-#endif
-            g_force_upload_flag = 0;
-            upload_strip_status();
-            last_report = now_tick;
-            last_upload_tick = now_tick;
-        }
-        else if (!NET_Manager_IsReady())
-        {
-            /* 离线模式下不发送网络上报，避免发送队列堆积 */
-            g_force_upload_flag = 0;
-        }
+        Key_Task();
+        Upload_Status_Task();
 
         /* CH444 + UART3 分时轮询四路 BL0942 */
         BL0942_Poll_Task();

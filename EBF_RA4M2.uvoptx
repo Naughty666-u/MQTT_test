@@ -143,24 +143,7 @@
           <Name>UL2V8M(-S0 -C0 -P0 )  -FN3 -FC7800 -FD20000000 -FF0RA4M2_512K -FF1RA4M2_DATA_C512K -FF2RA4M2_CONF -FL080000 -FL12000 -FL2200 -FS00 -FS18000000 -FS2100A100 -FP0($$Device:R7FA4M2AD$Flash\RA4M2_512K.FLM) -FP1($$Device:R7FA4M2AD$Flash\RA4M2_DATA_C512K.FLM) -FP2($$Device:R7FA4M2AD$Flash\RA4M2_CONF.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>292</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>34468</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\src\cJSON_handle\cJSON_handle.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\EBF_RA4M2\src/cJSON_handle/cJSON_handle.c\292</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -176,6 +159,11 @@
           <count>2</count>
           <WinNumber>1</WinNumber>
           <ItemText>g_strip</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>At_Rx_Buff</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -252,7 +240,7 @@
 
   <Group>
     <GroupName>:Renesas RA Smart Configurator:Common Sources</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

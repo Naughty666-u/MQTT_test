@@ -90,7 +90,7 @@ bool EventDetector_Update(EventDetector_t *d, bool socket_on, float p_now, uint3
                 d->on_cnt = 0;
                 d->off_cnt = 0;
 
-                /* ⭐ 冷却防火墙：防止用户频繁插拔导致的识别任务堆积 ⭐ */
+                /*  冷却防火墙：防止用户频繁插拔导致的识别任务堆积  */
                 if ((now_tick - d->last_trigger_tick) >= TRIGGER_COOLDOWN_MS)
                 {
                     d->last_trigger_tick = now_tick; // 更新最近触发时间

@@ -5,6 +5,8 @@
 void key_timHandler_callback(void);
 /* 返回按键事件位图：bit0~bit3 对应 KEY1~KEY4 单击事件 */
 int key_control(void);
+/* 处理按键事件并执行对应插座开关动作，主循环周期调用即可 */
+void Key_Task(void);
 void Key_GPT_Init(void);
 typedef struct key_body
   {

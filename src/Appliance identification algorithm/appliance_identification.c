@@ -226,8 +226,10 @@ void AI_Trigger_Sampling(uint8_t index)
      * 为什么这样做：
      * 避免重入导致 start_tick / i_max 被中途覆盖，最终特征失真。
      */
+    /*在触发之前这个用电器之前的状态应该处于空闲*/
     if (p_ai->state == AI_IDLE)
     {
+        /*进入采样阶段*/
         p_ai->state = AI_SAMPLING;
         p_ai->start_tick = HAL_GetTick();
         p_ai->i_max = 0.0f;

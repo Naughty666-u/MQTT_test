@@ -54,21 +54,39 @@
 /* 清空 UART2 接收缓冲区 */
 #define   Clear_Buff()   memset( At_Rx_Buff , 0 , sizeof(At_Rx_Buff) ); \
                          Uart2_Num = 0;
+
+/*
+ * WiFi 子系统初始化入口。
+ *
+ * 这里不是简单初始化 UART，而是启动整个 ESP8266 网络管理链路：
+ * - 初始化联网状态机
+ * - 准备后续在主循环中由 WiFi_ServiceTask() 持续推进
+ */
+void WiFi_Init(void);
+
+/*
+ * 裸机版 WiFi 总管函数。
+ *
+ * 调用方式：
+ * - 在主循环中高频调用
+ * - 统一推进 ESP8266 相关的收发、联网、SoftAP 配网和 MQTT 下行处理
+ *
+ * 这样做的目的，是先在裸机阶段建立“只有一个入口能碰 ESP8266”的边界，
+ * 后续迁移到 FreeRTOS 时，可直接把本函数放进独立 wifi_task 中运行。
+ */
+void WiFi_ServiceTask(void);
+
+/*
+ * 业务层发布请求入口。
+ *
+ * 业务模块只表达“我要发布一条 MQTT 消息”，
+ * 实际入队和发送仍由 WiFi 子系统内部统一处理。
+ */
+bool WiFi_RequestPublish(char * topics , char * data );
+
 bool Send_Data_Raw( char * topics , char * data );
 void ESP8266_TxTask(void);
-void  ESP8266_Hard_Reset(void);
 bool ESP8266_MQTT_Test(void);
 void ESP8266_UART2_Init(void);
 void ESP8266_AT_Send(char * cmd );
-void ESP8266_Rst(void);
-void ESP8266_STA ( void );
-void ESP8266_AP ( void );
-void ESP8266_STA_AP ( void );
-bool ESP8266_STA_JoinAP( char * id ,  char * password , uint8_t timeout );
-void MQTT_SetUserProperty( char * client_id , char * user_name, char * user_password );
-bool Connect_MQTT( char * mqtt_ip , char * mqtt_port , uint8_t timeout );
-bool Subscribes_Topics( char * topics );
-void Send_Data( char * topics , char * data );
-void Process_RingBuffer_Data(void);
-int ESP8266_ATE0(void);
 #endif

@@ -58,6 +58,8 @@ static volatile uint32_t g_bl_deadline_tick = 0;
 
 extern PowerStrip_t g_strip;
 
+//我们使用了CH444G来实现一个串口分时复用实现四个BL0942能够正常采集用电器参数
+//选择哪一个插座的BL042能够正常工作
 static void CH444_Select_Channel(uint8_t channel)
 {
     /* channel: 0..3 -> IN1/IN0: 00/01/10/11 */
@@ -132,20 +134,23 @@ void uart3_callback(uart_callback_args_t *p_args)
     {
         case UART_EVENT_TX_COMPLETE:
         {
-            g_uart3_tx_complete = 1;
+            g_uart3_tx_complete = 1; /*发送指令完毕将标志位置为1*/
             break;
         }
 
         case UART_EVENT_RX_CHAR:
         {
+            /*如果现在轮询BL0942状态不处于等待帧时刻，就自动退出，因为这时候单片机都没有发送指令给BL0942*/
             if (g_bl_poll_state != BL_STATE_WAIT_FRAME)
             {
                 return;
             }
 
+            /*BL0942处于等待帧时刻*/
             if (g_bl0942_rx_count < BL0942_FRAME_LEN)
             {
                 g_bl0942_rx_frame[g_bl0942_rx_count++] = (uint8_t)p_args->data;
+                /*每接收到一个BL0942发送过来的完整数据包，就将准备就绪标志位置为true，提醒单片机可以开始解析数据包*/
                 if (g_bl0942_rx_count >= BL0942_FRAME_LEN)
                 {
                     g_bl0942_frame_ready = true;
@@ -166,9 +171,10 @@ void Send_com(void)
     g_uart3.p_api->write(g_uart3.p_ctrl, com_data, 2);
 }
 
+//Bl0942轮询任务
 void BL0942_Poll_Task(void)
 {
-    uint32_t now = HAL_GetTick();
+    uint32_t now = HAL_GetTick();//获取当前时间
 
     switch (g_bl_poll_state)
     {
@@ -178,6 +184,7 @@ void BL0942_Poll_Task(void)
             CH444_Select_Channel(g_active_channel);
             BL0942_Rx_Reset();
 
+            /*发送指令让对应的BL0942正常工作*/
             Send_com();
             g_bl_deadline_tick = now + BL0942_RX_TIMEOUT_MS;
             g_bl_poll_state = BL_STATE_WAIT_FRAME;
@@ -189,10 +196,13 @@ void BL0942_Poll_Task(void)
             if (g_bl0942_frame_ready)
             {
                 uint8_t frame[BL0942_FRAME_LEN];
+                /*每接收到一个完整的数据包就先进行拷贝，防止丢失*/
                 memcpy(frame, (const void *)g_bl0942_rx_frame, BL0942_FRAME_LEN);
 
+                /*处理哪一个插座发来的数据包进行解析，并传入对应的插座号*/
                 Data_Processing(frame, g_active_channel);
-
+                
+                /*切换下一个插座上报数据包进行解析，并将轮询状态置为等待*/
                 g_active_channel = (uint8_t)((g_active_channel + 1U) & 0x03U);
                 g_bl_poll_state = BL_STATE_IDLE;
             }
@@ -238,7 +248,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
 
     /* 取反得到校验码 */
     check_num = ~(count & 0xFF);
-
+     /*如果校验正确就进行解算用电器电参*/
     if (check_num == data[22])
     {
         /* 电流寄存器（有符号） */
@@ -307,6 +317,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
     if (check_num == data[22])
     {
         float p_used = (P1 >= 0.0) ? (float)P1 : (float)(-P1);
+        /*刷新前一刻用电器功率*/
         float p_prev = g_strip.sockets[index].power;
 
         /* 异常功率过滤，避免污染识别状态 */
@@ -333,6 +344,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
         float temp_c_sum = 0.0f;
         for (int j = 0; j < 4; j++)
         {
+            //如果插座开关没开就直接忽略其功率，不计入总功率
             if (!g_strip.sockets[j].on)
             {
                 continue;
@@ -357,10 +369,14 @@ void Data_Processing(unsigned char *data, uint8_t index)
                 LOGI("[LP] socket=%d power=%.2fW (skip AI)\r\n", index, g_strip.sockets[index].power);
             }
 
+             /*如果检测到这是一个低功耗设备，而且之前还没被标成 LowPower，那就先上报状态*/
+
             if (strcmp(g_strip.sockets[index].device_name, "LowPower") != 0)
             {
                 request_status_upload();
             }
+
+            //将此设备命名为LowPower即为低功耗设备
             strncpy(g_strip.sockets[index].device_name, "LowPower", 15);
             AI_Reset(index);
             EventDetector_Init(&g_evt_det[index]);
@@ -372,6 +388,7 @@ void Data_Processing(unsigned char *data, uint8_t index)
                                                  g_strip.sockets[index].on,
                                                  p_used,
                                                  HAL_GetTick());
+        /*检测到有用电器插上，触发用电器识别*/
         if (need_trigger)
         {
             AI_Trigger_Sampling(index);

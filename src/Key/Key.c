@@ -1,8 +1,12 @@
 ﻿#include "Key.h"
+#include "cJSON_handle.h"
+#include "appliance_identification.h"
+#include "log.h"
 #include "stdio.h"
 
 key_struct key[4] = {0};
 int num = 0;
+extern PowerStrip_t g_strip;
 
 /* 10ms 定时中断下，2 个采样点去抖 = 20ms */
 #define KEY_COUNT          4U
@@ -114,6 +118,26 @@ int key_control(void)
     }
 
     return num;
+}
+
+void Key_Task(void)
+{
+    int key_evt = key_control();
+
+    for (uint8_t i = 0; i < KEY_COUNT; i++)
+    {
+        if ((key_evt & (1 << i)) == 0)
+        {
+            continue;
+        }
+
+        bool target_on = !g_strip.sockets[i].on;
+        Socket_Command_Handler(i, target_on);
+        LOGD("[KEY] key%u pressed, relay%u -> %s\r\n",
+             (unsigned)(i + 1U),
+             (unsigned)(i + 1U),
+             target_on ? "ON" : "OFF");
+    }
 }
 
 void Key_GPT_Init(void)

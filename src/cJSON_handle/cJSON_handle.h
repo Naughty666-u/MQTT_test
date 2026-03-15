@@ -22,6 +22,8 @@ typedef struct {
 
 // 组装并上报 status 主题数据
 void upload_strip_status(void);
+// 上报任务：统一处理心跳上报、事件触发上报和离线清标志
+void Upload_Status_Task(void);
 // 请求尽快上报一次状态（由主循环统一节流执行）
 void request_status_upload(void);
 // 网页联调测试：填充4路模拟功率数据（遵循当前 on 状态）

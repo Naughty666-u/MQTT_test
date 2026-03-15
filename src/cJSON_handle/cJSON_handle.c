@@ -7,12 +7,19 @@
 #include "Systick.h"
 #include "log.h"
 #include "appliance_identification.h"
+#include "SoftAP_connect_wifi/SoftAP_connect_wifi.h"
 
 /* ESP8266 UART 回调里会把 +MQTTSUBRECV 命令行写入该环形缓冲区。 */
 extern circle_buf_t g_cmd_rx_buf;
 
 /* 单次 JSON 解析缓冲区大小。 */
 #define MAX_JSON_SIZE 512
+
+/* 上报任务节流参数。 */
+#define HEARTBEAT_MS      1500U
+#define UPLOAD_MIN_GAP_MS 200U
+/* 1=开启网页联调模拟数据；0=关闭（使用真实采样数据） */
+#define WEB_MQTT_TEST_MODE 0
 
 /*
  * 串口流式解析缓冲区。
@@ -21,15 +28,14 @@ extern circle_buf_t g_cmd_rx_buf;
 static char json_process_buf[MAX_JSON_SIZE];
 
 /*
- * 主循环里的“立即上报”标志。
- * 由命令处理成功后置 1，下一轮循环会立刻 upload_strip_status()。
+ * 立即上报标志与任务内部节流时间戳。
+ * - request_status_upload() 置位 g_force_upload_flag
+ * - Upload_Status_Task() 根据心跳/事件条件决定是否真正上报
  */
-extern uint8_t g_force_upload_flag;
+static uint8_t g_force_upload_flag = 0;
+static uint32_t g_last_report_tick = 0;
+static uint32_t g_last_upload_tick = 0;
 
-void request_status_upload(void)
-{
-    g_force_upload_flag = 1;
-}
 
 /*
  * 全局排插状态：
@@ -49,64 +55,40 @@ PowerStrip_t g_strip = {
     }
 };
 
-/*
- * 网页联调测试函数：
- * - 首次调用时给4路插孔写入默认测试状态；
- * - 后续每次调用按 on 状态刷新功率与总量；
- * - 不修改命令解析链路，ON/OFF 仍然通过正常流程生效。
- */
-void web_mqtt_test_fill_mock(void)
+
+
+ /*1.功率值发生较大变化，要求及时上报一次*/
+ /*2.设备名字发生变化*/
+void request_status_upload(void)
 {
-    static bool inited = false;
-    static const float k_mock_power_w[4] = {85.0f, 46.0f, 23.5f, 12.0f};
-    static const char *k_mock_name[4] = {"DeskLamp", "Fan", "Charger", "Speaker"};
-
-    if (!inited)
-    {
-        /* 初始给两路通电，便于网页上线后马上看到功率与开关状态。 */
-        g_strip.sockets[0].on = true;
-        g_strip.sockets[1].on = true;
-        g_strip.sockets[2].on = false;
-        g_strip.sockets[3].on = false;
-
-        for (int i = 0; i < 4; i++)
-        {
-            strncpy(g_strip.sockets[i].device_name, k_mock_name[i], sizeof(g_strip.sockets[i].device_name) - 1);
-            g_strip.sockets[i].device_name[sizeof(g_strip.sockets[i].device_name) - 1] = '\0';
-            g_strip.sockets[i].pending_valid = false;
-            g_strip.sockets[i].pending_id = 0;
-        }
-        inited = true;
-    }
-
-    g_strip.voltage = 220.8f;
-    g_strip.total_power = 0.0f;
-
-    for (int i = 0; i < 4; i++)
-    {
-        if (g_strip.sockets[i].on)
-        {
-            /* ON 时按预设功率上报，便于前端观察开关与功率联动。 */
-            g_strip.sockets[i].power = k_mock_power_w[i];
-
-            /* 如果被其他流程改成 Idle/None，测试模式下恢复为固定测试名。 */
-            if ((strcmp(g_strip.sockets[i].device_name, "Idle") == 0) ||
-                (strcmp(g_strip.sockets[i].device_name, "None") == 0))
-            {
-                strncpy(g_strip.sockets[i].device_name, k_mock_name[i], sizeof(g_strip.sockets[i].device_name) - 1);
-                g_strip.sockets[i].device_name[sizeof(g_strip.sockets[i].device_name) - 1] = '\0';
-            }
-        }
-        else
-        {
-            g_strip.sockets[i].power = 0.0f;
-        }
-
-        g_strip.total_power += g_strip.sockets[i].power;
-    }
-
-    g_strip.total_current = (g_strip.voltage > 1.0f) ? (g_strip.total_power / g_strip.voltage) : 0.0f;
+    g_force_upload_flag = 1;
 }
+
+/*上报状态任务*/
+void Upload_Status_Task(void)
+{
+    uint32_t now_tick = HAL_GetTick();
+    bool heartbeat_due = (now_tick - g_last_report_tick >= HEARTBEAT_MS);
+    bool event_due = (g_force_upload_flag != 0U) &&
+                     (now_tick - g_last_upload_tick >= UPLOAD_MIN_GAP_MS);
+
+    if (NET_Manager_IsReady() && (heartbeat_due || event_due))
+    {
+#if WEB_MQTT_TEST_MODE
+        web_mqtt_test_fill_mock();
+#endif
+        g_force_upload_flag = 0;
+        upload_strip_status();
+        g_last_report_tick = now_tick;
+        g_last_upload_tick = now_tick;
+    }
+    else if (!NET_Manager_IsReady())
+    {
+        /* 离线模式下不发送网络上报，避免发送队列堆积。 */
+        g_force_upload_flag = 0;
+    }
+}
+
 
 /**
  * @brief 发送命令 ACK 回执
@@ -148,7 +130,7 @@ static bool send_ack(const char *cmd_id, const char *status, const char *reason,
     bool queued_ok = false;
     if (ack_out)
     {
-        queued_ok = Send_Data_Raw(MQTT_PUB_ACK, ack_out);
+        queued_ok = WiFi_RequestPublish(MQTT_PUB_ACK, ack_out);
         free(ack_out);
     }
 
@@ -212,7 +194,7 @@ void upload_strip_status(void)
     char *out = cJSON_PrintUnformatted(root);
     if (out)
     {
-        bool queued_ok = Send_Data_Raw(MQTT_PUB_STATUS, out);
+        bool queued_ok = WiFi_RequestPublish(MQTT_PUB_STATUS, out);
         if (!queued_ok)
         {
             LOGW("[TX] status enqueue failed\r\n");
@@ -561,4 +543,64 @@ void handle_uart_json_stream(void)
 
         last_byte_time = now;
     }
+}
+
+
+/*
+ * 网页联调测试函数：
+ * - 首次调用时给4路插孔写入默认测试状态；
+ * - 后续每次调用按 on 状态刷新功率与总量；
+ * - 不修改命令解析链路，ON/OFF 仍然通过正常流程生效。
+ */
+void web_mqtt_test_fill_mock(void)
+{
+    static bool inited = false;
+    static const float k_mock_power_w[4] = {85.0f, 46.0f, 23.5f, 12.0f};
+    static const char *k_mock_name[4] = {"DeskLamp", "Fan", "Charger", "Speaker"};
+
+    if (!inited)
+    {
+        /* 初始给两路通电，便于网页上线后马上看到功率与开关状态。 */
+        g_strip.sockets[0].on = true;
+        g_strip.sockets[1].on = true;
+        g_strip.sockets[2].on = false;
+        g_strip.sockets[3].on = false;
+
+        for (int i = 0; i < 4; i++)
+        {
+            strncpy(g_strip.sockets[i].device_name, k_mock_name[i], sizeof(g_strip.sockets[i].device_name) - 1);
+            g_strip.sockets[i].device_name[sizeof(g_strip.sockets[i].device_name) - 1] = '\0';
+            g_strip.sockets[i].pending_valid = false;
+            g_strip.sockets[i].pending_id = 0;
+        }
+        inited = true;
+    }
+
+    g_strip.voltage = 220.8f;
+    g_strip.total_power = 0.0f;
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (g_strip.sockets[i].on)
+        {
+            /* ON 时按预设功率上报，便于前端观察开关与功率联动。 */
+            g_strip.sockets[i].power = k_mock_power_w[i];
+
+            /* 如果被其他流程改成 Idle/None，测试模式下恢复为固定测试名。 */
+            if ((strcmp(g_strip.sockets[i].device_name, "Idle") == 0) ||
+                (strcmp(g_strip.sockets[i].device_name, "None") == 0))
+            {
+                strncpy(g_strip.sockets[i].device_name, k_mock_name[i], sizeof(g_strip.sockets[i].device_name) - 1);
+                g_strip.sockets[i].device_name[sizeof(g_strip.sockets[i].device_name) - 1] = '\0';
+            }
+        }
+        else
+        {
+            g_strip.sockets[i].power = 0.0f;
+        }
+
+        g_strip.total_power += g_strip.sockets[i].power;
+    }
+
+    g_strip.total_current = (g_strip.voltage > 1.0f) ? (g_strip.total_power / g_strip.voltage) : 0.0f;
 }

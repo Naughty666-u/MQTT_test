@@ -45,4 +45,8 @@
   ra\fsp\inc\instances\r_dmac.h ra\fsp\inc\api\r_transfer_api.h \
   ra\fsp\inc\instances\r_sdhi.h ra_cfg\fsp_cfg\r_sdhi_cfg.h \
   ra\fsp\inc\api\r_sdmmc_api.h ra\fsp\inc\instances\r_sci_uart.h \
-  ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h
+  ra\fsp\inc\api\r_uart_api.h ra_cfg\fsp_cfg\r_sci_uart_cfg.h \
+  src\cJSON_handle\cJSON_handle.h \
+  src\Appliance\ identification\ algorithm\appliance_identification.h \
+  src\sdcard_data_handle\sdcard_data_handle.h src\FatFs\ff15\ff.h \
+  src\FatFs\ff15\ffconf.h src\log.h src\Systick\Systick.h
